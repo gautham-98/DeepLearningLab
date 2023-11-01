@@ -12,6 +12,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_boolean('train', True, 'Specify whether to train or evaluate a model.')
 
 def main(argv):
+    print("Hello")
 
     # generate folder structures
     run_paths = utils_params.gen_run_folder()
