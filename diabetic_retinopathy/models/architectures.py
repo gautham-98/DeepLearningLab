@@ -31,3 +31,7 @@ def vgg_like(input_shape, n_classes, base_filters, n_blocks, dense_units, dropou
     outputs = tf.keras.layers.Dense(n_classes)(out)
 
     return tf.keras.Model(inputs=inputs, outputs=outputs, name='vgg_like')
+
+@gin.configurable
+def cnn01():
+    print("Inside model, but there is nothing") # TODO make models

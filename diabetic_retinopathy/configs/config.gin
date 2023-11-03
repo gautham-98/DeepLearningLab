@@ -13,9 +13,15 @@ Trainer.log_interval = 1e4
 Trainer.ckpt_interval = 1e4
 
 # Input pipeline
-load.name = 'mnist'
-load.data_dir = '/home/data/tensorflow_datasets'
+load.name = 'idrid'
+#load.data_dir = '/home/data/tensorflow_datasets'
+#load.data_dir = 'A:\\study\\INFOTECH\\SEM_3\\DL-lab\\dl-lab-23w-team10\\datasets\\IDRID_dataset'
 preprocess.img_height = 28
 preprocess.img_width = 28
 prepare.batch_size = 32
 prepare.caching = False
+prepare.shuffle_buffer = 300
+
+# TF Records
+make_tfrecords.data_dir = 'A:/study/INFOTECH/SEM_3/DL-lab/dl-lab-23w-team10/datasets/IDRID_dataset/'
+make_tfrecords.target_dir = './data_tfrecords/'
