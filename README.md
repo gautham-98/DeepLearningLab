@@ -1,5 +1,5 @@
-# TeamXX
-- Name (stXXXXXX)
+# Team10
+- Gautham Mohan (st184914)
 - Name (stXXXXXX)
 
 # How to run the code
