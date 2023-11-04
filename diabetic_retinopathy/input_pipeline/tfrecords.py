@@ -27,7 +27,7 @@ def make_tfrecords(data_dir, target_dir):
         return 0
 
     df_train_val = pd.read_csv(LABELS_PATH + "train.csv", usecols=['Image name', 'Retinopathy grade'])
-    df_test = pd.read_csv(LABELS_PATH + "train.csv", usecols=['Image name', 'Retinopathy grade'])
+    df_test = pd.read_csv(LABELS_PATH + "test.csv", usecols=['Image name', 'Retinopathy grade'])
 
     convert_to_binary(df_train_val)
     convert_to_binary(df_test)
@@ -54,8 +54,7 @@ def record_writer(df, record_path, images_path):
     with tf.io.TFRecordWriter(record_path) as writer:
         for index, row in df.iterrows():
             image = cv2.imread(images_path + row["Image name"] + ".jpg")
-            #preprocessed_image = preprocess_image(image)
-            preprocessed_image = cv2.resize(image, (256, 256))
+            preprocessed_image = preprocess_image(image)
             label = row["Retinopathy grade"]
             tf_example = image_example(preprocessed_image, label)
             writer.write(tf_example.SerializeToString())
