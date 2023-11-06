@@ -15,7 +15,6 @@ flags.DEFINE_string('model_name', 'cnn01', 'Specify the name of the model to be 
 
 
 def main(argv):
-    print("Hello")
 
     # generate folder structures
     run_paths = utils_params.gen_run_folder()
