@@ -60,7 +60,7 @@ def load(name, data_dir):
 
 
 @gin.configurable
-def prepare(ds_train, ds_val, ds_test, ds_info, batch_size, caching, shuffle_buffer=100):
+def prepare(ds_train, ds_val, ds_test, ds_info, batch_size, caching, shuffle_buffer=300):
     # Prepare training dataset
     ds_train = ds_train.map(
         preprocess, num_parallel_calls=tf.data.experimental.AUTOTUNE)

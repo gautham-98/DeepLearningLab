@@ -54,8 +54,8 @@ def record_writer(df, record_path, images_path):
     with tf.io.TFRecordWriter(record_path) as writer:
         for index, row in df.iterrows():
             image = cv2.imread(images_path + row["Image name"] + ".jpg")
-            #preprocessed_image = preprocess_image(image)
-            preprocessed_image = cv2.resize(image, (256, 256))
+            preprocessed_image = preprocess_image(image)
+            #preprocessed_image = cv2.resize(image, (256, 256))
             label = row["Retinopathy grade"]
             tf_example = image_example(preprocessed_image, label)
             writer.write(tf_example.SerializeToString())

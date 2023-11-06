@@ -1,27 +1,31 @@
 # Architectures
-vgg_like.base_filters = 8
-vgg_like.n_blocks = 3
-vgg_like.dense_units = 32
-vgg_like.dropout_rate = 0.2
+
+# cnn01 Model Params
+cnn01.input_shape   = (256,256,3)
+cnn01.filters = (4, 32, 64, 128)
+cnn01.kernel_size   = (3, 3, 3, 5)
+cnn01.pool_size     = 3
+cnn01.strides       = (1,1,2,2)
+cnn01.dropout_rate  = 0.3
 
 # Layers
 vgg_block.kernel_size = (3, 3)
 
 # Training
-Trainer.total_steps = 1e5
-Trainer.log_interval = 1e4
+Trainer.total_steps = 1000
+Trainer.log_interval = 2
 Trainer.ckpt_interval = 1e4
 
 # Input pipeline
 load.name = 'idrid'
 #load.data_dir = '/home/data/tensorflow_datasets'
 #load.data_dir = 'A:\\study\\INFOTECH\\SEM_3\\DL-lab\\dl-lab-23w-team10\\datasets\\IDRID_dataset'
-preprocess.img_height = 28
-preprocess.img_width = 28
-prepare.batch_size = 32
+preprocess.img_height = 256
+preprocess.img_width = 256
+prepare.batch_size = 10
 prepare.caching = False
 prepare.shuffle_buffer = 300
 
 # TF Records
-make_tfrecords.data_dir = 'A:/study/INFOTECH/SEM_3/DL-lab/dl-lab-23w-team10/datasets/IDRID_dataset/'
+make_tfrecords.data_dir = 'C:/Users/Gautham/GIT/dl-lab-23w-team10/datasets/IDRID_dataset/'
 make_tfrecords.target_dir = './data_tfrecords/'

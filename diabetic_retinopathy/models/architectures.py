@@ -1,7 +1,14 @@
 import gin
+import keras
 import tensorflow as tf
+import logging
+
+from tensorflow.keras import regularizers
+from tensorflow.keras.layers import Conv2D, MaxPool2D, AveragePooling2D, Dense, Flatten, Dropout, BatchNormalization
+from tensorflow.keras import layers, Sequential
 
 from models.layers import vgg_block
+
 
 @gin.configurable
 def vgg_like(input_shape, n_classes, base_filters, n_blocks, dense_units, dropout_rate):
@@ -32,6 +39,63 @@ def vgg_like(input_shape, n_classes, base_filters, n_blocks, dense_units, dropou
 
     return tf.keras.Model(inputs=inputs, outputs=outputs, name='vgg_like')
 
+
 @gin.configurable
-def cnn01():
-    print("Inside model, but there is nothing") # TODO make models
+def cnn01(input_shape, filters, kernel_size, strides, pool_size, dropout_rate):
+    print("cnn01-something to start with")  # TODO make better models
+
+    model = tf.keras.Sequential(name='cnn01')
+    model.add(tf.keras.Input(shape=input_shape))
+
+    model.add(Conv2D(filters=filters[0],
+                     kernel_size=kernel_size[0],
+                     strides=strides[0],
+                     activation='relu',
+                     kernel_regularizer=regularizers.L1(l1=0.01)
+                     ))
+    model.add(BatchNormalization())
+
+    model.add(Conv2D(filters=filters[1],
+                     kernel_size=kernel_size[1],
+                     strides=strides[1],
+                     activation='relu',
+                     kernel_regularizer=regularizers.L1(l1=0.01)
+                     ))
+    model.add(AveragePooling2D(pool_size=pool_size))
+    model.add(BatchNormalization())
+
+    model.add(Conv2D(filters=filters[2],
+                     kernel_size=kernel_size[2],
+                     strides=strides[2],
+                     activation='relu',
+                     kernel_regularizer=regularizers.L1(l1=0.01)
+                     ))
+
+    model.add(MaxPool2D(pool_size=pool_size))
+    model.add(BatchNormalization())
+
+    model.add(Conv2D(filters=filters[3],
+                     kernel_size=kernel_size[3],
+                     strides=strides[3],
+                     activation='relu',
+                     kernel_regularizer=regularizers.L1(l1=0.01)
+                     ))
+    model.add(MaxPool2D(pool_size=pool_size))
+    model.add(BatchNormalization())
+
+    model.add(tf.keras.layers.GlobalAveragePooling2D())
+    model.add(tf.keras.layers.Dropout(dropout_rate))
+
+    model.add(tf.keras.layers.Dense(
+        units=16, kernel_regularizer=regularizers.l2(0.001)))
+    model.add(tf.keras.layers.Dropout(dropout_rate))
+
+    model.add(tf.keras.layers.Dense(
+        units=2, kernel_regularizer=regularizers.l2(0.001)))
+
+    model.build()
+
+    logging.info(f"cnn01 input shape:  {model.input_shape}")
+    logging.info(f"cnn01 output shape: {model.output_shape}")
+
+    return model

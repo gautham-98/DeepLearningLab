@@ -10,7 +10,9 @@ from models.architectures import vgg_like, cnn01
 from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', False, 'Specify whether to train or evaluate a model.') # TODO make this to true to train the model
+flags.DEFINE_boolean('train', True, 'Specify whether to train or evaluate a model.')  # TODO make this to true to train the model
+flags.DEFINE_string('model_name', 'cnn01', 'Specify the name of the model to be used to train')
+
 
 def main(argv):
     print("Hello")
@@ -36,10 +38,11 @@ def main(argv):
 
     print("Data is ready, now entering to model part")
     # model
-    model = cnn01()
+    if FLAGS.model_name == 'cnn01':
+        model = cnn01()
 
     if FLAGS.train:
-        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths) # TODO make train flag to true for training
+        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)  # TODO make train flag to true for training
         for _ in trainer.train():
             continue
     else:
@@ -48,6 +51,7 @@ def main(argv):
                  ds_test,
                  ds_info,
                  run_paths)
+
 
 if __name__ == "__main__":
     app.run(main)
