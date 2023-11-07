@@ -2,7 +2,7 @@
 
 # cnn01 Model Params
 cnn01.input_shape   = (256,256,3)
-cnn01.filters = (4, 32, 64, 128)
+cnn01.filters       = (4, 8, 16, 32)
 cnn01.kernel_size   = (3, 3, 3, 5)
 cnn01.pool_size     = 3
 cnn01.strides       = (1,1,2,2)

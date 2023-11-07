@@ -42,7 +42,7 @@ def vgg_like(input_shape, n_classes, base_filters, n_blocks, dense_units, dropou
 
 @gin.configurable
 def cnn01(input_shape, filters, kernel_size, strides, pool_size, dropout_rate):
-    print("cnn01-something to start with")  # TODO make better models
+    print("cnn01")  # TODO make better models
 
     model = tf.keras.Sequential(name='cnn01')
     model.add(tf.keras.Input(shape=input_shape))
@@ -61,7 +61,7 @@ def cnn01(input_shape, filters, kernel_size, strides, pool_size, dropout_rate):
                      activation='relu',
                      kernel_regularizer=regularizers.L1(l1=0.01)
                      ))
-    model.add(AveragePooling2D(pool_size=pool_size))
+    model.add(MaxPool2D(pool_size=pool_size))
     model.add(BatchNormalization())
 
     model.add(Conv2D(filters=filters[2],
@@ -70,7 +70,6 @@ def cnn01(input_shape, filters, kernel_size, strides, pool_size, dropout_rate):
                      activation='relu',
                      kernel_regularizer=regularizers.L1(l1=0.01)
                      ))
-
     model.add(MaxPool2D(pool_size=pool_size))
     model.add(BatchNormalization())
 
@@ -80,14 +79,13 @@ def cnn01(input_shape, filters, kernel_size, strides, pool_size, dropout_rate):
                      activation='relu',
                      kernel_regularizer=regularizers.L1(l1=0.01)
                      ))
-    model.add(MaxPool2D(pool_size=pool_size))
     model.add(BatchNormalization())
 
     model.add(tf.keras.layers.GlobalAveragePooling2D())
     model.add(tf.keras.layers.Dropout(dropout_rate))
 
     model.add(tf.keras.layers.Dense(
-        units=16, kernel_regularizer=regularizers.l2(0.001)))
+        units=32, kernel_regularizer=regularizers.l2(0.001)))
     model.add(tf.keras.layers.Dropout(dropout_rate))
 
     model.add(tf.keras.layers.Dense(
