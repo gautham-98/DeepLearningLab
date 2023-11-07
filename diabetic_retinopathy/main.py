@@ -13,7 +13,6 @@ FLAGS = flags.FLAGS
 flags.DEFINE_boolean('train', True, 'Specify whether to train or evaluate a model.')  # TODO make this to true to train the model
 flags.DEFINE_string('model_name', 'cnn01', 'Specify the name of the model to be used to train')
 
-
 def main(argv):
 
     # generate folder structures
