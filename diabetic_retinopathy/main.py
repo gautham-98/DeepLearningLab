@@ -5,13 +5,15 @@ from absl import app, flags
 from train import Trainer
 from evaluation.eval import evaluate
 from input_pipeline import datasets
-from diabetic_retinopathy.utils import utils_params, utils_misc
-from models.architectures import vgg_like, cnn01
+from utils import utils_params, utils_misc
+from models.architectures import vgg_like, cnn
 from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', True, 'Specify whether to train or evaluate a model.')  # TODO make this to true to train the model
-flags.DEFINE_string('model_name', 'cnn01', 'Specify the name of the model to be used to train')
+flags.DEFINE_boolean('train', True, 'Specify whether to train or evaluate a model.')
+flags.DEFINE_boolean('eval', False,
+                     'evaluate the specific model.')
+flags.DEFINE_string('model_name', 'cnn', 'Choose model to train. Default model cnn')
 
 def main(argv):
 
@@ -36,10 +38,12 @@ def main(argv):
 
     print("Data is ready, now entering to model part")
     # model
-    if FLAGS.model_name == 'cnn01':
-        model = cnn01()
+    # if FLAGS.model_name == 'cnn01':
+    #     model = cnn01()
+    model = cnn()
 
     if FLAGS.train:
+        logging.info("Starting model training...")
         trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)  # TODO make train flag to true for training
         for _ in trainer.train():
             continue
