@@ -62,6 +62,3 @@ def cnn(input_shape, base_filters, kernel_size, strides, max_pool_dim, dropout_r
     model.build()
     return model
 
-
-def cnn22():
-    pass # TODO delete
