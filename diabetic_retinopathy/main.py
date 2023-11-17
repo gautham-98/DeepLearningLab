@@ -35,8 +35,6 @@ def main(argv):
 
     # setup pipeline
     ds_train, ds_val, ds_test, ds_info = datasets.load(data_dir=gin.query_parameter('make_tfrecords.target_dir'))
-
-    print("Data is ready, now entering to model part")
     # model
     # if FLAGS.model_name == 'cnn01':
     #     model = cnn01()
@@ -44,15 +42,18 @@ def main(argv):
 
     if FLAGS.train:
         logging.info("Starting model training...")
-        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)  # TODO make train flag to true for training
+        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
         for _ in trainer.train():
             continue
-    else:
+    if FLAGS.eval:
+        logging.info(f"Starting model evaluation...")
+        checkpoint = False  # add checkpoint
         evaluate(model,
-                 checkpoint,
                  ds_test,
                  ds_info,
-                 run_paths)
+                 run_paths,
+                 checkpoint,
+                 )
 
 
 if __name__ == "__main__":
