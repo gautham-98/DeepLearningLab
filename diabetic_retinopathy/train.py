@@ -1,3 +1,5 @@
+import time
+
 import gin
 import tensorflow as tf
 import logging
