@@ -4,12 +4,24 @@ import logging
 
 @gin.configurable
 class Trainer(object):
-    def __init__(self, model, ds_train, ds_val, ds_info, run_paths, total_steps, log_interval, ckpt_interval):
+    def __init__(self, model, ds_train, ds_val, ds_info, run_paths, total_steps, log_interval, ckpt_interval, ckpt_path=False):
+        self.model = model
         # Summary Writer
         # ....
 
         # Checkpoint Manager
-        # ...
+        self.model = model
+        self.ckpt = tf.train.Checkpoint(model=self.model)
+        if ckpt_path:
+            self.manager = tf.train.CheckpointManager(self.ckpt, ckpt_path, max_to_keep=4)
+            if self.manager.latest_checkpoint:
+                self.ckpt.restore(self.manager.latest_checkpoint)
+                logging.info("Restored from {}".format(self.manager.latest_checkpoint))
+            else:
+                logging.error("Checkpoint path provided is not valid : {}".format(ckpt_path))
+        else:
+            self.manager = tf.train.CheckpointManager(self.ckpt, run_paths["path_ckpts_train"], max_to_keep=4)
+            logging.info(f"Initializing from scratch. Checkpoints stored in {run_paths['path_ckpts_train']}")
 
         # Loss objective
         self.loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
@@ -58,6 +70,7 @@ class Trainer(object):
         for idx, (images, labels) in enumerate(self.ds_train):
 
             step = idx + 1
+            start_time = time.time()
             self.train_step(images, labels)
 
             if step % self.log_interval == 0:
@@ -68,8 +81,10 @@ class Trainer(object):
                 for val_images, val_labels in self.ds_val:
                     self.val_step(val_images, val_labels)
 
-                template = 'Step {}, Loss: {}, Accuracy: {}, Validation Loss: {}, Validation Accuracy: {}'
+                template = 'Step {}, Time {}, Loss: {:.2f}, Accuracy: {:.2f}, Validation Loss: {:.2f}, Validation ' \
+                           'Accuracy: {:.2f}'
                 logging.info(template.format(step,
+                                             time.time() - start_time,
                                              self.train_loss.result(),
                                              self.train_accuracy.result() * 100,
                                              self.val_loss.result(),
@@ -86,11 +101,10 @@ class Trainer(object):
 
             if step % self.ckpt_interval == 0:
                 logging.info(f'Saving checkpoint to {self.run_paths["path_ckpts_train"]}.')
-                # Save checkpoint
-                # ...
+                self.manager.save()
 
             if step % self.total_steps == 0:
                 logging.info(f'Finished training after {step} steps.')
                 # Save final checkpoint
-                # ...
+                self.manager.save()
                 return self.val_accuracy.result().numpy()
