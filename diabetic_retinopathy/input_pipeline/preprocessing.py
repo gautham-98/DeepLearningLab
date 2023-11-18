@@ -7,13 +7,9 @@ import numpy as np
 @gin.configurable
 def preprocess(image, label, img_height, img_width):
     """Dataset preprocessing: Normalizing and resizing"""
-
-    # Normalize image: `uint8` -> `float32`.
-    tf.cast(image, tf.float32) / 255.
-
-    # Resize image
-    # image = tf.image.resize(image, size=(img_height, img_width))
-
+    # Image Normalization.
+    max = tf.reduce_max(image)
+    image = tf.cast(image, tf.float32) / tf.cast(max, tf.float32)
     return image, label
 
 
