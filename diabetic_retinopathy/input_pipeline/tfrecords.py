@@ -32,7 +32,7 @@ def make_tfrecords(data_dir, target_dir):
     convert_to_binary(df_train_val)
     convert_to_binary(df_test)
 
-    df_train, df_val = train_test_split(df_train_val, test_size=0.2)
+    df_train, df_val = train_test_split(df_train_val, test_size=0.2, shuffle=True)
 
     df_train = resample_df(df_train)
    # df_val = resample_df(df_val)
@@ -46,6 +46,7 @@ def make_tfrecords(data_dir, target_dir):
     record_writer(df_train, target_dir + "train.tfrecords", IMAGES_PATH + 'train/')
     record_writer(df_val, target_dir + "validation.tfrecords", IMAGES_PATH + 'train/')
     record_writer(df_test, target_dir + "test.tfrecords", IMAGES_PATH + 'test/')
+    logging.info(f"TF records created at {target_dir}")
 
     return 1
 
