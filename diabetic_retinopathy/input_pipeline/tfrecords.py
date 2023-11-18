@@ -9,7 +9,7 @@ import tensorflow as tf
 import logging
 import gin
 from sklearn.model_selection import train_test_split
-from diabetic_retinopathy.utils import utils_tfrecords
+from utils import utils_tfrecords
 from sklearn.utils import resample
 import sys
 
@@ -27,15 +27,15 @@ def make_tfrecords(data_dir, target_dir):
         return 0
 
     df_train_val = pd.read_csv(LABELS_PATH + "train.csv", usecols=['Image name', 'Retinopathy grade'])
-    df_test = pd.read_csv(LABELS_PATH + "train.csv", usecols=['Image name', 'Retinopathy grade'])
+    df_test = pd.read_csv(LABELS_PATH + "test.csv", usecols=['Image name', 'Retinopathy grade'])
 
     convert_to_binary(df_train_val)
     convert_to_binary(df_test)
 
-    df_train, df_val = train_test_split(df_train_val, test_size=0.2)
+    df_train, df_val = train_test_split(df_train_val, test_size=0.2, shuffle=True)
 
     df_train = resample_df(df_train)
-    df_val = resample_df(df_val)
+   # df_val = resample_df(df_val)
 
     if not (os.path.isdir(IMAGES_PATH + 'train/') or IMAGES_PATH + 'test/'):
         logging.error(f"Path does not exist: {IMAGES_PATH}train/")
@@ -46,6 +46,7 @@ def make_tfrecords(data_dir, target_dir):
     record_writer(df_train, target_dir + "train.tfrecords", IMAGES_PATH + 'train/')
     record_writer(df_val, target_dir + "validation.tfrecords", IMAGES_PATH + 'train/')
     record_writer(df_test, target_dir + "test.tfrecords", IMAGES_PATH + 'test/')
+    logging.info(f"TF records created at {target_dir}")
 
     return 1
 

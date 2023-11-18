@@ -6,7 +6,7 @@ import tensorflow_datasets as tfds
 from input_pipeline.preprocessing import preprocess, augment
 
 
-from diabetic_retinopathy.utils import utils_tfrecords
+from utils import utils_tfrecords
 
 
 @gin.configurable
@@ -60,14 +60,15 @@ def load(name, data_dir):
 
 
 @gin.configurable
-def prepare(ds_train, ds_val, ds_test, ds_info, batch_size, caching, shuffle_buffer=300):
+def prepare(ds_train, ds_val, ds_test, ds_info, batch_size, caching, shuffle_buffer=300, to_augment=False):
     # Prepare training dataset
     ds_train = ds_train.map(
         preprocess, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     if caching:
         ds_train = ds_train.cache()
-    ds_train = ds_train.map(
-        augment, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    if to_augment:
+        ds_train = ds_train.map(
+            augment, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
     if isinstance(ds_info, str):
         ds_train = ds_train.shuffle(shuffle_buffer, reshuffle_each_iteration=True)

@@ -10,9 +10,9 @@ from models.architectures import vgg_like, cnn
 from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', True, 'Specify whether to train or evaluate a model.')
+flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
 flags.DEFINE_boolean('eval', False,
-                     'evaluate the specific model.')
+                     'Specify whether to evaluate  model.')
 flags.DEFINE_string('model_name', 'cnn', 'Choose model to train. Default model cnn')
 
 def main(argv):
@@ -27,32 +27,33 @@ def main(argv):
     gin.parse_config_files_and_bindings(['configs/config.gin'], [])
     utils_params.save_config(run_paths['path_gin'], gin.config_str())
 
-    # create tf-records folder and files if they do not exist yet
     if tfrecords.make_tfrecords():
-        logging.info("Created TFRecords files at path specified in gin file")
-    else:
-        logging.info("TFRecords files already exist. Proceed with the execution")
+        logging.info("Created TFRecords files")
 
     # setup pipeline
     ds_train, ds_val, ds_test, ds_info = datasets.load(data_dir=gin.query_parameter('make_tfrecords.target_dir'))
-
-    print("Data is ready, now entering to model part")
     # model
     # if FLAGS.model_name == 'cnn01':
     #     model = cnn01()
     model = cnn()
 
     if FLAGS.train:
+        # set loggers
+        utils_misc.set_loggers(run_paths['path_logs_train'], logging.INFO)
         logging.info("Starting model training...")
-        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)  # TODO make train flag to true for training
+        model.summary()
+        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
         for _ in trainer.train():
             continue
-    else:
+    if FLAGS.eval:
+        # set loggers
+        utils_misc.set_loggers(run_paths['path_logs_eval'], logging.INFO)
+        logging.info(f"Starting model evaluation...")
         evaluate(model,
-                 checkpoint,
                  ds_test,
                  ds_info,
-                 run_paths)
+                 run_paths
+                 )
 
 
 if __name__ == "__main__":

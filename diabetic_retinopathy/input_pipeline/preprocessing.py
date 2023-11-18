@@ -7,77 +7,67 @@ import numpy as np
 @gin.configurable
 def preprocess(image, label, img_height, img_width):
     """Dataset preprocessing: Normalizing and resizing"""
-
-    # Normalize image: `uint8` -> `float32`.
-    tf.cast(image, tf.float32) / 255.
-
-    # Resize image
-    image = tf.image.resize(image, size=(img_height, img_width))
-
+    # Image Normalization.
+    max = tf.reduce_max(image)
+    image = tf.cast(image, tf.float32) / tf.cast(max, tf.float32)
     return image, label
 
 
-# Data Augmentation
-
-tf.random.set_seed = 100
-
-
-def random_augment(image, apply_method, prob=0.3):
-    if tf.random.uniform([]) <= prob:
-        image = apply_method(image)
-    else:
-        image = image
-    return image
-
-
-def random_flip_left_right(image):
-    image = tf.image.flip_up_down(image)
-    return image
-
-
-def random_flip_up_down(image):
-    image = tf.image.flip_up_down(image)
-    return image
-
-
-def random_rotate(image):
-    random_angle = tf.random.uniform([], seed=5) * 2 * np.pi
-    image = tfa.image.rotate(image,
-                             angles=random_angle,
-                             )
-    return image
-
-
-def random_brightness(image):
-    random_value = tf.random.uniform([], minval=0, maxval=0.4, seed=3)
-    image = tf.image.adjust_brightness(image,
-                                       random_value,
-                                       )
-    return image
-
-
-def random_contrast(image):
-    random_value = tf.random.uniform([], minval=1, maxval=2, seed=8)
-    image = tf.image.adjust_contrast(image,
-                                     random_value,
-                                     )
-    return image
-
-
-def random_saturation(image):
-    random_value = tf.random.uniform([], minval=0.4, maxval=2, seed=8)
-    image = tf.image.adjust_saturation(image,
-                                       random_value,
-                                       )
-    return image
+for i in range(3):
+    seed = (i, 0)  # tuple of size (2,)
 
 
 def augment(image, label):
     """Data augmentation"""
-    image = random_augment(image, random_flip_up_down, prob=0.35)
-    image = random_augment(image, random_flip_left_right, prob=0.35)
-    image = random_augment(image, random_rotate, prob=0.25)
-    image = random_augment(image, random_brightness, prob=0.25)
-    image = random_augment(image, random_contrast, prob=0.25)
-    image = random_augment(image, random_saturation, prob=0.25)
+    image = apply_randomly(image, augment_contrast)
+    image = apply_randomly(image, augment_saturation)
+    image = apply_randomly(image, augment_brightness)
+    image = apply_randomly(image, augment_flip_left_right)
+    image = apply_randomly(image, augment_flip_updowm)
+    image = apply_randomly(image, augment_random_crop)
+
     return image, label
+
+
+@gin.configurable
+def apply_randomly(img, apply_func, p=0.5):
+    if tf.random.uniform([]) < p:
+        img = apply_func(img)
+    else:
+        img = img
+    return img
+
+
+def augment_brightness(image):
+    img = tf.image.stateless_random_brightness(image, 0.3, seed=seed)
+    return img
+
+
+def augment_contrast(image):
+    img = tf.image.stateless_random_contrast(image, 0.2, 1, seed=seed)
+    return img
+
+
+def augment_saturation(image):
+    img = tf.image.stateless_random_saturation(image, 0.1, 1.0, seed=seed)
+    return img
+
+
+def augment_flip_left_right(image):
+    img = tf.image.stateless_random_flip_left_right(image, seed=seed)
+    return img
+
+
+def augment_flip_updowm(image):
+    img = tf.image.stateless_random_flip_up_down(image, seed=seed)
+    return img
+
+
+def augment_random_crop(image):
+    h = gin.query_parameter('preprocess.img_height')
+    w = gin.query_parameter('preprocess.img_width')
+    cropped_h = int(h / 1.3)
+    cropped_w = int(w / 1.3)
+    img = tf.image.stateless_random_crop(image, (cropped_h, cropped_w, 3), seed=seed)
+    img = tf.image.resize(img, [w, h])
+    return img
