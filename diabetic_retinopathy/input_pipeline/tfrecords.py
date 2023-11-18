@@ -9,7 +9,7 @@ import tensorflow as tf
 import logging
 import gin
 from sklearn.model_selection import train_test_split
-from diabetic_retinopathy.utils import utils_tfrecords
+from utils import utils_tfrecords
 from sklearn.utils import resample
 import sys
 
