@@ -5,7 +5,7 @@ from absl import app, flags
 from train import Trainer
 from evaluation.eval import evaluate
 from input_pipeline import datasets
-from utils import utils_params, utils_misc
+from diabetic_retinopathy.utils import utils_params, utils_misc
 from models.architectures import vgg_like, cnn
 from input_pipeline import tfrecords
 
