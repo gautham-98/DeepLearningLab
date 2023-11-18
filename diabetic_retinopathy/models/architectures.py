@@ -46,13 +46,19 @@ def cnn(input_shape, base_filters, kernel_size, strides, max_pool_dim, dropout_r
     model.add(tf.keras.Input(shape=input_shape, ))
     model.add(Conv2D(filters=base_filters[0], kernel_size=kernel_size[0], strides=strides, activation="relu",
                      kernel_regularizer=regularizers.L1(l1=0.01, )))
-    model.add(MaxPool2D(pool_size=max_pool_dim))
-    model.add(BatchNormalization())
-    model.add(Conv2D(filters=base_filters[1], kernel_size=kernel_size[1], strides=strides, activation="relu",
+    model.add(Conv2D(filters=base_filters[1], kernel_size=kernel_size[0], strides=strides, activation="relu",
                      kernel_regularizer=regularizers.L1(l1=0.01, )))
     model.add(MaxPool2D(pool_size=max_pool_dim))
     model.add(BatchNormalization())
-    model.add(Conv2D(filters=base_filters[2], kernel_size=kernel_size[2], strides=strides, activation="relu",
+    model.add(Conv2D(filters=base_filters[2], kernel_size=kernel_size[1], strides=strides, activation="relu",
+                     kernel_regularizer=regularizers.L1(l1=0.01, )))
+    model.add(MaxPool2D(pool_size=max_pool_dim))
+    model.add(BatchNormalization())
+    model.add(Conv2D(filters=base_filters[3], kernel_size=kernel_size[3], strides=strides, activation="relu",
+                     kernel_regularizer=regularizers.L1(l1=0.01, )))
+    model.add(MaxPool2D(pool_size=max_pool_dim))
+    model.add(BatchNormalization())
+    model.add(Conv2D(filters=base_filters[4], kernel_size=kernel_size[3], strides=strides, activation="relu",
                      kernel_regularizer=regularizers.L1(l1=0.01, )))
     model.add(tf.keras.layers.GlobalAveragePooling2D())
     model.add(tf.keras.layers.Dropout(dropout_rate))
