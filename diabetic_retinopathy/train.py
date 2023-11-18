@@ -83,7 +83,7 @@ class Trainer(object):
                 for val_images, val_labels in self.ds_val:
                     self.val_step(val_images, val_labels)
 
-                template = 'Step {}, Time {}, Loss: {:.2f}, Accuracy: {:.2f}, Validation Loss: {:.2f}, Validation ' \
+                template = 'Step {}, Time {:.2f}, Loss: {:.2f}, Accuracy: {:.2f}, Validation Loss: {:.2f}, Validation ' \
                            'Accuracy: {:.2f}'
                 logging.info(template.format(step,
                                              time.time() - start_time,
