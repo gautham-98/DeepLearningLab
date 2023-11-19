@@ -2,7 +2,7 @@ import gin
 import logging
 from absl import app, flags
 
-from diabetic_retinopathy.deep_visu.deep_visualise import DeepVisualize
+from deep_visu.deep_visualise import DeepVisualize
 from train import Trainer
 from evaluation.eval import evaluate
 from input_pipeline import datasets
@@ -12,7 +12,7 @@ from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
-flags.DEFINE_boolean('eval', True,
+flags.DEFINE_boolean('eval', False,
                      'Specify whether to evaluate  model.')
 flags.DEFINE_string('model_name', 'cnn', 'Choose model to train. Default model cnn')
 flags.DEFINE_boolean('deep_visu', True, 'perform deep visualization with grad_cam')

@@ -18,6 +18,7 @@ Trainer.ckpt_interval = 50
 
 # Input pipeline
 load.name = 'idrid'
+#load.data_dir = 'C:/Users/Gautham/GIT/dl-lab-23w-team10/datasets/IDRID_dataset'
 load.data_dir = '/home/data/IDRID_dataset/'
 #load.data_dir = 'A:\\study\\INFOTECH\\SEM_3\\DL-lab\\dl-lab-23w-team10\\datasets\\IDRID_dataset'
 preprocess.img_height = 256
@@ -30,4 +31,5 @@ apply_randomly.p=0.3
 
 # TF Records
 make_tfrecords.data_dir = '/home/data/IDRID_dataset/'
+#make_tfrecords.data_dir = 'C:/Users/Gautham/GIT/dl-lab-23w-team10/datasets/IDRID_dataset/'
 make_tfrecords.target_dir = './tfrecords_data/'
