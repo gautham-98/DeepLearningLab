@@ -33,3 +33,9 @@ apply_randomly.p=0.3
 make_tfrecords.data_dir = '/home/data/IDRID_dataset/'
 #make_tfrecords.data_dir = 'C:/Users/Gautham/GIT/dl-lab-23w-team10/datasets/IDRID_dataset/'
 make_tfrecords.target_dir = './tfrecords_data/'
+
+#Deep Visu
+DeepVisualize.target_dir = './'
+DeepVisualize.layer_name = 'to_grad_cam'
+DeepVisualize.image_list_train = [8,3,5,100]
+DeepVisualize.image_list_test = [7,6,32,34]
