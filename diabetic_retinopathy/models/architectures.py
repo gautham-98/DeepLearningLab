@@ -59,7 +59,7 @@ def cnn(input_shape, base_filters, kernel_size, strides, max_pool_dim, dropout_r
     model.add(MaxPool2D(pool_size=max_pool_dim))
     model.add(BatchNormalization())
     model.add(Conv2D(filters=base_filters[4], kernel_size=kernel_size[3], strides=strides, activation="relu",
-                     kernel_regularizer=regularizers.L1(l1=0.01, )))
+                     kernel_regularizer=regularizers.L1(l1=0.01, ), name='to_grad_cam'))
     model.add(tf.keras.layers.GlobalAveragePooling2D())
     model.add(tf.keras.layers.Dropout(dropout_rate))
     model.add(tf.keras.layers.Dense(units=16, kernel_regularizer=regularizers.l2(0.001), activation="relu"))

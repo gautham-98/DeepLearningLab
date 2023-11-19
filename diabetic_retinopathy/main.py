@@ -2,6 +2,7 @@ import gin
 import logging
 from absl import app, flags
 
+from diabetic_retinopathy.deep_visu.deep_visualise import DeepVisualize
 from train import Trainer
 from evaluation.eval import evaluate
 from input_pipeline import datasets
@@ -11,9 +12,10 @@ from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
-flags.DEFINE_boolean('eval', False,
+flags.DEFINE_boolean('eval', True,
                      'Specify whether to evaluate  model.')
 flags.DEFINE_string('model_name', 'cnn', 'Choose model to train. Default model cnn')
+flags.DEFINE_boolean('deep_visu', True, 'perform deep visualization with grad_cam')
 
 def main(argv):
 
@@ -54,6 +56,11 @@ def main(argv):
                  ds_info,
                  run_paths
                  )
+
+    if FLAGS.deep_visu:
+        deep_visualize = DeepVisualize(model, run_paths, data_dir=gin.query_parameter('make_tfrecords.data_dir'))
+        deep_visualize.visualize()
+
 
 
 if __name__ == "__main__":
