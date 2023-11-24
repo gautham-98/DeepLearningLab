@@ -2,20 +2,20 @@ import gin
 import logging
 from absl import app, flags
 
-from diabetic_retinopathy.deep_visu.deep_visualise import DeepVisualize
+from deep_visu.deep_visualise import DeepVisualize
 from train import Trainer
 from evaluation.eval import evaluate
 from input_pipeline import datasets
 from utils import utils_params, utils_misc
-from models.architectures import vgg_like, cnn
+from models.architectures import vgg_like, cnn01
 from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
-flags.DEFINE_boolean('eval', True,
+flags.DEFINE_boolean('eval', False,
                      'Specify whether to evaluate  model.')
-flags.DEFINE_string('model_name', 'cnn', 'Choose model to train. Default model cnn')
-flags.DEFINE_boolean('deep_visu', True, 'perform deep visualization with grad_cam')
+flags.DEFINE_string('model_name', 'cnn01', 'Choose model to train. Default model cnn')
+flags.DEFINE_boolean('deep_visu', False, 'perform deep visualization with grad_cam')
 
 def main(argv):
 
@@ -37,7 +37,7 @@ def main(argv):
     # model
     # if FLAGS.model_name == 'cnn01':
     #     model = cnn01()
-    model = cnn()
+    model = cnn01()
 
     if FLAGS.train:
         # set loggers
