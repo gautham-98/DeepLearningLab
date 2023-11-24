@@ -7,7 +7,7 @@ import tensorflow as tf
 import cv2
 import logging
 
-from diabetic_retinopathy.deep_visu.grad_cam import GradCam
+from deep_visu.grad_cam import GradCam
 
 @gin.configurable
 class DeepVisualize:

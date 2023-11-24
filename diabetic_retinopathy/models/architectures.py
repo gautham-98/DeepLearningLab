@@ -68,3 +68,124 @@ def cnn(input_shape, base_filters, kernel_size, strides, max_pool_dim, dropout_r
     model.build()
     return model
 
+@gin.configurable()
+def cnn01(input_shape, filters, kernel_size, strides, pool_size, dropout_rate):
+    print("cnn01") # TODO make models
+
+    model = tf.keras.Sequential(name='cnn01')
+    model.add(tf.keras.Input(shape=input_shape))
+
+    model.add(Conv2D(filters=filters[0],
+              kernel_size=kernel_size[0],
+              strides=strides[0],
+              activation='relu',
+              kernel_regularizer=regularizers.L1(l1=0.01),
+              kernel_initializer =tf.keras.initializers.HeNormal()
+              ))
+    model.add(BatchNormalization())
+
+    model.add(Conv2D(filters=filters[1],
+              kernel_size=kernel_size[1],
+              strides=strides[1],
+              activation='relu',
+              kernel_regularizer=regularizers.L1(l1=0.01),
+              kernel_initializer =tf.keras.initializers.HeNormal()
+              ))
+    #model.add(MaxPool2D(pool_size=pool_size))
+    model.add(BatchNormalization())
+
+    model.add(Conv2D(filters=filters[2],
+              kernel_size=kernel_size[2],
+              strides=strides[2],
+              activation='relu',
+              kernel_regularizer=regularizers.L1(l1=0.01),
+              kernel_initializer =tf.keras.initializers.HeNormal()
+              ))
+    #model.add(MaxPool2D(pool_size=pool_size))
+    model.add(BatchNormalization())
+
+    model.add(Conv2D(filters=filters[3],
+              kernel_size=kernel_size[3],
+              strides=strides[3],
+              activation='relu',
+              kernel_regularizer=regularizers.L1(l1=0.01),
+              kernel_initializer =tf.keras.initializers.HeNormal()
+              ))
+    #model.add(MaxPool2D(pool_size=pool_size))
+    model.add(BatchNormalization())
+
+    model.add(Conv2D(filters=filters[4],
+              kernel_size=kernel_size[4],
+              strides=strides[4],
+              activation='relu',
+              kernel_regularizer=regularizers.L1(l1=0.01),
+              kernel_initializer =tf.keras.initializers.HeNormal()
+              ))
+    model.add(MaxPool2D(pool_size=pool_size))
+    model.add(BatchNormalization())
+    model.add(tf.keras.layers.Dropout(dropout_rate))
+
+    model.add(Conv2D(filters=filters[5],
+              kernel_size=kernel_size[5],
+              strides=strides[5],
+              activation='relu',
+              kernel_regularizer=regularizers.L1(l1=0.01),
+              kernel_initializer =tf.keras.initializers.HeNormal()
+              ))
+    model.add(MaxPool2D(pool_size=pool_size))
+    model.add(BatchNormalization())
+
+    model.add(Conv2D(filters=filters[6],
+              kernel_size=kernel_size[6],
+              strides=strides[6],
+              dilation_rate = 1,
+              activation='relu',
+              kernel_regularizer=regularizers.L1(l1=0.01),
+              kernel_initializer =tf.keras.initializers.HeNormal(),
+              name='to_grad_cam'
+              ))
+    model.add(MaxPool2D(pool_size=pool_size))
+    model.add(BatchNormalization())
+
+    model.add(Conv2D(filters=filters[7],
+              kernel_size=kernel_size[7],
+              strides=strides[7],
+              dilation_rate = 1,
+              activation='relu',
+              kernel_regularizer=regularizers.L1(l1=0.01),
+              kernel_initializer =tf.keras.initializers.HeNormal()
+              ))
+    #model.add(MaxPool2D(pool_size=pool_size))
+    model.add(BatchNormalization())
+    model.add(tf.keras.layers.Dropout(dropout_rate))
+
+    model.add(tf.keras.layers.GlobalAveragePooling2D())
+    model.add(tf.keras.layers.Dropout(dropout_rate))
+
+    model.add(tf.keras.layers.Dense(
+        units=32, kernel_regularizer=regularizers.l1(0.001), kernel_initializer =tf.keras.initializers.HeNormal()))
+    #model.add(tf.keras.layers.Dropout(dropout_rate))
+
+    # model.add(tf.keras.layers.Dense(
+    #     units=16, kernel_regularizer=regularizers.l1(0.001), kernel_initializer =tf.keras.initializers.HeNormal()))
+    # model.add(tf.keras.layers.Dropout(dropout_rate))
+
+    model.add(tf.keras.layers.Dense(
+        units=8, kernel_regularizer=regularizers.l1(0.001), kernel_initializer =tf.keras.initializers.HeNormal()))
+    model.add(tf.keras.layers.Dropout(dropout_rate))
+
+    # model.add(tf.keras.layers.Dense(
+    #     units=4, kernel_regularizer=regularizers.l1(0.001), kernel_initializer =tf.keras.initializers.HeNormal()))
+    # model.add(tf.keras.layers.Dropout(dropout_rate))
+
+    model.add(tf.keras.layers.Dense(
+        units=2, kernel_regularizer=regularizers.l1(0.001), kernel_initializer =tf.keras.initializers.HeNormal()))
+
+    model.build()
+
+    logging.info(f"cnn01 input shape:  {model.input_shape}")
+    logging.info(f"cnn01 output shape: {model.output_shape}")
+
+    return model
+
+
