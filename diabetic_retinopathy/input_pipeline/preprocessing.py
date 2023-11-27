@@ -2,6 +2,7 @@ import gin
 import tensorflow as tf
 import tensorflow_addons as tfa
 import numpy as np
+import logging
 
 
 @gin.configurable
@@ -23,14 +24,14 @@ def augment(image, label):
     image = apply_randomly(image, augment_saturation)
     image = apply_randomly(image, augment_brightness)
     image = apply_randomly(image, augment_flip_left_right)
-    image = apply_randomly(image, augment_flip_updowm)
+    image = apply_randomly(image, augment_flip_updown)
     image = apply_randomly(image, augment_random_crop)
-
+    image = apply_randomly(image, random_rotate)
     return image, label
 
 
 @gin.configurable
-def apply_randomly(img, apply_func, p=0.5):
+def apply_randomly(img, apply_func, p=0.3):
     if tf.random.uniform([]) < p:
         img = apply_func(img)
     else:
@@ -58,7 +59,7 @@ def augment_flip_left_right(image):
     return img
 
 
-def augment_flip_updowm(image):
+def augment_flip_updown(image):
     img = tf.image.stateless_random_flip_up_down(image, seed=seed)
     return img
 
@@ -70,4 +71,11 @@ def augment_random_crop(image):
     cropped_w = int(w / 1.3)
     img = tf.image.stateless_random_crop(image, (cropped_h, cropped_w, 3), seed=seed)
     img = tf.image.resize(img, [w, h])
+    return img
+
+def random_rotate(image):
+    random_angle = tf.random.uniform([],minval=0,maxval=2, seed=14) * np.pi
+    img = tfa.image.rotate(image,
+                             angles=random_angle,
+                             )
     return img

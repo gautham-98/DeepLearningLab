@@ -98,11 +98,18 @@ def convert_to_binary(df):
 
 
 def resample_df(df):
+    max_idx = df['Retinopathy grade'].value_counts().idxmax()
     total_samples = df['Retinopathy grade'].value_counts().max()
     df0 = df.loc[df['Retinopathy grade'] == 0]
     df1 = df.loc[df['Retinopathy grade'] == 1]
-    df0_resampled = resample(df0, replace=True, n_samples=total_samples, random_state=seed)
-    df1_resampled = resample(df1, replace=True, n_samples=total_samples, random_state=seed)
+    df0_resampled = df0
+    df1_resampled = df1
+
+    if max_idx == 1:
+        df0_resampled = resample(df0, replace=True, n_samples=total_samples, random_state=seed)
+    elif max_idx == 0:
+        df1_resampled = resample(df1, replace=True, n_samples=total_samples, random_state=seed)
+
     df = pd.concat([df0_resampled, df1_resampled])
 
     return df

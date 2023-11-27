@@ -29,7 +29,7 @@ class ConfusionMatrix(tf.keras.metrics.Metric):
         accuracy = (tp + tn) / (tp + tn + fp + fn)
         recall = tp / (tp + fn)
         precision = tp / (tp + fp)
-        f1_score = 2 * (precision * recall / precision + recall)
+        f1_score = 2 * ((precision * recall) / (precision + recall))
         sensitivity = tp / (tp + fn)
         specificity = tn / (tn + fp)
         balanced_accuracy = (sensitivity + specificity) / 2
