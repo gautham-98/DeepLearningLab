@@ -52,7 +52,6 @@ def main(argv):
         evaluate(model,
                  ds_test,
                  ds_info,
-                 run_paths
                  )
 
     if FLAGS.deep_visu:

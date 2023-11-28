@@ -10,13 +10,14 @@ from sklearn import metrics
 import wandb
 
 @gin.configurable
-def evaluate(model, ds_test, ds_info, run_paths, log_wandb=False):
+def evaluate(model, ds_test, ds_info, ckpt_path=False, log_wandb=False):
     test_accuracy = tf.keras.metrics.SparseCategoricalAccuracy(name='test_accuracy')
 
     # Restore model to the latest checkpoint
-    checkpoint = tf.train.Checkpoint(model=model)
-    checkpoint.restore(tf.train.latest_checkpoint(run_paths['path_ckpts_train'])).expect_partial()
-    logging.info(f"Check point restored from {run_paths['path_ckpts_train']} ")
+    if ckpt_path:
+        checkpoint = tf.train.Checkpoint(model=model)
+        checkpoint.restore(tf.train.latest_checkpoint(ckpt_path))
+        logging.info(f"Check point restored from {ckpt_path} ")
 
     confusion_matrix = ConfusionMatrix()
     auc_metric = tf.keras.metrics.AUC(num_thresholds=50)
