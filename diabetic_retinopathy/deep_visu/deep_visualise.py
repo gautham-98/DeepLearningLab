@@ -14,7 +14,7 @@ from input_pipeline.preprocessing import preprocess
 
 @gin.configurable
 class DeepVisualize:
-    def __init__(self, model, run_paths, data_dir, target_dir, layer_name, image_list_test=None, image_list_train=None):
+    def __init__(self, model, run_paths, data_dir, target_dir, layer_name, image_list_test=None, image_list_train=None, chkpt=False):
         self.data_dir = data_dir
         self.target_dir = target_dir
         self.run_paths = run_paths
@@ -22,6 +22,8 @@ class DeepVisualize:
         self.layer_name = layer_name
         self.image_list_test = image_list_test
         self.image_list_train = image_list_train
+        self.chkpt = chkpt
+
         if (image_list_train is None) or (image_list_test is None):
             logging.info("No images specified from either test or train set. gradCAM terminated")
             sys.exit(0)
@@ -66,11 +68,15 @@ class DeepVisualize:
         ds_train, ds_test = self.create_dataset()
         ds_train = ds_train.map(preprocess, num_parallel_calls=tf.data.experimental.AUTOTUNE)
         ds_test = ds_test.map(preprocess, num_parallel_calls=tf.data.experimental.AUTOTUNE)
-        logging.info("dataset created from image checkpoints")
+        logging.info("dataset created from image list")
+
         checkpoint = tf.train.Checkpoint(model=self.model)
-        checkpoint.restore(tf.train.latest_checkpoint(self.run_paths['path_ckpts_train']))
-        logging.info(f"model loaded with checkpoint from {self.run_paths['path_ckpts_train']}")
-        # checkpoint.restore(tf.train.latest_checkpoint('/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments/run_2023-11-27T19-00-24-470804/ckpts'))
+        if self.chkpt:
+            checkpoint.restore(tf.train.latest_checkpoint(self.chkpt))
+            logging.info(f"model loaded with checkpoint from {self.chkpt}")
+        else:
+            checkpoint.restore(tf.train.latest_checkpoint(self.run_paths['path_ckpts_train']))
+            logging.info(f"model loaded with checkpoint from {self.run_paths['path_ckpts_train']}")
 
         output_dir = os.path.join(self.target_dir, 'gradcam_out')
         os.makedirs(output_dir, exist_ok=True)
@@ -81,10 +87,9 @@ class DeepVisualize:
         os.makedirs(gradcam_out_dir)
 
         train_dir = os.path.join(gradcam_out_dir, 'train')
-        os.makedirs(train_dir, exist_ok=True)
-
+        os.makedirs(train_dir)
         test_dir = os.path.join(gradcam_out_dir, 'test')
-        os.makedirs(test_dir, exist_ok=True)
+        os.makedirs(test_dir)
 
         logging.info("applying gradCAM")
         gradcam_test = GradCam(self.model, self.layer_name, ds_test)
