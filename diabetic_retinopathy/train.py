@@ -6,11 +6,9 @@ import logging
 
 @gin.configurable
 class Trainer(object):
-    def __init__(self, model, ds_train, ds_val, ds_info, run_paths, total_steps, log_interval, ckpt_interval, ckpt_path=False):
-        self.model = model
-        # Summary Writer
-        # ....
+    def __init__(self, model, ds_train, ds_val, ds_info, run_paths, total_steps, log_interval, ckpt_interval, learning_rate, ckpt_path=False):
 
+        self.learning_rate = learning_rate
         # Checkpoint Manager
         self.model = model
         self.ckpt = tf.train.Checkpoint(model=self.model)
@@ -27,7 +25,7 @@ class Trainer(object):
 
         # Loss objective
         self.loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
-        self.optimizer = tf.keras.optimizers.Adam()
+        self.optimizer = tf.keras.optimizers.Adam(learning_rate = self.learning_rate)
 
         # Metrics
         self.train_loss = tf.keras.metrics.Mean(name='train_loss')
@@ -44,6 +42,7 @@ class Trainer(object):
         self.total_steps = total_steps
         self.log_interval = log_interval
         self.ckpt_interval = ckpt_interval
+       
 
     @tf.function
     def train_step(self, images, labels):

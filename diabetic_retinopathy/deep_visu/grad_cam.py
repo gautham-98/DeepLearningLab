@@ -50,7 +50,7 @@ class GradCam:
         return jet_heatmap
 
 
-    def apply_gradcam(self, image_list, save_dir, alpha=0.2):
+    def apply_gradcam(self, image_list, save_dir, alpha=0.5):
         dataset = self.dataset
         for i, (image, label) in enumerate(dataset):
             img_idx = image_list[i]
@@ -58,7 +58,7 @@ class GradCam:
             heatmap = self.get_heatmap(image)
             image = tf.squeeze(image, axis=0)
             jet_heatmap = self.get_jet_heatmap(heatmap, image)
-            image = tf.image.rgb_to_grayscale(image)
             superimposed_img = jet_heatmap * alpha + image
+            # superimposed_img = image
             save_path = os.path.join(save_dir, f"img_{img_idx}_label-{label}.jpg")
             tf.keras.preprocessing.image.save_img(save_path, superimposed_img)

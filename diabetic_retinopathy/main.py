@@ -7,7 +7,7 @@ from train import Trainer
 from evaluation.eval import evaluate
 from input_pipeline import datasets
 from utils import utils_params, utils_misc
-from models.architectures import vgg_like, cnn01
+from models.architectures import vgg_like, cnn01, res_cnn, transfer_model
 from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
@@ -37,7 +37,7 @@ def main(argv):
     # model
     # if FLAGS.model_name == 'cnn01':
     #     model = cnn01()
-    model = cnn01()
+    model = res_cnn()
 
     if FLAGS.train:
         # set loggers
