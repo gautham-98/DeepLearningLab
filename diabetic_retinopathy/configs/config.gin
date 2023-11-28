@@ -79,3 +79,8 @@ DeepVisualize.layer_name = 'activation_4'
 DeepVisualize.image_list_train = [5,6,7,8]
 DeepVisualize.image_list_test = [1,2,3,4]
 #DeepVisualize.chkpt = '/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments/run_2023-11-28T01-54-20-850818/ckpts'
+
+
+# wandb logging
+evaluate.log_wandb = True
+Trainer.log_wandb = True
