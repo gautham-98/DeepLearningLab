@@ -11,11 +11,10 @@ from models.architectures import vgg_like, cnn01, res_cnn, transfer_model
 from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
-flags.DEFINE_boolean('eval', False,
-                     'Specify whether to evaluate  model.')
+flags.DEFINE_boolean('train', True, 'Specify whether to train  model.')
+flags.DEFINE_boolean('eval', True, 'Specify whether to evaluate  model.')
 flags.DEFINE_string('model_name', 'cnn01', 'Choose model to train. Default model cnn')
-flags.DEFINE_boolean('deep_visu', False, 'perform deep visualization with grad_cam')
+flags.DEFINE_boolean('deep_visu', True, 'perform deep visualization with grad_cam')
 
 def main(argv):
 

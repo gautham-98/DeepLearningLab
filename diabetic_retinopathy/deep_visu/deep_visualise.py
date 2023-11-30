@@ -64,7 +64,7 @@ class DeepVisualize:
         return image
 
     def visualize(self):
-        logging.info("===============Starting Deep Visualisation================")
+        logging.info("\n===============Starting Deep Visualisation================")
         ds_train, ds_test = self.create_dataset()
         ds_train = ds_train.map(preprocess, num_parallel_calls=tf.data.experimental.AUTOTUNE)
         ds_test = ds_test.map(preprocess, num_parallel_calls=tf.data.experimental.AUTOTUNE)

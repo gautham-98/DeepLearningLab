@@ -33,13 +33,13 @@ cnn01.dropout_rate  = 0.2
 ##res_cnn Model Parameters
 ##layers are as given (0, 1, 2, 3, 4)
 res_cnn.input_shape    = (256,256,3)
-res_cnn.filters        = (8, 16, 16, 32, 32)
+res_cnn.filters        = (4, 8, 16, 32)
 res_cnn.kernel_size    = 3
-res_cnn.strides        = (1, 1, 1, 1, 1)
+res_cnn.strides        = (1, 1, 1, 1)
 res_cnn.pool_size      = 3
 res_cnn.dropout_rate   = 0.3
 #res_cnn.dropout_blocks = (2, 4)
-res_cnn.maxpool_blocks = (1, 2, 4)
+res_cnn.maxpool_blocks = (0, 1, 2)
 #res_cnn.res_blocks     = ((1,2), (3,4))
 
 # Layers
@@ -47,9 +47,10 @@ vgg_block.kernel_size = (3, 3)
 
 # Training
 Trainer.total_steps = 5000
-Trainer.log_interval = 10
+Trainer.log_interval = 13
 Trainer.ckpt_interval = 50
 Trainer.learning_rate = 0.0001
+#Trainer.ckpt_path = '/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments/run_2023-11-28T21-02-09-274977/ckpts'
 
 # Input pipeline
 load.name = 'idrid'
@@ -58,7 +59,7 @@ load.data_dir = '/home/data/IDRID_dataset/'
 #load.data_dir = 'A:\\study\\INFOTECH\\SEM_3\\DL-lab\\dl-lab-23w-team10\\datasets\\IDRID_dataset'
 preprocess.img_height = 256
 preprocess.img_width = 256
-prepare.batch_size = 40
+prepare.batch_size = 32
 prepare.caching = False
 prepare.shuffle_buffer = 400
 prepare.to_augment = True
@@ -68,14 +69,15 @@ apply_randomly.p=0.35
 make_tfrecords.data_dir = '/home/data/IDRID_dataset/'
 #make_tfrecords.data_dir = 'C:/Users/Gautham/GIT/dl-lab-23w-team10/datasets/IDRID_dataset/'
 #make_tfrecords.target_dir = './tfrecords_data/'
-make_tfrecords.target_dir = './tfrecords_data_grahams/'
-#make_tfrecords.target_dir = './tfrecords_data_grahams_clahe/'
-preprocess_image.with_clahe = False
+#make_tfrecords.target_dir = './tfrecords_data_grahams/'
+make_tfrecords.target_dir = './tfrecords_data_grahams_clahe/'
+preprocess_image.with_clahe = True
 preprocess_image.with_bens = True
 
 #Deep Visu
 DeepVisualize.target_dir = './'
-DeepVisualize.layer_name = 'activation_4'
+DeepVisualize.layer_name = 'activation_3'
+#DeepVisualize.chkpt = '/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments/run_2023-11-29T13-41-48-991091/ckpts'
 DeepVisualize.image_list_train = [5,6,7,8]
 DeepVisualize.image_list_test = [1,2,3,4]
-#DeepVisualize.chkpt = '/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments/run_2023-11-28T01-54-20-850818/ckpts'
+GradCam.class_idx = 1

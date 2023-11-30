@@ -23,8 +23,8 @@ class GradCam:
             if self.class_idx is None:
                 self.class_idx = tf.argmax(preds[0])
             class_channel = preds[:, self.class_idx]
-            grads = tape.gradient(class_channel, layer_activations)
-
+            
+        grads = tape.gradient(class_channel, layer_activations)
         average_grads = tf.reduce_mean(grads, axis=(0, 1, 2))
         return average_grads, layer_activations
 

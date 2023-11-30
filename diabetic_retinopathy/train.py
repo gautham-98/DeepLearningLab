@@ -41,7 +41,7 @@ class Trainer(object):
         self.run_paths = run_paths
         self.total_steps = total_steps
         self.log_interval = log_interval
-        self.ckpt_interval = ckpt_interval
+        self.ckpt_interval = ckpt_interval  
        
 
     @tf.function
@@ -91,8 +91,6 @@ class Trainer(object):
                                              self.val_loss.result(),
                                              self.val_accuracy.result() * 100))
                 
-                # Write summary to tensorboard
-                # ...
 
                 # Reset train metrics
                 self.train_loss.reset_states()
