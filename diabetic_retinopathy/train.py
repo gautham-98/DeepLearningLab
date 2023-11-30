@@ -3,10 +3,12 @@ import time
 import gin
 import tensorflow as tf
 import logging
+import wandb
 
 @gin.configurable
 class Trainer(object):
-    def __init__(self, model, ds_train, ds_val, ds_info, run_paths, total_steps, log_interval, ckpt_interval, learning_rate, ckpt_path=False):
+    def __init__(self, model, ds_train, ds_val, ds_info, run_paths, total_steps, log_interval, ckpt_interval,
+                 learning_rate, ckpt_path=False, log_wandb=False):
 
         self.learning_rate = learning_rate
         # Checkpoint Manager
@@ -41,8 +43,8 @@ class Trainer(object):
         self.run_paths = run_paths
         self.total_steps = total_steps
         self.log_interval = log_interval
-        self.ckpt_interval = ckpt_interval  
-       
+        self.ckpt_interval = ckpt_interval
+        self.log_wandb = log_wandb
 
     @tf.function
     def train_step(self, images, labels):
@@ -90,7 +92,12 @@ class Trainer(object):
                                              self.train_accuracy.result() * 100,
                                              self.val_loss.result(),
                                              self.val_accuracy.result() * 100))
-                
+
+                # wandb logging: make the flag true from config.gin to start logging
+                if self.log_wandb:
+                    wandb.log({'train_acc': self.train_accuracy.result() * 100, 'train_loss': self.train_loss.result(),
+                               'val_acc': self.val_accuracy.result() * 100, 'val_loss': self.val_loss.result(),
+                               'step': step})
 
                 # Reset train metrics
                 self.train_loss.reset_states()

@@ -41,3 +41,19 @@ def gen_run_folder(path_model_id=''):
 def save_config(path_gin, config):
     with open(path_gin, 'w') as f_config:
         f_config.write(config)
+
+# https://github.com/google/gin-config/issues/154
+def gin_config_to_readable_dictionary(gin_config: dict):
+    """
+    Parses the gin configuration to a dictionary. Useful for logging to e.g. W&B
+    :param gin_config: the gin's config dictionary. Can be obtained by gin.config._OPERATIVE_CONFIG
+    :return: the parsed (mainly: cleaned) dictionary
+    """
+    data = {}
+    for key in gin_config.keys():
+        name = key[1].split(".")[1]
+        values = gin_config[key]
+        for k, v in values.items():
+            data["/".join([name, k])] = v
+
+    return data

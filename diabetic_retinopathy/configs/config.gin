@@ -81,3 +81,10 @@ DeepVisualize.layer_name = 'activation_3'
 DeepVisualize.image_list_train = [5,6,7,8]
 DeepVisualize.image_list_test = [1,2,3,4]
 GradCam.class_idx = 1
+
+# Evaluation checkpoint path
+#evaluate.ckpt_path = #your checkpoint path here
+
+# wandb logging
+evaluate.log_wandb = True
+Trainer.log_wandb = True
