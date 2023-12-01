@@ -224,7 +224,7 @@ def res_cnn(input_shape, filters, kernel_size, strides, pool_size, dropout_rate,
                     if not (out[-1].shape[-1] == out_to_add.shape[-1]):
                         out_to_add = Conv2D(filters=out[-1].shape[-1], 
                                             kernel_size=(1,1), 
-                                            kernel_regularizer=regularizers.L1(0.1)
+                                            kernel_regularizer=regularizers.L1(0.01)
                                             )(out_to_add)
                         out_to_add = BatchNormalization()(out_to_add)
                     out[-1] = Add()([out_to_add, out[-1]])
@@ -255,8 +255,12 @@ def res_cnn(input_shape, filters, kernel_size, strides, pool_size, dropout_rate,
 
     return model
 
+@gin.configurable
+def transfer_model(input_shape, filters, dense_units, dropout_rate):
 
-def transfer_model(input_shape=(256,256,3), layer_count=3, filters=32, kernel_size=3, strides=1, pool_size=3, dropout_rate=0.3):
+    """returns both the whole model and the base_model
+      further steps for making the layers trainable are
+      done by TransferTrainer"""
 
     inputs = Input(shape=input_shape)
 
@@ -264,33 +268,25 @@ def transfer_model(input_shape=(256,256,3), layer_count=3, filters=32, kernel_si
                                                          weights="imagenet", 
                                                          input_shape=input_shape, 
                                                          pooling=None)
-
-    base_model.trainable = False
-    
-    for layer in base_model.layers[-layer_count:]:
-            layer.trainable = True
     
     out = base_model(inputs)
-    out = Conv2D(filters=32, kernel_size=3, strides=1, activation='relu', kernel_regularizer=regularizers.l1(0.01))(out)
+    out = Conv2D(filters=filters, kernel_size=3, strides=1, activation='relu', kernel_regularizer=regularizers.l1(0.01))(out)
     out = BatchNormalization()(out) 
 
     out_dense = GlobalAveragePooling2D()(out)
-
-    out_dense = Dense(units=32, kernel_regularizer=regularizers.l2(0.01), activation='relu')(out_dense)
+    out_dense = Dense(units=int(dense_units/2), kernel_regularizer=regularizers.l2(0.01), activation='relu')(out_dense)
     out_dense = Dropout(dropout_rate)(out_dense)
-    out_dense = Dense(units=16, kernel_regularizer=regularizers.l2(0.01), activation='relu')(out_dense)
+    out_dense = Dense(units=int(dense_units/4), kernel_regularizer=regularizers.l2(0.01))(out_dense)
     out_dense = Dropout(dropout_rate)(out_dense)
-    out_dense = Dense(units=4, kernel_regularizer=regularizers.l2(0.01))(out_dense)
 
     outputs = Dense(units=2)(out_dense)
     
-    model = keras.Model(inputs=inputs, outputs=outputs, name="res_cnn")
-    model.build(input_shape=input_shape)
+    model = keras.Model(inputs=inputs, outputs=outputs, name="transfer_model")
 
-    logging.info(f"res_cnn input shape:  {model.input_shape}")
-    logging.info(f"res_cnn output shape: {model.output_shape}")
+    logging.info(f"transfer_model input shape:  {model.input_shape}")
+    logging.info(f"transfer_model output shape: {model.output_shape}")
 
-    return model
+    return model, base_model
 
 
     

@@ -4,7 +4,7 @@ from absl import app, flags
 import wandb
 
 from deep_visu.deep_visualise import DeepVisualize
-from train import Trainer
+from train import Trainer, TransferTrainer
 from evaluation.eval import evaluate
 from input_pipeline import datasets
 from utils import utils_params, utils_misc
@@ -16,6 +16,7 @@ flags.DEFINE_boolean('train', True, 'Specify whether to train  model.')
 flags.DEFINE_boolean('eval', True, 'Specify whether to evaluate  model.')
 flags.DEFINE_string('model_name', 'cnn01', 'Choose model to train. Default model cnn')
 flags.DEFINE_boolean('deep_visu', True, 'perform deep visualization with grad_cam')
+
 
 def main(argv):
     # generate folder structures
@@ -29,21 +30,28 @@ def main(argv):
         logging.info("Created TFRecords files")
 
     # setup wandb
-    wandb.init(project='diabetic-retinopathy', name=run_paths['model_id'],
+    wandb.init(project='diabetic-retinopathy', name=run_paths['path_model_id'],
                config=utils_params.gin_config_to_readable_dictionary(gin.config._CONFIG))
     # setup pipeline
     ds_train, ds_val, ds_test, ds_info = datasets.load(data_dir=gin.query_parameter('make_tfrecords.target_dir'))
     # model
-    model = res_cnn()
+    model, base_model = transfer_model()
 
     if FLAGS.train:
         # set loggers
         utils_misc.set_loggers(run_paths['path_logs_train'], logging.INFO)
         logging.info("Starting model training...")
-        model.summary()
-        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
-        for _ in trainer.train():
-            continue
+        #model.summary()
+        
+        # if not FLAGS.model_name == 'transfer_model':
+        #     trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
+        #     for _ in trainer.train():
+        #         continue
+        if True:
+            trainer = TransferTrainer(model, base_model, ds_train, ds_val, ds_info, run_paths)
+            for _ in trainer.train():
+                continue
+
     if FLAGS.eval:
         # set loggers
         utils_misc.set_loggers(run_paths['path_logs_eval'], logging.INFO)

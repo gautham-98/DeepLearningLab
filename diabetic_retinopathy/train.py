@@ -9,8 +9,7 @@ import wandb
 class Trainer(object):
     def __init__(self, model, ds_train, ds_val, ds_info, run_paths, total_steps, log_interval, ckpt_interval,
                  learning_rate, ckpt_path=False, log_wandb=False):
-
-        self.learning_rate = learning_rate
+       
         # Checkpoint Manager
         self.model = model
         self.ckpt = tf.train.Checkpoint(model=self.model)
@@ -27,6 +26,7 @@ class Trainer(object):
 
         # Loss objective
         self.loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+        self.learning_rate = learning_rate
         self.optimizer = tf.keras.optimizers.Adam(learning_rate = self.learning_rate)
 
         # Metrics
@@ -114,3 +114,53 @@ class Trainer(object):
                 # Save final checkpoint
                 self.manager.save()
                 return self.val_accuracy.result().numpy()
+
+@gin.configurable
+class TransferTrainer(Trainer):
+    def __init__(self, model, base_model, ds_train, ds_val, ds_info, run_paths, 
+                 coarse_learning_rate, fine_learning_rate, coarse_num_steps, fine_num_steps, layers_to_tune):
+        
+        super().__init__(model=model, ds_train=ds_train, ds_val=ds_val, ds_info=ds_info, run_paths=run_paths,
+                        total_steps=1000, 
+                        log_interval=gin.query_parameter("Trainer.log_interval"),
+                        ckpt_interval=gin.query_parameter("Trainer.ckpt_interval"), 
+                        learning_rate = 0.001, ckpt_path=False, log_wandb=False )
+        self.base_model = base_model
+        self.coarse_learning_rate = coarse_learning_rate
+        self.fine_learning_rate = fine_learning_rate
+        self.coarse_num_steps = coarse_num_steps
+        self.fine_num_steps = fine_num_steps
+        self.layers_to_tune = layers_to_tune
+
+    def setup_layers_training_params(self, is_fine_tuning):
+        self.base_model.trainable = False
+        self.learning_rate = self.fine_learning_rate if is_fine_tuning else self.coarse_learning_rate
+        self.total_steps = self.fine_num_steps if is_fine_tuning else self.coarse_num_steps
+        if is_fine_tuning:
+            self.base_model.trainable = True
+            for layer in self.base_model.layers[:-self.layers_to_tune]:
+                layer.trainable = False
+            for layer in self.base_model.layers[-self.layers_to_tune:]:
+                if isinstance(layer, tf.keras.layers.BatchNormalization):
+                    layer.trainable = False
+        self.model.summary()
+    
+    def train(self):
+        logging.info("\n Starting transfer learning")
+
+        # coarse_training
+        logging.info("\n Starting coarse training of model's classification head")
+        self.setup_layers_training_params(is_fine_tuning=False)
+        yield from super().train()
+        
+        # fine_training
+        logging.info("\n Starting fine tuning of the model")
+        self.setup_layers_training_params(is_fine_tuning=True)
+        yield from super().train()
+
+
+    
+
+    
+
+
