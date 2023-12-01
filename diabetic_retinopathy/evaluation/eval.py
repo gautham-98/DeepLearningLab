@@ -44,7 +44,7 @@ def evaluate(model, ds_test, ds_info, ckpt_path=False, log_wandb=False):
 
     cm_result = confusion_matrix.result()
     auc_result = auc_metric.result()
-    ub_accuracy, recall, precision, f1_score, sensitivity, specificity, balanced_accuracy, fpr = confusion_matrix.get_related_metrics()
+    ub_accuracy, recall, precision, f1_score, sensitivity, specificity, balanced_accuracy = confusion_matrix.get_related_metrics()
     confusion_matrix.reset_state()
     auc_metric.reset_state()
     sparse_accuracy = test_accuracy.result()

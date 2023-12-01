@@ -75,8 +75,8 @@ def image_example(image, label):
     return tf.train.Example(features=tf.train.Features(feature=feature))
 
 
-# Preprocess will crop the image and resize the image
-def preprocess_image(image):
+#Preprocess will crop the image and resize the image
+def crop_image(image):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     _, threshold = cv2.threshold(gray, 15, 255, cv2.THRESH_BINARY)
     pos = np.nonzero(threshold)
@@ -89,6 +89,27 @@ def preprocess_image(image):
     image = cv2.copyMakeBorder(image, upper_diff, lower_diff, 0, 0, cv2.BORDER_CONSTANT)
 
     return cv2.resize(image, (256, 256))
+
+def apply_clahe(image):
+    clahe_model = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+    image_b = clahe_model.apply(image[:,:,0])
+    image_g = clahe_model.apply(image[:,:,1])
+    image_r = clahe_model.apply(image[:,:,2])
+    image_clahe = np.stack((image_b,image_g,image_r), axis=2)
+    return image_clahe
+
+@gin.configurable
+def preprocess_image(image, with_clahe=False, with_bens=False):
+    img_size = 256
+    image = crop_image(image)
+
+    if with_clahe:
+        image = apply_clahe(image)
+    
+    if with_bens:
+        image = cv2.addWeighted (image,4, cv2.GaussianBlur( image , (0,0) ,img_size/30) ,-4 ,128)
+
+    return image
 
 
 def convert_to_binary(df):
