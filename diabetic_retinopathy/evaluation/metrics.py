@@ -22,7 +22,7 @@ class ConfusionMatrix(tf.keras.metrics.Metric):
         WIKI: https://neptune.ai/blog/balanced-accuracy
         """
         tp = self.ConfusionMat[0, 0]
-        tn = self.ConfusionMat[0, 1]
+        tn = self.ConfusionMat[1, 1]
         fp = self.ConfusionMat[0, 1]
         fn = self.ConfusionMat[1, 0]
 
