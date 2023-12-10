@@ -6,6 +6,7 @@ import numpy as np
 import tensorflow as tf
 import cv2
 import logging
+import wandb
 
 from datetime import datetime
 from deep_visu.grad_cam import GradCam
@@ -14,7 +15,7 @@ from input_pipeline.preprocessing import preprocess
 
 @gin.configurable
 class DeepVisualize:
-    def __init__(self, model, run_paths, data_dir, target_dir, layer_name, image_list_test=None, image_list_train=None, chkpt=False):
+    def __init__(self, model, run_paths, data_dir, target_dir, layer_name, image_list_test=None, image_list_train=None, chkpt=False, log_wandb=False):
         self.data_dir = data_dir
         self.target_dir = target_dir
         self.run_paths = run_paths
@@ -45,27 +46,35 @@ class DeepVisualize:
 
         file_paths_train = [(images_path + "train/" + filename + ".jpg") for filename in df_train['Image name']]
         file_paths_test = [(images_path + "test/" + filename + ".jpg") for filename in df_test['Image name']]
-        images_train = [self.load_and_preprocess(file_path) for file_path in file_paths_train]
-        images_test = [self.load_and_preprocess(file_path) for file_path in file_paths_test]
+        ds_images_train = [self.load(file_path, with_preprocess=True) for file_path in file_paths_train]
+        ds_images_test = [self.load(file_path, with_preprocess=True) for file_path in file_paths_test]
 
         convert_to_binary(df_train)
         convert_to_binary(df_test)
         labels_train = df_train['Retinopathy grade'].values
         labels_test = df_test['Retinopathy grade'].values
 
-        ds_train = tf.data.Dataset.from_tensor_slices((images_train, labels_train))
-        ds_test = tf.data.Dataset.from_tensor_slices((images_test, labels_test))
-        return ds_train, ds_test
+        ds_train = tf.data.Dataset.from_tensor_slices((ds_images_train, labels_train))
+        ds_test = tf.data.Dataset.from_tensor_slices((ds_images_test, labels_test))
 
-    def load_and_preprocess(self, img_path):
+        #load actual images for comparisons 
+        images_train = [self.load(file_path, with_preprocess=False) for file_path in file_paths_train]
+        images_test = [self.load(file_path, with_preprocess=False) for file_path in file_paths_test]
+
+        return ds_train, ds_test, images_train, images_test
+
+    def load(self, img_path, with_preprocess):
         image = cv2.imread(img_path)
-        image = preprocess_image(image)
+        if with_preprocess:
+            image = preprocess_image(image)
+        else:
+            image = preprocess_image(image, with_clahe=False, with_bens=False)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         return image
 
     def visualize(self):
         logging.info("\n===============Starting Deep Visualisation================")
-        ds_train, ds_test = self.create_dataset()
+        ds_train, ds_test, images_train, images_test = self.create_dataset()
         ds_train = ds_train.map(preprocess, num_parallel_calls=tf.data.experimental.AUTOTUNE)
         ds_test = ds_test.map(preprocess, num_parallel_calls=tf.data.experimental.AUTOTUNE)
         logging.info("dataset created from image list")
@@ -92,8 +101,14 @@ class DeepVisualize:
         os.makedirs(test_dir)
 
         logging.info("applying gradCAM")
-        gradcam_test = GradCam(self.model, self.layer_name, ds_test)
-        gradcam_train = GradCam(self.model, self.layer_name, ds_train)
-        gradcam_train.apply_gradcam(self.image_list_train, train_dir)
-        gradcam_test.apply_gradcam(self.image_list_test, test_dir)
+        gradcam_test = GradCam(self.model, self.layer_name, ds_test, images_test)
+        gradcam_train = GradCam(self.model, self.layer_name, ds_train, images_train)
+
+        for gradcam_image, image_name, save_path  in gradcam_train.apply_gradcam(self.image_list_train, train_dir):
+            wandb.log({f"gradcam_train_image_{image_name}": wandb.Image(gradcam_image)})
+            tf.keras.preprocessing.image.save_img(save_path, gradcam_image)
+        for gradcam_image, image_name, save_path  in gradcam_test.apply_gradcam(self.image_list_test, test_dir):
+            wandb.log({f"gradcam_test_image_{image_name}": wandb.Image(gradcam_image)})
+            tf.keras.preprocessing.image.save_img(save_path, gradcam_image)
+
         logging.info(f"images saved in {gradcam_out_dir}")
