@@ -8,13 +8,13 @@ from train import Trainer, TransferTrainer
 from evaluation.eval import evaluate
 from input_pipeline import datasets
 from utils import utils_params, utils_misc
-from models.architectures import vgg_like, res_cnn, transfer_model
+from models.architectures import vgg_like, cnn_1, cnn_se, transfer_model
 from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean('train', True, 'Specify whether to train  model.')
 flags.DEFINE_boolean('eval', True, 'Specify whether to evaluate  model.')
-flags.DEFINE_string('model_name', 'res_cnn', 'Choose model to train. Default model cnn')
+flags.DEFINE_string('model_name', 'cnn_se', 'Choose model to train. Default model cnn')
 flags.DEFINE_boolean('deep_visu', True, 'perform deep visualization with grad_cam')
 
 
@@ -38,8 +38,10 @@ def main(argv):
     # model
     if FLAGS.model_name == 'transfer_model':
         model, base_model = transfer_model()
-    elif FLAGS.model_name == 'res_cnn':
-        model = res_cnn()
+    elif FLAGS.model_name == 'cnn_se':
+        model = cnn_se()
+    elif FLAGS.model_name == 'cnn_1':
+        model = cnn_1()
 
     if FLAGS.train:
         # set loggers
