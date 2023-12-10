@@ -74,7 +74,7 @@ def augment_random_crop(image):
     return img
 
 def random_rotate(image):
-    random_angle = tf.random.uniform([],minval=0,maxval=2, seed=14) * np.pi
+    random_angle = tf.random.uniform([],minval=-0.5,maxval=0.5, seed=14) * np.pi
     img = tfa.image.rotate(image,
                              angles=random_angle,
                              )

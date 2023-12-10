@@ -6,9 +6,9 @@ import logging
 from tensorflow.keras import regularizers
 from tensorflow.keras.layers import Input, Conv2D, MaxPool2D, GlobalAveragePooling2D, Add, Dense, Flatten, Dropout, BatchNormalization
 from tensorflow.keras import layers, Sequential
-from tensorflow.keras.applications import InceptionResNetV2
 
-from models.layers import vgg_block, cnn_block
+
+from models.layers import vgg_block, cnn_block, skip_connect
 
 
 @gin.configurable
@@ -40,175 +40,18 @@ def vgg_like(input_shape, n_classes, base_filters, n_blocks, dense_units, dropou
 
     return tf.keras.Model(inputs=inputs, outputs=outputs, name='vgg_like')
 
-
 @gin.configurable()
-def cnn(input_shape, base_filters, kernel_size, strides, max_pool_dim, dropout_rate):
-    model = tf.keras.Sequential(name="CNN_Basic_Model_1")
-    model.add(tf.keras.Input(shape=input_shape, ))
-    model.add(Conv2D(filters=base_filters[0], kernel_size=kernel_size[0], strides=strides, activation="relu",
-                     kernel_regularizer=regularizers.L1(l1=0.01, )))
-    model.add(Conv2D(filters=base_filters[1], kernel_size=kernel_size[0], strides=strides, activation="relu",
-                     kernel_regularizer=regularizers.L1(l1=0.01, )))
-    model.add(MaxPool2D(pool_size=max_pool_dim))
-    model.add(BatchNormalization())
-    model.add(Conv2D(filters=base_filters[2], kernel_size=kernel_size[1], strides=strides, activation="relu",
-                     kernel_regularizer=regularizers.L1(l1=0.01, )))
-    model.add(MaxPool2D(pool_size=max_pool_dim))
-    model.add(BatchNormalization())
-    model.add(Conv2D(filters=base_filters[3], kernel_size=kernel_size[3], strides=strides, activation="relu",
-                     kernel_regularizer=regularizers.L1(l1=0.01, )))
-    model.add(MaxPool2D(pool_size=max_pool_dim))
-    model.add(BatchNormalization())
-    model.add(Conv2D(filters=base_filters[4], kernel_size=kernel_size[3], strides=strides, activation="relu",
-                     kernel_regularizer=regularizers.L1(l1=0.01, ), name='to_grad_cam'))
-    model.add(tf.keras.layers.GlobalAveragePooling2D())
-    model.add(tf.keras.layers.Dropout(dropout_rate))
-    model.add(tf.keras.layers.Dense(units=16, kernel_regularizer=regularizers.l2(0.001), activation="relu"))
-    model.add(tf.keras.layers.Dropout(dropout_rate))
-    model.add(tf.keras.layers.Dense(units=2, kernel_regularizer=regularizers.l2(0.001)))
-    model.build()
-    return model
-
-@gin.configurable()
-def cnn01(input_shape, filters, kernel_size, strides, pool_size, dropout_rate):
-
-    model = tf.keras.Sequential(name='cnn01')
-    model.add(tf.keras.Input(shape=input_shape))
-
-    model.add(Conv2D(filters=filters[0],
-              kernel_size=kernel_size[0],
-              strides=strides[0],
-              activation='relu',
-              kernel_regularizer=regularizers.L1(l1=0.01),
-              kernel_initializer =tf.keras.initializers.HeNormal()
-              ))
-    model.add(BatchNormalization())
-
-    model.add(Conv2D(filters=filters[1],
-              kernel_size=kernel_size[1],
-              strides=strides[1],
-              activation='relu',
-              kernel_regularizer=regularizers.L1(l1=0.01),
-              kernel_initializer =tf.keras.initializers.HeNormal()
-              ))
-    #model.add(MaxPool2D(pool_size=pool_size))
-    model.add(BatchNormalization())
-
-    model.add(Conv2D(filters=filters[2],
-              kernel_size=kernel_size[2],
-              strides=strides[2],
-              activation='relu',
-              kernel_regularizer=regularizers.L1(l1=0.01),
-              kernel_initializer =tf.keras.initializers.HeNormal()
-              ))
-    #model.add(MaxPool2D(pool_size=pool_size))
-    model.add(BatchNormalization())
-
-    model.add(Conv2D(filters=filters[3],
-              kernel_size=kernel_size[3],
-              strides=strides[3],
-              activation='relu',
-              kernel_regularizer=regularizers.L1(l1=0.01),
-              kernel_initializer =tf.keras.initializers.HeNormal()
-              ))
-    #model.add(MaxPool2D(pool_size=pool_size))
-    model.add(BatchNormalization())
-
-    model.add(Conv2D(filters=filters[4],
-              kernel_size=kernel_size[4],
-              strides=strides[4],
-              activation='relu',
-              kernel_regularizer=regularizers.L1(l1=0.01),
-              kernel_initializer =tf.keras.initializers.HeNormal()
-              ))
-    model.add(MaxPool2D(pool_size=pool_size))
-    model.add(BatchNormalization())
-    # model.add(tf.keras.layers.Dropout(dropout_rate))
-
-    model.add(Conv2D(filters=filters[5],
-              kernel_size=kernel_size[5],
-              strides=strides[5],
-              activation='relu',
-              kernel_regularizer=regularizers.L1(l1=0.01),
-              kernel_initializer =tf.keras.initializers.HeNormal()
-              ))
-    model.add(MaxPool2D(pool_size=pool_size))
-    model.add(BatchNormalization())
-    model.add(tf.keras.layers.Dropout(dropout_rate))
-
-    model.add(Conv2D(filters=filters[6],
-              kernel_size=kernel_size[6],
-              strides=strides[6],
-              dilation_rate = 1,
-              activation='relu',
-              kernel_regularizer=regularizers.L1(l1=0.01),
-              kernel_initializer =tf.keras.initializers.HeNormal(),
-              name='to_grad_cam'
-              ))
-    model.add(MaxPool2D(pool_size=pool_size))
-    model.add(BatchNormalization())
-    model.add(tf.keras.layers.Dropout(dropout_rate))
-
-    model.add(Conv2D(filters=filters[7],
-              kernel_size=kernel_size[7],
-              strides=strides[7],
-              dilation_rate = 1,
-              activation='relu',
-              kernel_regularizer=regularizers.L1(l1=0.01),
-              kernel_initializer =tf.keras.initializers.HeNormal()
-              ))
-    #model.add(MaxPool2D(pool_size=pool_size))
-    model.add(BatchNormalization())
-    model.add(tf.keras.layers.Dropout(dropout_rate))
-
-    model.add(tf.keras.layers.GlobalAveragePooling2D())
-    model.add(tf.keras.layers.Dropout(dropout_rate))
-
-    model.add(tf.keras.layers.Dense(
-        units=32, kernel_regularizer=regularizers.l1(0.001), activation = 'relu', kernel_initializer =tf.keras.initializers.HeNormal()))
-    #model.add(tf.keras.layers.Dropout(dropout_rate))
-
-    # model.add(tf.keras.layers.Dense(
-    #     units=16, kernel_regularizer=regularizers.l1(0.001), kernel_initializer =tf.keras.initializers.HeNormal()))
-    # model.add(tf.keras.layers.Dropout(dropout_rate))
-
-    model.add(tf.keras.layers.Dense(
-        units=8, kernel_regularizer=regularizers.l1(0.001), activation = 'relu', kernel_initializer =tf.keras.initializers.HeNormal()))
-    model.add(tf.keras.layers.Dropout(dropout_rate))
-
-    # model.add(tf.keras.layers.Dense(
-    #     units=4, kernel_regularizer=regularizers.l1(0.001), kernel_initializer =tf.keras.initializers.HeNormal()))
-    # model.add(tf.keras.layers.Dropout(dropout_rate))
-
-    model.add(tf.keras.layers.Dense(
-        units=2, kernel_regularizer=regularizers.l1(0.001), kernel_initializer =tf.keras.initializers.HeNormal()))
-
-    model.build()
-
-    logging.info(f"cnn01 input shape:  {model.input_shape}")
-    logging.info(f"cnn01 output shape: {model.output_shape}")
-
-    return model
-
-@gin.configurable()
-def res_cnn(input_shape, filters, kernel_size, strides, pool_size, dropout_rate, maxpool_blocks,  dropout_blocks=False, res_blocks=False):
+def res_cnn(input_shape, filters, kernel_size, strides, pool_size, dropout_rate, batch_norm_blocks=False, maxpool_blocks=False,  dropout_blocks=False, skip_connection_pairs=False):
     
     inputs = Input(shape=input_shape)
 
-
     # convolutional layers
     out = []
-    # first convolution layer
-    out_block1 = cnn_block(inputs, 
-                        filters[0], 
-                        kernel_size, 
-                        strides[0]
-                        )
-    out.append(out_block1)
+    for block in range(len(filters)):
 
-    for block in range(1,len(filters)):
+        input_layer = inputs if block==0 else out[-1]
         #Conv2d
-        out_block = cnn_block(out[-1], 
+        out_block = cnn_block(input_layer, 
                         filters[block], 
                         kernel_size, 
                         strides[block]
@@ -216,34 +59,31 @@ def res_cnn(input_shape, filters, kernel_size, strides, pool_size, dropout_rate,
         out.append(out_block)
 
         #Skip connection
-        if res_blocks:
-            for skip_connection in res_blocks:
-                if block == skip_connection[1]:
-                    out_to_add = out[skip_connection[0]]
-                    # reshape for equal number of feature maps
-                    if not (out[-1].shape[-1] == out_to_add.shape[-1]):
-                        out_to_add = Conv2D(filters=out[-1].shape[-1], 
-                                            kernel_size=(1,1), 
-                                            kernel_regularizer=regularizers.L1(0.01)
-                                            )(out_to_add)
-                        out_to_add = BatchNormalization()(out_to_add)
-                    out[-1] = Add()([out_to_add, out[-1]])
-        
-        #dropout and maxpooling
-        if block in maxpool_blocks:
+        if skip_connection_pairs:
+            skip_connect(out, block, skip_connection_pairs)
+
+        #batch normalisation, dropout_blocks, maxpooling
+        if batch_norm_blocks and (block in batch_norm_blocks):
+            out[-1] = BatchNormalization()(out[-1])
+        if maxpool_blocks and (block in maxpool_blocks):
             out[-1] = MaxPool2D(pool_size)(out[-1])
-        if dropout_blocks: 
-            if block in dropout_blocks:
-                out[-1] = Dropout(dropout_rate)(out[-1])
+        if dropout_blocks and (block in dropout_blocks): 
+            out[-1] = Dropout(dropout_rate)(out[-1])
 
     # dense layers
     out_dense = GlobalAveragePooling2D()(out[-1])
     out_dense = Dropout(dropout_rate)(out_dense)
-    out_dense = Dense(units=32, kernel_regularizer=regularizers.l2(0.01), activation='relu')(out_dense)
+    out_dense = Dense(units=32, kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0), activation='relu',
+                      kernel_initializer =tf.keras.initializers.HeNormal()
+                      )(out_dense)
     out_dense = Dropout(dropout_rate)(out_dense)
-    out_dense = Dense(units=16, kernel_regularizer=regularizers.l2(0.01), activation='relu')(out_dense)
+    out_dense = Dense(units=16, kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0), activation='relu',
+                      kernel_initializer =tf.keras.initializers.HeNormal()
+                      )(out_dense)
     out_dense = Dropout(dropout_rate)(out_dense)
-    out_dense = Dense(units=4, kernel_regularizer=regularizers.l2(0.01))(out_dense)
+    out_dense = Dense(units=4, 
+                      kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0)
+                      )(out_dense)
 
     outputs = Dense(units=2)(out_dense)
     
@@ -255,23 +95,40 @@ def res_cnn(input_shape, filters, kernel_size, strides, pool_size, dropout_rate,
 
     return model
 
+
 @gin.configurable
-def transfer_model(input_shape, filters, dense_units, dropout_rate):
+def transfer_model(input_shape, base_model_name, filters, dense_units, dropout_rate):
 
     """returns both the whole model and the base_model
       further steps for making the layers trainable are
       done by TransferTrainer"""
 
     inputs = Input(shape=input_shape)
+    if base_model_name == 'InceptionResnet':
+        base_model = tf.keras.applications.InceptionResNetV2(include_top=False,
+                                                                weights="imagenet", 
+                                                                input_shape=input_shape, 
+                                                                pooling=None)
+    elif base_model_name == 'InceptionV3':
+        base_model = tf.keras.applications.InceptionV3(include_top=False,
+                                                                weights="imagenet", 
+                                                                input_shape=input_shape, 
+                                                                pooling=None)
+    elif base_model_name == 'VGG16':
+        base_model = tf.keras.applications.VGG16(include_top=False,
+                                                                weights="imagenet", 
+                                                                input_shape=input_shape, 
+                                                                pooling=None)
+    elif base_model_name == 'DenseNet121':
+        base_model = tf.keras.applications.DenseNet121(include_top=False,
+                                                                weights="imagenet", 
+                                                                input_shape=input_shape, 
+                                                                pooling=None)
 
-    base_model = tf.keras.applications.InceptionResNetV2(include_top=False,
-                                                         weights="imagenet", 
-                                                         input_shape=input_shape, 
-                                                         pooling=None)
-    
+
     out = base_model(inputs)
-    out = Conv2D(filters=filters, kernel_size=3, strides=1, activation='relu', kernel_regularizer=regularizers.l1(0.01))(out)
-    out = BatchNormalization()(out) 
+    # out = Conv2D(filters=filters, kernel_size=3, strides=1, activation='relu', kernel_regularizer=regularizers.l1(0.01))(out)
+    # out = BatchNormalization()(out) 
 
     out_dense = GlobalAveragePooling2D()(out)
     out_dense = Dense(units=int(dense_units/2), kernel_regularizer=regularizers.l2(0.01), activation='relu')(out_dense)

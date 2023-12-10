@@ -8,9 +8,10 @@ import cv2
 
 @gin.configurable
 class GradCam:
-    def __init__(self, model, layer_name, dataset, class_idx=None):
+    def __init__(self, model, layer_name, dataset, original_images, class_idx=None):
         self.model = model
         self.layer_name = layer_name
+        self.original_images = original_images
         self.dataset = dataset
         self.class_idx = class_idx
         self.grad_model = tf.keras.models.Model(self.model.inputs,
@@ -51,14 +52,18 @@ class GradCam:
 
 
     def apply_gradcam(self, image_list, save_dir, alpha=0.5):
-        dataset = self.dataset
-        for i, (image, label) in enumerate(dataset):
+        for i, (ds_image, label) in enumerate(self.dataset):
             img_idx = image_list[i]
-            image = tf.expand_dims(image, axis=0)
-            heatmap = self.get_heatmap(image)
-            image = tf.squeeze(image, axis=0)
-            jet_heatmap = self.get_jet_heatmap(heatmap, image)
-            superimposed_img = jet_heatmap * alpha + image
-            # superimposed_img = image
-            save_path = os.path.join(save_dir, f"img_{img_idx}_label-{label}.jpg")
-            tf.keras.preprocessing.image.save_img(save_path, superimposed_img)
+            original_image = np.array(self.original_images[i])
+            original_image = original_image/255.0
+            image_name = f"img_{img_idx}_label-{label}.jpg"
+            save_path = os.path.join(save_dir, image_name)
+
+            ds_image = tf.expand_dims(ds_image, axis=0)
+            heatmap = self.get_heatmap(ds_image)
+            ds_image = tf.squeeze(ds_image, axis=0)
+            jet_heatmap = self.get_jet_heatmap(heatmap, ds_image)
+            superimposed_img = jet_heatmap * alpha + ds_image * (1-alpha)
+
+            total_image = tf.concat([original_image, superimposed_img], axis=0)
+            yield total_image, image_name, save_path
