@@ -2,7 +2,7 @@ import gin
 import tensorflow as tf
 
 from tensorflow.keras import regularizers
-from tensorflow.keras.layers import Conv2D, MaxPool2D, GlobalAveragePooling2D, Dense, Flatten, Dropout, BatchNormalization, Activation
+from tensorflow.keras.layers import Conv2D, MaxPool2D, GlobalAveragePooling2D, Dense, Flatten, Dropout, BatchNormalization, Activation, Add, Multiply
 
 @gin.configurable
 def vgg_block(inputs, filters, kernel_size):
@@ -29,12 +29,33 @@ def cnn_block(input, filter, kernel_size, stride):
                     kernel_size=kernel_size,
                     padding='same',
                     strides=stride,
-                    kernel_regularizer=regularizers.L1(0.01)
-                    #kernel_initializer =tf.keras.initializers.HeNormal()
+                    kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0),
+                    kernel_initializer =tf.keras.initializers.HeNormal()
                     )
-    
     out = conv2D(input)
     out = Activation('relu')(out)
-    out = BatchNormalization()(out)
+    # out = squeeze_excite_block(out)
   
     return out
+
+
+def skip_connect(out, block, skip_connection_pairs):
+    for skip_connection in skip_connection_pairs:
+        if block == skip_connection[1]:
+            out_to_add = out[skip_connection[0]]
+            #reshape for equal number of feature maps if required
+            if not (out[-1].shape[-1] == out_to_add.shape[-1]):
+                out_to_add = Conv2D(filters=out[-1].shape[-1], 
+                                    kernel_size=(1,1), 
+                                    kernel_regularizer=regularizers.l1_l2(l1=0.005, l2=0.05)
+                                    )(out_to_add)
+            out[-1] = Add()([out_to_add, out[-1]])
+            # out[-1] = tf.concat([out_to_add, out], axis=0)
+
+def squeeze_excite_block(input, ratio=8):
+    num_channels = int(input.shape[-1])
+    se = GlobalAveragePooling2D()(input)
+    se = Dense(num_channels // ratio, activation='relu')(se)
+    se = Dense(num_channels, activation='sigmoid')(se)
+    se = tf.reshape(se, [-1, 1, 1, num_channels])
+    return Multiply()([input, se])
