@@ -12,14 +12,15 @@ class Trainer(object):
        
         # Checkpoint Manager
         self.model = model
+        self.ckpt_path = ckpt_path
         self.ckpt = tf.train.Checkpoint(model=self.model)
-        if ckpt_path:
-            self.manager = tf.train.CheckpointManager(self.ckpt, ckpt_path, max_to_keep=4)
+        if self.ckpt_path:
+            self.manager = tf.train.CheckpointManager(self.ckpt, self.ckpt_path, max_to_keep=4)
             if self.manager.latest_checkpoint:
                 self.ckpt.restore(self.manager.latest_checkpoint)
                 logging.info("Restored from {}".format(self.manager.latest_checkpoint))
             else:
-                logging.error("Checkpoint path provided is not valid : {}".format(ckpt_path))
+                logging.error("Checkpoint path provided is not valid : {}".format(self.ckpt_path))
         else:
             self.manager = tf.train.CheckpointManager(self.ckpt, run_paths["path_ckpts_train"], max_to_keep=4)
             logging.info(f"Initializing from scratch. Checkpoints stored in {run_paths['path_ckpts_train']}")
@@ -119,44 +120,69 @@ class Trainer(object):
 class TransferTrainer(Trainer):
     def __init__(self, model, base_model, ds_train, ds_val, ds_info, run_paths, 
                  coarse_learning_rate, fine_learning_rate, coarse_num_steps, fine_num_steps, layers_to_tune):
-        
         super().__init__(model=model, ds_train=ds_train, ds_val=ds_val, ds_info=ds_info, run_paths=run_paths,
                         total_steps=1000, 
                         log_interval=gin.query_parameter("Trainer.log_interval"),
                         ckpt_interval=gin.query_parameter("Trainer.ckpt_interval"), 
-                        learning_rate = 0.001, ckpt_path=False, log_wandb=False )
+                        learning_rate = 0.001, ckpt_path=False, log_wandb=gin.query_parameter("Trainer.log_wandb") )
+        
         self.base_model = base_model
         self.coarse_learning_rate = coarse_learning_rate
         self.fine_learning_rate = fine_learning_rate
         self.coarse_num_steps = coarse_num_steps
         self.fine_num_steps = fine_num_steps
         self.layers_to_tune = layers_to_tune
+        self.fine_training_alone = self.coarse_num_steps <= 0
+        self.coarse_training_alone = self.fine_num_steps <= 0
+
+
+    def train(self):
+        logging.info("\n=====================Transfer Training======================")
+        logging.info(f"The total number of layers in base model  = {len(self.base_model.layers)}")
+        if not self.fine_training_alone:
+            yield from self.coarse_training()
+            logging.info("\n Training completed")
+        if not self.coarse_training_alone:
+            yield from self.fine_training()
+            logging.info("\n Training completed")
+
+
+    def coarse_training(self):
+        # coarse_training
+        logging.info("Starting coarse training of model's classification head")
+        self.setup_layers_training_params(is_fine_tuning=False)
+        yield from super().train()
+
+    
+    def fine_training(self):
+        # fine_training
+        logging.info("Starting fine tuning of the model")
+        self.setup_layers_training_params(is_fine_tuning=True)
+        yield from super().train()
+
 
     def setup_layers_training_params(self, is_fine_tuning):
+        #params
         self.base_model.trainable = False
         self.learning_rate = self.fine_learning_rate if is_fine_tuning else self.coarse_learning_rate
         self.total_steps = self.fine_num_steps if is_fine_tuning else self.coarse_num_steps
+        #layers
         if is_fine_tuning:
             self.base_model.trainable = True
-            for layer in self.base_model.layers[:-self.layers_to_tune]:
-                layer.trainable = False
-            for layer in self.base_model.layers[-self.layers_to_tune:]:
+            for layer in self.base_model.layers:
                 if isinstance(layer, tf.keras.layers.BatchNormalization):
                     layer.trainable = False
+            for layer in self.base_model.layers[:-self.layers_to_tune]:
+                layer.trainable = False
         self.model.summary()
     
-    def train(self):
-        logging.info("\n Starting transfer learning")
-
-        # coarse_training
-        logging.info("\n Starting coarse training of model's classification head")
-        self.setup_layers_training_params(is_fine_tuning=False)
-        yield from super().train()
         
-        # fine_training
-        logging.info("\n Starting fine tuning of the model")
-        self.setup_layers_training_params(is_fine_tuning=True)
-        yield from super().train()
+
+    
+
+    
+    
+        
 
 
     
