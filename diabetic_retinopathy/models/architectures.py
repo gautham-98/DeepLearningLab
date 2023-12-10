@@ -8,7 +8,7 @@ from tensorflow.keras.layers import Input, Conv2D, MaxPool2D, GlobalAveragePooli
 from tensorflow.keras import layers, Sequential
 
 
-from models.layers import vgg_block, cnn_block, skip_connect
+from models.layers import vgg_block, cnn_block, skip_connect, squeeze_excite_block
 
 
 @gin.configurable
@@ -40,8 +40,9 @@ def vgg_like(input_shape, n_classes, base_filters, n_blocks, dense_units, dropou
 
     return tf.keras.Model(inputs=inputs, outputs=outputs, name='vgg_like')
 
-@gin.configurable()
-def res_cnn(input_shape, filters, kernel_size, strides, pool_size, dropout_rate, batch_norm_blocks=False, maxpool_blocks=False,  dropout_blocks=False, skip_connection_pairs=False):
+
+@gin.configurable
+def cnn_1(input_shape, filters, kernel_size, strides, pool_size, dropout_rate, batch_norm_blocks=False, maxpool_blocks=False,  dropout_blocks=False, skip_connection_pairs=False, SE_blocks=False):
     
     inputs = Input(shape=input_shape)
 
@@ -57,6 +58,9 @@ def res_cnn(input_shape, filters, kernel_size, strides, pool_size, dropout_rate,
                         strides[block]
                         )
         out.append(out_block)
+
+        if SE_blocks:
+            out[-1] = squeeze_excite_block(out[-1])
 
         #Skip connection
         if skip_connection_pairs:
@@ -87,11 +91,72 @@ def res_cnn(input_shape, filters, kernel_size, strides, pool_size, dropout_rate,
 
     outputs = Dense(units=2)(out_dense)
     
-    model = keras.Model(inputs=inputs, outputs=outputs, name="res_cnn")
+    model = keras.Model(inputs=inputs, outputs=outputs, name="cnn_1")
     model.build(input_shape=input_shape)
 
-    logging.info(f"res_cnn input shape:  {model.input_shape}")
-    logging.info(f"res_cnn output shape: {model.output_shape}")
+    logging.info(f"cnn_1 input shape:  {model.input_shape}")
+    logging.info(f"cnn_1 output shape: {model.output_shape}")
+
+    return model
+
+
+
+@gin.configurable
+def cnn_se(input_shape, filters, kernel_size, strides, pool_size, dropout_rate, batch_norm_blocks=False,
+           maxpool_blocks=False,  dropout_blocks=False, skip_connection_pairs=False, SE_blocks=False):
+    
+    inputs = Input(shape=input_shape)
+
+    # convolutional layers
+    out = []
+    for block in range(len(filters)):
+
+        input_layer = inputs if block==0 else out[-1]
+        #Conv2d
+        out_block = cnn_block(input_layer, 
+                        filters[block], 
+                        kernel_size, 
+                        strides[block]
+                        )
+        out.append(out_block)
+
+        if SE_blocks:
+            out[-1] = squeeze_excite_block(out[-1])
+
+        #Skip connection
+        if skip_connection_pairs:
+            skip_connect(out, block, skip_connection_pairs)
+
+        #batch normalisation, dropout_blocks, maxpooling
+        if batch_norm_blocks and (block in batch_norm_blocks):
+            out[-1] = BatchNormalization()(out[-1])
+        if maxpool_blocks and (block in maxpool_blocks):
+            out[-1] = MaxPool2D(pool_size)(out[-1])
+        if dropout_blocks and (block in dropout_blocks): 
+            out[-1] = Dropout(dropout_rate)(out[-1])
+
+    # dense layers
+    out_dense = GlobalAveragePooling2D()(out[-1])
+    out_dense = Dropout(dropout_rate)(out_dense)
+    out_dense = Dense(units=32, kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0), activation='relu',
+                      kernel_initializer =tf.keras.initializers.HeNormal()
+                      )(out_dense)
+    out_dense = Dropout(dropout_rate)(out_dense)
+    out_dense = Dense(units=16, kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0), activation='relu',
+                      kernel_initializer =tf.keras.initializers.HeNormal()
+                      )(out_dense)
+    out_dense = Dropout(dropout_rate)(out_dense)
+    out_dense = Dense(units=4, 
+                      kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0)
+                      )(out_dense)
+
+    outputs = Dense(units=2)(out_dense)
+    
+    model = keras.Model(inputs=inputs, outputs=outputs, name="cnn_se")
+    model.build(input_shape=input_shape)
+
+    logging.info(f"cnn_se input shape:  {model.input_shape}")
+    logging.info(f"cnn_se output shape: {model.output_shape}")
 
     return model
 
