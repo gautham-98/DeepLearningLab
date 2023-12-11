@@ -12,10 +12,10 @@ from models.architectures import vgg_like, cnn_1, cnn_se, transfer_model
 from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', True, 'Specify whether to train  model.')
-flags.DEFINE_boolean('eval', True, 'Specify whether to evaluate  model.')
+flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
+flags.DEFINE_boolean('eval', False, 'Specify whether to evaluate  model.')
 flags.DEFINE_string('model_name', 'cnn_se', 'Choose model to train. Default model cnn')
-flags.DEFINE_boolean('deep_visu', True, 'perform deep visualization with grad_cam')
+flags.DEFINE_boolean('deep_visu', False, 'perform deep visualization with grad_cam')
 
 
 def main(argv):
@@ -37,27 +37,22 @@ def main(argv):
 
     # model
     if FLAGS.model_name == 'transfer_model':
-        model, base_model = transfer_model()
+        model = transfer_model()
     elif FLAGS.model_name == 'cnn_se':
         model = cnn_se()
     elif FLAGS.model_name == 'cnn_1':
         model = cnn_1()
+    elif FLAGS.model_name == "vgg":
+        model = vgg_like()
 
     if FLAGS.train:
         # set loggers
         utils_misc.set_loggers(run_paths['path_logs_train'], logging.INFO)
         logging.info("Starting model training...")
-        
-        if FLAGS.model_name == 'transfer_model':
-            trainer = TransferTrainer(model, base_model, ds_train, ds_val, ds_info, run_paths)
-            for _ in trainer.train():
-                continue
-        
-        else:
-            model.summary()
-            trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
-            for _ in trainer.train():
-                continue
+        model.summary()
+        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
+        for _ in trainer.train():
+            continue
 
     if FLAGS.eval:
         # set loggers
