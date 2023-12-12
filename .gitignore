@@ -143,3 +143,15 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+#output files
+
+*.jpg
+*.png
+*.out
+*.txt
+*.json
+*.wandb
+*.tfrecords
+*.yaml
+diabetic_retinopathy/wandb/latest-run
+*.sh
