@@ -24,14 +24,14 @@ def main(argv):
 
     # gin-config
     gin.parse_config_files_and_bindings(['configs/config.gin'], [])
-    utils_params.save_config(run_paths['path_gin'], gin.config_str())
+    utils_params.save_config(run_paths['path_gin'], gin.config_str()) 
 
     if tfrecords.make_tfrecords():
         logging.info("Created TFRecords files")
 
     # setup wandb
     wandb.init(project='diabetic-retinopathy', name=run_paths['path_model_id'],
-               config=utils_params.gin_config_to_readable_dictionary(gin.config._CONFIG))
+            config=utils_params.gin_config_to_readable_dictionary(gin.config._CONFIG))
     # setup pipeline
     ds_train, ds_val, ds_test, ds_info = datasets.load(data_dir=gin.query_parameter('make_tfrecords.target_dir'))
 
@@ -64,9 +64,9 @@ def main(argv):
         utils_misc.set_loggers(run_paths['path_logs_eval'], logging.INFO)
         logging.info(f"Starting model evaluation...")
         evaluate(model,
-                 ds_test,
-                 ds_info,
-                 )
+                ds_test,
+                ds_info,
+                )
 
     if FLAGS.deep_visu:
         deep_visualize = DeepVisualize(model, run_paths, data_dir=gin.query_parameter('make_tfrecords.data_dir'))
