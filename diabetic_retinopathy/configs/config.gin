@@ -7,38 +7,55 @@ transfer_model.dense_units = 10
 transfer_model.dropout_rate = 0.3
 transfer_model.base_model_name = 'DenseNet121'
 
-#res_cnn Model Parameters
-#layers are as given (0, 1, 2, 3, 4, 5, 6, 7)
-#res_cnn.input_shape    = (256,256,3)
-#res_cnn.filters        = (4, 8, 8, 16, 16, 32, 32)
-#res_cnn.kernel_size    = 3
-#res_cnn.strides        = (1, 1, 1, 1, 1, 1, 1, 1, 1)
-#res_cnn.pool_size      = 3
-#res_cnn.dropout_rate   = 0.2
-#res_cnn.dropout_blocks = (5,6)
-#res_cnn.maxpool_blocks = (2,4,6,7)
-#res_cnn.res_blocks     = ((0,2), (2,4), (4,6), (6,7))
-#res_cnn.res_blocks     = ((1,2), (3,4), (5,6))
-#res_cnn.res_blocks     = ((0,1), (1,2), (2,3), (3,4), (4,5), (5,6), (6,7))
+# cnn_1
+cnn_1.input_shape    = (256,256,3)
+cnn_1.filters        = (4, 8, 16, 32)
+cnn_1.kernel_size    = 7
+cnn_1.strides        = (1, 1, 1, 1)
+cnn_1.pool_size      = 2
+cnn_1.dropout_rate   = 0.422
+cnn_1.dropout_blocks = (1, 2)
+cnn_1.maxpool_blocks = (2, 3)
+
+##cnn_se Model Parameters ---- 80+% with SE_blocks , bens alone
+##20000 steps but this number of steps can be reduced looking at the validation loss plateau
+##layers are as given (0, 1, 2, 3)
+cnn_se.input_shape    = (256,256,3)
+cnn_se.filters        = (4, 8, 16, 32)
+cnn_se.kernel_size    = 3
+cnn_se.strides        = (1, 1, 1, 1,1,1,1,1,1)
+cnn_se.pool_size      = 2
+cnn_se.dropout_rate   = 0.30
+# cnn_se.batch_norm_blocks = (0,)
+cnn_se.dropout_blocks = (1, 2)
+cnn_se.maxpool_blocks = (1, 2)
+cnn_se.SE_blocks       = True
+# cnn_se.skip_connection_pairs = ((1, 2), (2, 3))
 
 ##res_cnn Model Parameters ---- 73-75% test accuracy on bens-clahe, 75%-79% on bens alone both 5000 steps, 82% without batch_normalisation 7000 steps
 ##layers are as given (0, 1, 2, 3)
-res_cnn.input_shape    = (256,256,3)
-res_cnn.filters        = (4, 8, 16, 32)
-res_cnn.kernel_size    = 3
-res_cnn.strides        = (1, 1, 1, 1)
-res_cnn.pool_size      = 3
-res_cnn.dropout_rate   = 0.3
-#res_cnn.batch_norm_blocks = (0,)
-res_cnn.dropout_blocks = (1, 2)
-res_cnn.maxpool_blocks = (1, 2)
+#res_cnn.input_shape    = (256,256,3)
+#res_cnn.filters        = (4, 8, 16, 32)
+#res_cnn.kernel_size    = 3
+#res_cnn.strides        = (1, 1, 1, 1)
+#res_cnn.pool_size      = 3
+#res_cnn.dropout_rate   = 0.3
+##res_cnn.batch_norm_blocks = (0,)
+#res_cnn.dropout_blocks = (1, 2)
+#res_cnn.maxpool_blocks = (1, 2)
 #res_cnn.skip_connection_pairs = ((0,1), (1,2))
 
 # Layers
+vgg_like.input_shape = (256, 256, 3)
 vgg_block.kernel_size = (3, 3)
+vgg_like.n_classes = 2
+vgg_like.base_filters = 4
+vgg_like.n_blocks = 4
+vgg_like.dense_units = 64
+vgg_like.dropout_rate = 0.486
 
 # Training
-Trainer.total_steps = 15000
+Trainer.total_steps = 17000 
 Trainer.log_interval = 13
 Trainer.ckpt_interval = 50
 Trainer.learning_rate = 0.001
@@ -70,28 +87,22 @@ apply_randomly.p=0.35
 
 # TF Records
 make_tfrecords.data_dir = '/home/data/IDRID_dataset/'
-#make_tfrecords.data_dir = 'C:/Users/Gautham/GIT/dl-lab-23w-team10/datasets/IDRID_dataset/'
-#make_tfrecords.target_dir = './tfrecords_data/'
-make_tfrecords.target_dir = './tfrecords_data_grahams/'
-#make_tfrecords.target_dir = './tfrecords_data_grahams_30'
-#make_tfrecords.target_dir = './tfrecords_data_grahams_clahe/'
-#make_tfrecords.target_dir = './tfrecords_data_clahe'
+make_tfrecords.target_dir = './tfrecords_data_normal/'
 preprocess_image.with_clahe = False
-preprocess_image.with_bens = True
+preprocess_image.with_bens = False
 
 #Deep Visu
-DeepVisualize.target_dir = './'
-#DeepVisualize.chkpt = '/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments/run_2023-11-29T13-41-48-991091/ckpts'
-DeepVisualize.layer_name = 'activation_3'
-DeepVisualize.image_list_train = [5,6,7,8]
-DeepVisualize.image_list_test = [15,57,87,32]
-GradCam.class_idx = 1
+#DeepVisualize.target_dir = './'
+#DeepVisualize.chkpt = ''
+#DeepVisualize.layer_name = 'activation_3'
+#DeepVisualize.image_list_train = [5,6,7,8]
+#DeepVisualize.image_list_test = [15,57,87,32]
+#GradCam.class_idx = 1
 
 # Evaluation checkpoint path
-#evaluate.ckpt_path = #your checkpoint path here
+# evaluate.ckpt_path = "/home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts"
 
 # wandb logging
-evaluate.log_wandb = True
-Trainer.log_wandb = True
-DeepVisualize.log_wandb = True
-
+evaluate.log_wandb = False
+Trainer.log_wandb = False
+#DeepVisualize.log_wandb = True
