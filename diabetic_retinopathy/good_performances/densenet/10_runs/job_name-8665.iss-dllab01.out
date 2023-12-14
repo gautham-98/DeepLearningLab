@@ -1,0 +1,1397 @@
+2023-12-14 11:41:10.265274: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-12-14 11:41:10.929348: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+/home/RUS_CIP/st184584/.local/lib/python3.8/site-packages/tensorflow_addons/utils/ensure_tf_install.py:54: UserWarning: Tensorflow Addons supports using Python ops for all Tensorflow versions above or equal to 2.2.0 and strictly below 2.4.0 (nightly versions are not supported). 
+ The versions of TensorFlow you are currently using is 2.13.1 and is not supported. 
+Some things might work, some things might not.
+If you were to encounter a bug, do not file an issue.
+If you want to make sure you're using a tested and supported configuration, either change the TensorFlow version or the TensorFlow Addons's version. 
+You can find the compatibility matrix in TensorFlow Addon's readme:
+https://github.com/tensorflow/addons
+  warnings.warn(
+wandb: Currently logged in as: utsavpanchal (dl-lab-uni-stuttgart). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.16.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.0
+wandb: Run data is saved locally in /home/RUS_CIP/st184584/dl-lab-23w-team10/diabetic_retinopathy/wandb/run-20231214_114114-iv9otxoz
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007
+wandb: ⭐️ View project at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy
+wandb: 🚀 View run at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/runs/iv9otxoz
+I1214 11:41:14.931890 140666663466816 datasets.py:15] Preparing dataset idrid...
+2023-12-14 11:41:15.077264: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 9802 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:01:00.0, compute capability: 7.5
+I1214 11:41:19.229023 140666663466816 architectures.py:211] transfer_model input shape:  (None, 256, 256, 3)
+I1214 11:41:19.229331 140666663466816 architectures.py:212] transfer_model output shape: (None, 2)
+I1214 11:41:19.229421 140666663466816 main.py:74] ============ RUN 0================
+I1214 11:41:19.229709 140666663466816 main.py:76] Starting model training...
+Model: "transfer_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 3)]     0         
+                                                                 
+ densenet121 (Functional)    (None, 8, 8, 1024)        7037504   
+                                                                 
+ global_average_pooling2d (  (None, 1024)              0         
+ GlobalAveragePooling2D)                                         
+                                                                 
+ dropout (Dropout)           (None, 1024)              0         
+                                                                 
+ dense (Dense)               (None, 5)                 5125      
+                                                                 
+ dropout_1 (Dropout)         (None, 5)                 0         
+                                                                 
+ dense_1 (Dense)             (None, 2)                 12        
+                                                                 
+ dropout_2 (Dropout)         (None, 2)                 0         
+                                                                 
+ dense_2 (Dense)             (None, 2)                 6         
+                                                                 
+=================================================================
+Total params: 7042647 (26.87 MB)
+Trainable params: 5143 (20.09 KB)
+Non-trainable params: 7037504 (26.85 MB)
+_________________________________________________________________
+I1214 11:41:19.247135 140666663466816 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts
+2023-12-14 11:41:23.045238: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8600
+2023-12-14 11:41:24.679385: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7feae90ae490 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2023-12-14 11:41:24.679449: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): NVIDIA GeForce RTX 2080 Ti, Compute Capability 7.5
+2023-12-14 11:41:24.683690: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:255] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2023-12-14 11:41:24.800146: I ./tensorflow/compiler/jit/device_compiler.h:186] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+I1214 11:41:30.548285 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:41:36.686488 140666663466816 train.py:90] Step 100, Time 3.74, Loss: 0.66, Accuracy: 61.86, Validation Loss: 0.58, Validation Accuracy: 80.00
+I1214 11:41:36.689145 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:41:38.965445 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:41:41.432093 140666663466816 train.py:90] Step 200, Time 0.20, Loss: 0.60, Accuracy: 68.24, Validation Loss: 0.51, Validation Accuracy: 82.22
+I1214 11:41:41.433601 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:41:43.691754 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:41:46.131918 140666663466816 train.py:90] Step 300, Time 0.19, Loss: 0.57, Accuracy: 70.07, Validation Loss: 0.44, Validation Accuracy: 80.00
+I1214 11:41:46.133317 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:41:48.389381 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:41:50.844220 140666663466816 train.py:90] Step 400, Time 0.20, Loss: 0.57, Accuracy: 69.77, Validation Loss: 0.42, Validation Accuracy: 84.44
+I1214 11:41:50.845779 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:41:53.104812 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:41:55.602807 140666663466816 train.py:90] Step 500, Time 0.19, Loss: 0.55, Accuracy: 70.75, Validation Loss: 0.39, Validation Accuracy: 84.44
+I1214 11:41:55.605285 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:41:57.879179 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:00.586809 140666663466816 train.py:90] Step 600, Time 0.20, Loss: 0.56, Accuracy: 70.49, Validation Loss: 0.38, Validation Accuracy: 86.67
+I1214 11:42:00.588086 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:02.848214 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:05.328751 140666663466816 train.py:90] Step 700, Time 0.17, Loss: 0.54, Accuracy: 71.84, Validation Loss: 0.37, Validation Accuracy: 83.33
+I1214 11:42:05.330520 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:07.620055 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:10.145058 140666663466816 train.py:90] Step 800, Time 0.19, Loss: 0.54, Accuracy: 71.01, Validation Loss: 0.36, Validation Accuracy: 85.56
+I1214 11:42:10.146763 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:12.422110 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:14.907117 140666663466816 train.py:90] Step 900, Time 0.19, Loss: 0.52, Accuracy: 73.14, Validation Loss: 0.35, Validation Accuracy: 86.67
+I1214 11:42:14.908380 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:17.213716 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:19.695552 140666663466816 train.py:90] Step 1000, Time 0.20, Loss: 0.52, Accuracy: 73.14, Validation Loss: 0.35, Validation Accuracy: 84.44
+I1214 11:42:19.697510 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:22.304112 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:24.787323 140666663466816 train.py:90] Step 1100, Time 0.20, Loss: 0.54, Accuracy: 71.80, Validation Loss: 0.35, Validation Accuracy: 86.67
+I1214 11:42:24.789708 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:27.099875 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:29.612981 140666663466816 train.py:90] Step 1200, Time 0.19, Loss: 0.53, Accuracy: 72.06, Validation Loss: 0.35, Validation Accuracy: 90.00
+I1214 11:42:29.615022 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:31.903567 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:34.435421 140666663466816 train.py:90] Step 1300, Time 0.20, Loss: 0.53, Accuracy: 71.67, Validation Loss: 0.35, Validation Accuracy: 90.00
+I1214 11:42:34.438227 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:36.729348 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:39.245357 140666663466816 train.py:90] Step 1400, Time 0.17, Loss: 0.54, Accuracy: 72.04, Validation Loss: 0.36, Validation Accuracy: 81.11
+I1214 11:42:39.246638 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:41.546629 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:44.062870 140666663466816 train.py:90] Step 1500, Time 0.19, Loss: 0.52, Accuracy: 73.04, Validation Loss: 0.35, Validation Accuracy: 85.56
+I1214 11:42:44.064225 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:46.674164 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:49.182751 140666663466816 train.py:90] Step 1600, Time 0.19, Loss: 0.54, Accuracy: 72.42, Validation Loss: 0.35, Validation Accuracy: 85.56
+I1214 11:42:49.184038 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:51.492543 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:53.995481 140666663466816 train.py:90] Step 1700, Time 0.20, Loss: 0.52, Accuracy: 73.24, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:42:53.998180 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:56.361798 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:42:58.874331 140666663466816 train.py:90] Step 1800, Time 0.22, Loss: 0.53, Accuracy: 71.70, Validation Loss: 0.35, Validation Accuracy: 90.00
+I1214 11:42:58.876550 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:01.174488 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:03.701387 140666663466816 train.py:90] Step 1900, Time 0.20, Loss: 0.53, Accuracy: 72.48, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:43:03.702682 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:06.214603 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:08.770845 140666663466816 train.py:90] Step 2000, Time 0.19, Loss: 0.52, Accuracy: 72.81, Validation Loss: 0.35, Validation Accuracy: 90.00
+I1214 11:43:08.772183 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:11.075987 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:13.587563 140666663466816 train.py:90] Step 2100, Time 0.17, Loss: 0.53, Accuracy: 70.72, Validation Loss: 0.35, Validation Accuracy: 84.44
+I1214 11:43:13.588946 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:15.910192 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:18.429970 140666663466816 train.py:90] Step 2200, Time 0.20, Loss: 0.53, Accuracy: 71.99, Validation Loss: 0.35, Validation Accuracy: 85.56
+I1214 11:43:18.431819 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:20.752904 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:23.258730 140666663466816 train.py:90] Step 2300, Time 0.19, Loss: 0.54, Accuracy: 71.80, Validation Loss: 0.35, Validation Accuracy: 90.00
+I1214 11:43:23.260122 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:25.570165 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:28.286465 140666663466816 train.py:90] Step 2400, Time 0.20, Loss: 0.52, Accuracy: 73.92, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:43:28.287768 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:30.606731 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:33.159266 140666663466816 train.py:90] Step 2500, Time 0.21, Loss: 0.52, Accuracy: 73.10, Validation Loss: 0.34, Validation Accuracy: 87.78
+I1214 11:43:33.160626 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:35.458234 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:37.991979 140666663466816 train.py:90] Step 2600, Time 0.19, Loss: 0.52, Accuracy: 73.50, Validation Loss: 0.34, Validation Accuracy: 90.00
+I1214 11:43:37.993466 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:40.290195 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:42.864174 140666663466816 train.py:90] Step 2700, Time 0.19, Loss: 0.52, Accuracy: 72.68, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:43:42.865518 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:45.146709 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:47.660440 140666663466816 train.py:90] Step 2800, Time 0.17, Loss: 0.52, Accuracy: 73.78, Validation Loss: 0.35, Validation Accuracy: 82.22
+I1214 11:43:47.661925 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:49.969933 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:52.761328 140666663466816 train.py:90] Step 2900, Time 0.19, Loss: 0.53, Accuracy: 72.65, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:43:52.762689 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:55.072316 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:57.588348 140666663466816 train.py:90] Step 3000, Time 0.20, Loss: 0.52, Accuracy: 73.10, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:43:57.590616 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:43:57.877449 140666663466816 train.py:114] Finished training after 3000 steps.
+I1214 11:43:58.207067 140666663466816 main.py:84] Starting model evaluation...
+I1214 11:43:58.897206 140666663466816 eval.py:53] 
+====Results of Test set evaluation on transfer_model ====
+I1214 11:43:58.897960 140666663466816 eval.py:54] Confusion Matrix: [32  7] [11 53]
+I1214 11:43:58.898084 140666663466816 eval.py:55] Accuracy(balanced): 81.38
+I1214 11:43:58.898192 140666663466816 eval.py:56] Accuracy(Unbalanced): 82.52
+I1214 11:43:58.898475 140666663466816 eval.py:57] Accuracy(Sparse Categorical) 82.52
+I1214 11:43:58.898597 140666663466816 eval.py:58] sensitivity: 74.42
+I1214 11:43:58.898696 140666663466816 eval.py:59] specificity: 88.33
+I1214 11:43:58.898797 140666663466816 eval.py:60] recall: 74.42
+I1214 11:43:58.898893 140666663466816 eval.py:61] precision: 82.05
+I1214 11:43:58.899001 140666663466816 eval.py:62] f1_score: 78.05
+I1214 11:43:58.899130 140666663466816 eval.py:63] AUC 0.82
+I1214 11:43:59.066744 140666663466816 eval.py:69] ----Evaluation completed----
+I1214 11:43:59.067164 140666663466816 main.py:74] ============ RUN 1================
+I1214 11:43:59.067481 140666663466816 main.py:76] Starting model training...
+Model: "transfer_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 3)]     0         
+                                                                 
+ densenet121 (Functional)    (None, 8, 8, 1024)        7037504   
+                                                                 
+ global_average_pooling2d (  (None, 1024)              0         
+ GlobalAveragePooling2D)                                         
+                                                                 
+ dropout (Dropout)           (None, 1024)              0         
+                                                                 
+ dense (Dense)               (None, 5)                 5125      
+                                                                 
+ dropout_1 (Dropout)         (None, 5)                 0         
+                                                                 
+ dense_1 (Dense)             (None, 2)                 12        
+                                                                 
+ dropout_2 (Dropout)         (None, 2)                 0         
+                                                                 
+ dense_2 (Dense)             (None, 2)                 6         
+                                                                 
+=================================================================
+Total params: 7042647 (26.87 MB)
+Trainable params: 5143 (20.09 KB)
+Non-trainable params: 7037504 (26.85 MB)
+_________________________________________________________________
+I1214 11:43:59.086792 140666663466816 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts
+I1214 11:44:07.324619 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:11.767406 140666663466816 train.py:90] Step 100, Time 2.14, Loss: 0.51, Accuracy: 73.24, Validation Loss: 0.35, Validation Accuracy: 84.44
+I1214 11:44:11.769014 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:14.132048 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:16.641674 140666663466816 train.py:90] Step 200, Time 0.19, Loss: 0.53, Accuracy: 73.20, Validation Loss: 0.35, Validation Accuracy: 84.44
+I1214 11:44:16.642896 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:19.136248 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:21.634564 140666663466816 train.py:90] Step 300, Time 0.20, Loss: 0.54, Accuracy: 71.21, Validation Loss: 0.35, Validation Accuracy: 84.44
+I1214 11:44:21.635877 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:23.949523 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:26.459330 140666663466816 train.py:90] Step 400, Time 0.20, Loss: 0.51, Accuracy: 73.50, Validation Loss: 0.35, Validation Accuracy: 84.44
+I1214 11:44:26.460699 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:28.761438 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:31.291340 140666663466816 train.py:90] Step 500, Time 0.19, Loss: 0.52, Accuracy: 73.53, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 11:44:31.292757 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:33.569223 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:36.107323 140666663466816 train.py:90] Step 600, Time 0.20, Loss: 0.52, Accuracy: 72.94, Validation Loss: 0.34, Validation Accuracy: 90.00
+I1214 11:44:36.109678 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:38.446673 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:40.996097 140666663466816 train.py:90] Step 700, Time 0.17, Loss: 0.52, Accuracy: 72.99, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:44:40.997372 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:43.518742 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:46.036128 140666663466816 train.py:90] Step 800, Time 0.20, Loss: 0.53, Accuracy: 72.91, Validation Loss: 0.34, Validation Accuracy: 87.78
+I1214 11:44:46.038256 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:48.371871 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:50.882664 140666663466816 train.py:90] Step 900, Time 0.20, Loss: 0.53, Accuracy: 73.89, Validation Loss: 0.34, Validation Accuracy: 87.78
+I1214 11:44:50.884110 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:53.193544 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:55.721692 140666663466816 train.py:90] Step 1000, Time 0.20, Loss: 0.53, Accuracy: 72.35, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:44:55.724607 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:44:58.079546 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:00.610078 140666663466816 train.py:90] Step 1100, Time 0.21, Loss: 0.52, Accuracy: 72.91, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:45:00.611499 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:02.910594 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:05.744184 140666663466816 train.py:90] Step 1200, Time 0.19, Loss: 0.52, Accuracy: 72.68, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:45:05.745490 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:08.025427 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:10.572342 140666663466816 train.py:90] Step 1300, Time 0.20, Loss: 0.53, Accuracy: 72.35, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:45:10.573652 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:12.857348 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:15.380155 140666663466816 train.py:90] Step 1400, Time 0.17, Loss: 0.51, Accuracy: 73.98, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:45:15.382204 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:17.714957 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:20.232929 140666663466816 train.py:90] Step 1500, Time 0.20, Loss: 0.52, Accuracy: 72.94, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:45:20.234579 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:22.576827 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:25.087943 140666663466816 train.py:90] Step 1600, Time 0.20, Loss: 0.52, Accuracy: 72.97, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:45:25.089673 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:27.437442 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:30.453427 140666663466816 train.py:90] Step 1700, Time 0.20, Loss: 0.51, Accuracy: 73.10, Validation Loss: 0.35, Validation Accuracy: 82.22
+I1214 11:45:30.454740 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:32.801397 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:35.322176 140666663466816 train.py:90] Step 1800, Time 0.19, Loss: 0.51, Accuracy: 74.22, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:45:35.324420 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:37.622520 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:40.144491 140666663466816 train.py:90] Step 1900, Time 0.19, Loss: 0.53, Accuracy: 72.71, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 11:45:40.146017 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:42.483920 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:45.058866 140666663466816 train.py:90] Step 2000, Time 0.20, Loss: 0.52, Accuracy: 72.58, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 11:45:45.060369 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:47.368654 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:49.925689 140666663466816 train.py:90] Step 2100, Time 0.18, Loss: 0.52, Accuracy: 72.99, Validation Loss: 0.34, Validation Accuracy: 91.11
+I1214 11:45:49.928023 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:52.706237 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:55.275310 140666663466816 train.py:90] Step 2200, Time 0.20, Loss: 0.51, Accuracy: 74.41, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:45:55.276695 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:45:57.607451 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:00.147305 140666663466816 train.py:90] Step 2300, Time 0.20, Loss: 0.52, Accuracy: 72.52, Validation Loss: 0.35, Validation Accuracy: 88.89
+I1214 11:46:00.149813 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:02.521701 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:05.065903 140666663466816 train.py:90] Step 2400, Time 0.20, Loss: 0.52, Accuracy: 72.55, Validation Loss: 0.34, Validation Accuracy: 91.11
+I1214 11:46:05.067522 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:07.397338 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:09.986401 140666663466816 train.py:90] Step 2500, Time 0.20, Loss: 0.52, Accuracy: 73.86, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:46:09.987974 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:12.295301 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:14.856476 140666663466816 train.py:90] Step 2600, Time 0.19, Loss: 0.54, Accuracy: 72.65, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:46:14.857918 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:17.577827 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:20.143383 140666663466816 train.py:90] Step 2700, Time 0.20, Loss: 0.52, Accuracy: 72.75, Validation Loss: 0.34, Validation Accuracy: 91.11
+I1214 11:46:20.144788 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:22.434450 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:25.017111 140666663466816 train.py:90] Step 2800, Time 0.17, Loss: 0.51, Accuracy: 73.09, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:46:25.018664 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:27.354003 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:29.914121 140666663466816 train.py:90] Step 2900, Time 0.19, Loss: 0.52, Accuracy: 73.04, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:46:29.915452 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:32.249784 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:34.814842 140666663466816 train.py:90] Step 3000, Time 0.20, Loss: 0.52, Accuracy: 72.91, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:46:34.816440 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:35.106512 140666663466816 train.py:114] Finished training after 3000 steps.
+I1214 11:46:35.766008 140666663466816 main.py:84] Starting model evaluation...
+I1214 11:46:36.240773 140666663466816 eval.py:53] 
+====Results of Test set evaluation on transfer_model ====
+I1214 11:46:36.241620 140666663466816 eval.py:54] Confusion Matrix: [32  7] [11 53]
+I1214 11:46:36.241833 140666663466816 eval.py:55] Accuracy(balanced): 81.38
+I1214 11:46:36.241980 140666663466816 eval.py:56] Accuracy(Unbalanced): 82.52
+I1214 11:46:36.242315 140666663466816 eval.py:57] Accuracy(Sparse Categorical) 82.52
+I1214 11:46:36.242493 140666663466816 eval.py:58] sensitivity: 74.42
+I1214 11:46:36.242632 140666663466816 eval.py:59] specificity: 88.33
+I1214 11:46:36.242766 140666663466816 eval.py:60] recall: 74.42
+I1214 11:46:36.242898 140666663466816 eval.py:61] precision: 82.05
+I1214 11:46:36.243029 140666663466816 eval.py:62] f1_score: 78.05
+I1214 11:46:36.243213 140666663466816 eval.py:63] AUC 0.82
+I1214 11:46:36.371710 140666663466816 eval.py:69] ----Evaluation completed----
+I1214 11:46:36.372051 140666663466816 main.py:74] ============ RUN 2================
+I1214 11:46:36.372303 140666663466816 main.py:76] Starting model training...
+Model: "transfer_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 3)]     0         
+                                                                 
+ densenet121 (Functional)    (None, 8, 8, 1024)        7037504   
+                                                                 
+ global_average_pooling2d (  (None, 1024)              0         
+ GlobalAveragePooling2D)                                         
+                                                                 
+ dropout (Dropout)           (None, 1024)              0         
+                                                                 
+ dense (Dense)               (None, 5)                 5125      
+                                                                 
+ dropout_1 (Dropout)         (None, 5)                 0         
+                                                                 
+ dense_1 (Dense)             (None, 2)                 12        
+                                                                 
+ dropout_2 (Dropout)         (None, 2)                 0         
+                                                                 
+ dense_2 (Dense)             (None, 2)                 6         
+                                                                 
+=================================================================
+Total params: 7042647 (26.87 MB)
+Trainable params: 5143 (20.09 KB)
+Non-trainable params: 7037504 (26.85 MB)
+_________________________________________________________________
+I1214 11:46:36.389371 140666663466816 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts
+I1214 11:46:44.889128 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:50.059833 140666663466816 train.py:90] Step 100, Time 2.79, Loss: 0.52, Accuracy: 73.50, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:46:50.061253 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:52.392045 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:54.944238 140666663466816 train.py:90] Step 200, Time 0.20, Loss: 0.51, Accuracy: 74.35, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:46:54.945737 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:57.305977 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:46:59.859465 140666663466816 train.py:90] Step 300, Time 0.20, Loss: 0.53, Accuracy: 72.35, Validation Loss: 0.35, Validation Accuracy: 83.33
+I1214 11:46:59.861829 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:02.186021 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:04.721705 140666663466816 train.py:90] Step 400, Time 0.21, Loss: 0.51, Accuracy: 74.48, Validation Loss: 0.34, Validation Accuracy: 88.89
+I1214 11:47:04.723132 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:07.018340 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:10.039973 140666663466816 train.py:90] Step 500, Time 0.19, Loss: 0.52, Accuracy: 73.20, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:47:10.041530 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:12.369827 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:14.915356 140666663466816 train.py:90] Step 600, Time 0.20, Loss: 0.52, Accuracy: 73.20, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:47:14.916939 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:17.229748 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:19.785444 140666663466816 train.py:90] Step 700, Time 0.17, Loss: 0.52, Accuracy: 72.86, Validation Loss: 0.35, Validation Accuracy: 88.89
+I1214 11:47:19.786764 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:22.101329 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:24.622549 140666663466816 train.py:90] Step 800, Time 0.20, Loss: 0.53, Accuracy: 72.06, Validation Loss: 0.34, Validation Accuracy: 91.11
+I1214 11:47:24.623950 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:26.964559 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:29.488106 140666663466816 train.py:90] Step 900, Time 0.20, Loss: 0.50, Accuracy: 73.69, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 11:47:29.489553 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:32.226904 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:34.754333 140666663466816 train.py:90] Step 1000, Time 0.19, Loss: 0.52, Accuracy: 73.59, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:47:34.755762 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:37.074311 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:39.609947 140666663466816 train.py:90] Step 1100, Time 0.20, Loss: 0.51, Accuracy: 74.08, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 11:47:39.611384 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:41.947067 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:44.487885 140666663466816 train.py:90] Step 1200, Time 0.19, Loss: 0.52, Accuracy: 72.84, Validation Loss: 0.33, Validation Accuracy: 87.78
+I1214 11:47:44.489329 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:46.809571 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:49.400684 140666663466816 train.py:90] Step 1300, Time 0.20, Loss: 0.50, Accuracy: 74.77, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 11:47:49.402569 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:51.713132 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:54.277883 140666663466816 train.py:90] Step 1400, Time 0.17, Loss: 0.53, Accuracy: 72.86, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:47:54.279355 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:57.024181 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:47:59.602684 140666663466816 train.py:90] Step 1500, Time 0.20, Loss: 0.53, Accuracy: 72.39, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 11:47:59.604043 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:01.949848 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:04.462236 140666663466816 train.py:90] Step 1600, Time 0.20, Loss: 0.52, Accuracy: 72.52, Validation Loss: 0.33, Validation Accuracy: 90.00
+I1214 11:48:04.463635 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:06.794341 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:09.340356 140666663466816 train.py:90] Step 1700, Time 0.20, Loss: 0.51, Accuracy: 73.14, Validation Loss: 0.34, Validation Accuracy: 81.11
+I1214 11:48:09.341732 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:11.661846 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:14.264034 140666663466816 train.py:90] Step 1800, Time 0.21, Loss: 0.50, Accuracy: 74.61, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:48:14.266864 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:16.631847 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:19.181071 140666663466816 train.py:90] Step 1900, Time 0.20, Loss: 0.52, Accuracy: 71.99, Validation Loss: 0.34, Validation Accuracy: 81.11
+I1214 11:48:19.182538 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:21.790504 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:24.358089 140666663466816 train.py:90] Step 2000, Time 0.19, Loss: 0.52, Accuracy: 73.50, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:48:24.359540 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:26.691127 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:29.272202 140666663466816 train.py:90] Step 2100, Time 0.18, Loss: 0.53, Accuracy: 72.04, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:48:29.275011 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:31.660420 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:34.210986 140666663466816 train.py:90] Step 2200, Time 0.20, Loss: 0.52, Accuracy: 73.73, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:48:34.212984 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:36.533977 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:39.064463 140666663466816 train.py:90] Step 2300, Time 0.19, Loss: 0.51, Accuracy: 73.53, Validation Loss: 0.33, Validation Accuracy: 83.33
+I1214 11:48:39.066084 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:41.402667 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:44.374065 140666663466816 train.py:90] Step 2400, Time 0.20, Loss: 0.50, Accuracy: 75.16, Validation Loss: 0.33, Validation Accuracy: 83.33
+I1214 11:48:44.376538 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:46.726679 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:49.276031 140666663466816 train.py:90] Step 2500, Time 0.20, Loss: 0.52, Accuracy: 73.66, Validation Loss: 0.33, Validation Accuracy: 83.33
+I1214 11:48:49.277375 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:51.571669 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:54.174725 140666663466816 train.py:90] Step 2600, Time 0.21, Loss: 0.51, Accuracy: 73.76, Validation Loss: 0.34, Validation Accuracy: 81.11
+I1214 11:48:54.177332 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:56.558439 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:48:59.156465 140666663466816 train.py:90] Step 2700, Time 0.20, Loss: 0.52, Accuracy: 73.59, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 11:48:59.157805 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:01.479388 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:04.009567 140666663466816 train.py:90] Step 2800, Time 0.17, Loss: 0.52, Accuracy: 73.98, Validation Loss: 0.33, Validation Accuracy: 83.33
+I1214 11:49:04.010931 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:06.347459 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:09.331518 140666663466816 train.py:90] Step 2900, Time 0.20, Loss: 0.53, Accuracy: 72.58, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:49:09.334175 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:11.733449 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:14.304428 140666663466816 train.py:90] Step 3000, Time 0.20, Loss: 0.51, Accuracy: 73.43, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 11:49:14.306814 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:14.617753 140666663466816 train.py:114] Finished training after 3000 steps.
+I1214 11:49:14.974102 140666663466816 main.py:84] Starting model evaluation...
+I1214 11:49:15.478187 140666663466816 eval.py:53] 
+====Results of Test set evaluation on transfer_model ====
+I1214 11:49:15.479135 140666663466816 eval.py:54] Confusion Matrix: [32  7] [10 54]
+I1214 11:49:15.479277 140666663466816 eval.py:55] Accuracy(balanced): 82.36
+I1214 11:49:15.479381 140666663466816 eval.py:56] Accuracy(Unbalanced): 83.50
+I1214 11:49:15.479699 140666663466816 eval.py:57] Accuracy(Sparse Categorical) 83.50
+I1214 11:49:15.479821 140666663466816 eval.py:58] sensitivity: 76.19
+I1214 11:49:15.479943 140666663466816 eval.py:59] specificity: 88.52
+I1214 11:49:15.480039 140666663466816 eval.py:60] recall: 76.19
+I1214 11:49:15.480134 140666663466816 eval.py:61] precision: 82.05
+I1214 11:49:15.480226 140666663466816 eval.py:62] f1_score: 79.01
+I1214 11:49:15.480364 140666663466816 eval.py:63] AUC 0.83
+I1214 11:49:15.621873 140666663466816 eval.py:69] ----Evaluation completed----
+I1214 11:49:15.622500 140666663466816 main.py:74] ============ RUN 3================
+I1214 11:49:15.622879 140666663466816 main.py:76] Starting model training...
+Model: "transfer_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 3)]     0         
+                                                                 
+ densenet121 (Functional)    (None, 8, 8, 1024)        7037504   
+                                                                 
+ global_average_pooling2d (  (None, 1024)              0         
+ GlobalAveragePooling2D)                                         
+                                                                 
+ dropout (Dropout)           (None, 1024)              0         
+                                                                 
+ dense (Dense)               (None, 5)                 5125      
+                                                                 
+ dropout_1 (Dropout)         (None, 5)                 0         
+                                                                 
+ dense_1 (Dense)             (None, 2)                 12        
+                                                                 
+ dropout_2 (Dropout)         (None, 2)                 0         
+                                                                 
+ dense_2 (Dense)             (None, 2)                 6         
+                                                                 
+=================================================================
+Total params: 7042647 (26.87 MB)
+Trainable params: 5143 (20.09 KB)
+Non-trainable params: 7037504 (26.85 MB)
+_________________________________________________________________
+I1214 11:49:15.648590 140666663466816 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts
+I1214 11:49:23.912501 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:28.422520 140666663466816 train.py:90] Step 100, Time 2.15, Loss: 0.53, Accuracy: 72.16, Validation Loss: 0.35, Validation Accuracy: 81.11
+I1214 11:49:28.424686 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:30.798326 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:33.316986 140666663466816 train.py:90] Step 200, Time 0.20, Loss: 0.51, Accuracy: 73.50, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:49:33.319672 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:35.954976 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:38.515158 140666663466816 train.py:90] Step 300, Time 0.20, Loss: 0.50, Accuracy: 74.48, Validation Loss: 0.33, Validation Accuracy: 81.11
+I1214 11:49:38.517992 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:40.908334 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:43.511373 140666663466816 train.py:90] Step 400, Time 0.22, Loss: 0.52, Accuracy: 73.20, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:49:43.512702 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:45.808322 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:48.360992 140666663466816 train.py:90] Step 500, Time 0.19, Loss: 0.50, Accuracy: 74.22, Validation Loss: 0.33, Validation Accuracy: 83.33
+I1214 11:49:48.362411 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:50.660166 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:53.207447 140666663466816 train.py:90] Step 600, Time 0.19, Loss: 0.51, Accuracy: 74.61, Validation Loss: 0.34, Validation Accuracy: 82.22
+I1214 11:49:53.209208 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:55.517876 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:49:58.051212 140666663466816 train.py:90] Step 700, Time 0.17, Loss: 0.53, Accuracy: 72.86, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:49:58.054416 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:00.865341 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:03.413638 140666663466816 train.py:90] Step 800, Time 0.20, Loss: 0.53, Accuracy: 72.12, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:50:03.415097 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:05.748115 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:08.265660 140666663466816 train.py:90] Step 900, Time 0.20, Loss: 0.51, Accuracy: 73.46, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:50:08.269362 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:10.665931 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:13.203876 140666663466816 train.py:90] Step 1000, Time 0.19, Loss: 0.52, Accuracy: 73.69, Validation Loss: 0.33, Validation Accuracy: 83.33
+I1214 11:50:13.205676 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:15.528710 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:18.059160 140666663466816 train.py:90] Step 1100, Time 0.21, Loss: 0.51, Accuracy: 74.54, Validation Loss: 0.33, Validation Accuracy: 81.11
+I1214 11:50:18.060526 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:20.351527 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:22.893977 140666663466816 train.py:90] Step 1200, Time 0.19, Loss: 0.51, Accuracy: 73.10, Validation Loss: 0.32, Validation Accuracy: 90.00
+I1214 11:50:22.895921 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:25.670674 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:28.289279 140666663466816 train.py:90] Step 1300, Time 0.21, Loss: 0.52, Accuracy: 73.20, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:50:28.291402 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:30.618845 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:33.162272 140666663466816 train.py:90] Step 1400, Time 0.17, Loss: 0.51, Accuracy: 73.82, Validation Loss: 0.33, Validation Accuracy: 90.00
+I1214 11:50:33.163782 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:35.481264 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:38.054962 140666663466816 train.py:90] Step 1500, Time 0.19, Loss: 0.51, Accuracy: 74.77, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 11:50:38.057857 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:40.439255 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:43.007391 140666663466816 train.py:90] Step 1600, Time 0.20, Loss: 0.52, Accuracy: 72.88, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:50:43.008999 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:45.359661 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:48.284371 140666663466816 train.py:90] Step 1700, Time 0.19, Loss: 0.51, Accuracy: 73.50, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:50:48.286295 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:50.638127 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:53.191988 140666663466816 train.py:90] Step 1800, Time 0.21, Loss: 0.52, Accuracy: 72.78, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:50:53.193618 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:55.537569 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:50:58.104279 140666663466816 train.py:90] Step 1900, Time 0.20, Loss: 0.53, Accuracy: 72.29, Validation Loss: 0.34, Validation Accuracy: 88.89
+I1214 11:50:58.105682 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:00.417082 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:02.981107 140666663466816 train.py:90] Step 2000, Time 0.20, Loss: 0.53, Accuracy: 73.07, Validation Loss: 0.34, Validation Accuracy: 88.89
+I1214 11:51:02.982430 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:05.282289 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:07.849884 140666663466816 train.py:90] Step 2100, Time 0.18, Loss: 0.52, Accuracy: 72.30, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 11:51:07.851483 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:10.195757 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:13.159204 140666663466816 train.py:90] Step 2200, Time 0.21, Loss: 0.53, Accuracy: 72.25, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:51:13.161677 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:15.557037 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:18.080222 140666663466816 train.py:90] Step 2300, Time 0.20, Loss: 0.52, Accuracy: 73.50, Validation Loss: 0.35, Validation Accuracy: 81.11
+I1214 11:51:18.081586 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:20.435352 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:22.998347 140666663466816 train.py:90] Step 2400, Time 0.21, Loss: 0.52, Accuracy: 72.65, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:51:23.000186 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:25.346381 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:27.877322 140666663466816 train.py:90] Step 2500, Time 0.20, Loss: 0.52, Accuracy: 73.46, Validation Loss: 0.33, Validation Accuracy: 88.89
+I1214 11:51:27.878741 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:30.206121 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:32.745265 140666663466816 train.py:90] Step 2600, Time 0.18, Loss: 0.52, Accuracy: 72.29, Validation Loss: 0.34, Validation Accuracy: 88.89
+I1214 11:51:32.746611 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:35.054001 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:37.840409 140666663466816 train.py:90] Step 2700, Time 0.20, Loss: 0.50, Accuracy: 73.86, Validation Loss: 0.33, Validation Accuracy: 88.89
+I1214 11:51:37.842215 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:40.150063 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:42.677016 140666663466816 train.py:90] Step 2800, Time 0.18, Loss: 0.52, Accuracy: 73.62, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:51:42.679220 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:45.013911 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:47.544970 140666663466816 train.py:90] Step 2900, Time 0.19, Loss: 0.50, Accuracy: 74.71, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:51:47.546522 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:49.888722 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:52.415804 140666663466816 train.py:90] Step 3000, Time 0.20, Loss: 0.53, Accuracy: 72.52, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:51:52.417434 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:51:52.702379 140666663466816 train.py:114] Finished training after 3000 steps.
+I1214 11:51:53.037114 140666663466816 main.py:84] Starting model evaluation...
+I1214 11:51:53.485776 140666663466816 eval.py:53] 
+====Results of Test set evaluation on transfer_model ====
+I1214 11:51:53.486444 140666663466816 eval.py:54] Confusion Matrix: [32  7] [10 54]
+I1214 11:51:53.486669 140666663466816 eval.py:55] Accuracy(balanced): 82.36
+I1214 11:51:53.486865 140666663466816 eval.py:56] Accuracy(Unbalanced): 83.50
+I1214 11:51:53.487214 140666663466816 eval.py:57] Accuracy(Sparse Categorical) 83.50
+I1214 11:51:53.487416 140666663466816 eval.py:58] sensitivity: 76.19
+I1214 11:51:53.487605 140666663466816 eval.py:59] specificity: 88.52
+I1214 11:51:53.487789 140666663466816 eval.py:60] recall: 76.19
+I1214 11:51:53.487973 140666663466816 eval.py:61] precision: 82.05
+I1214 11:51:53.488156 140666663466816 eval.py:62] f1_score: 79.01
+I1214 11:51:53.488388 140666663466816 eval.py:63] AUC 0.83
+I1214 11:51:53.609040 140666663466816 eval.py:69] ----Evaluation completed----
+I1214 11:51:53.609408 140666663466816 main.py:74] ============ RUN 4================
+I1214 11:51:53.609695 140666663466816 main.py:76] Starting model training...
+Model: "transfer_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 3)]     0         
+                                                                 
+ densenet121 (Functional)    (None, 8, 8, 1024)        7037504   
+                                                                 
+ global_average_pooling2d (  (None, 1024)              0         
+ GlobalAveragePooling2D)                                         
+                                                                 
+ dropout (Dropout)           (None, 1024)              0         
+                                                                 
+ dense (Dense)               (None, 5)                 5125      
+                                                                 
+ dropout_1 (Dropout)         (None, 5)                 0         
+                                                                 
+ dense_1 (Dense)             (None, 2)                 12        
+                                                                 
+ dropout_2 (Dropout)         (None, 2)                 0         
+                                                                 
+ dense_2 (Dense)             (None, 2)                 6         
+                                                                 
+=================================================================
+Total params: 7042647 (26.87 MB)
+Trainable params: 5143 (20.09 KB)
+Non-trainable params: 7037504 (26.85 MB)
+_________________________________________________________________
+I1214 11:51:53.627554 140666663466816 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts
+I1214 11:52:01.801216 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:06.411003 140666663466816 train.py:90] Step 100, Time 2.31, Loss: 0.51, Accuracy: 73.69, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 11:52:06.412383 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:08.737414 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:11.339511 140666663466816 train.py:90] Step 200, Time 0.20, Loss: 0.51, Accuracy: 74.02, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 11:52:11.341222 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:13.690114 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:16.226488 140666663466816 train.py:90] Step 300, Time 0.20, Loss: 0.52, Accuracy: 73.17, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:52:16.228656 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:18.584860 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:21.138405 140666663466816 train.py:90] Step 400, Time 0.22, Loss: 0.52, Accuracy: 73.17, Validation Loss: 0.33, Validation Accuracy: 88.89
+I1214 11:52:21.139898 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:23.433720 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:25.969523 140666663466816 train.py:90] Step 500, Time 0.20, Loss: 0.51, Accuracy: 73.99, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 11:52:25.970888 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:28.490155 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:31.020567 140666663466816 train.py:90] Step 600, Time 0.20, Loss: 0.52, Accuracy: 73.10, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:52:31.021884 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:33.314424 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:35.829841 140666663466816 train.py:90] Step 700, Time 0.17, Loss: 0.52, Accuracy: 72.40, Validation Loss: 0.34, Validation Accuracy: 88.89
+I1214 11:52:35.831203 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:38.149918 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:40.654352 140666663466816 train.py:90] Step 800, Time 0.20, Loss: 0.52, Accuracy: 73.17, Validation Loss: 0.34, Validation Accuracy: 91.11
+I1214 11:52:40.656163 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:42.965906 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:45.484040 140666663466816 train.py:90] Step 900, Time 0.20, Loss: 0.52, Accuracy: 73.24, Validation Loss: 0.34, Validation Accuracy: 92.22
+I1214 11:52:45.485771 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:47.884653 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:50.830400 140666663466816 train.py:90] Step 1000, Time 0.19, Loss: 0.52, Accuracy: 73.10, Validation Loss: 0.33, Validation Accuracy: 85.56
+I1214 11:52:50.831752 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:53.145657 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:55.675539 140666663466816 train.py:90] Step 1100, Time 0.21, Loss: 0.51, Accuracy: 73.56, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:52:55.676841 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:52:57.970415 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:00.508306 140666663466816 train.py:90] Step 1200, Time 0.20, Loss: 0.52, Accuracy: 73.56, Validation Loss: 0.34, Validation Accuracy: 91.11
+I1214 11:53:00.509602 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:02.805418 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:05.373161 140666663466816 train.py:90] Step 1300, Time 0.19, Loss: 0.52, Accuracy: 73.46, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 11:53:05.374651 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:07.689315 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:10.230778 140666663466816 train.py:90] Step 1400, Time 0.18, Loss: 0.52, Accuracy: 73.52, Validation Loss: 0.33, Validation Accuracy: 85.56
+I1214 11:53:10.232177 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:12.558370 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:15.439902 140666663466816 train.py:90] Step 1500, Time 0.20, Loss: 0.51, Accuracy: 73.33, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:53:15.441401 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:17.773574 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:20.325604 140666663466816 train.py:90] Step 1600, Time 0.20, Loss: 0.49, Accuracy: 75.59, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:53:20.327288 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:22.677714 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:25.211034 140666663466816 train.py:90] Step 1700, Time 0.20, Loss: 0.52, Accuracy: 73.30, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:53:25.212378 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:27.536337 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:30.080929 140666663466816 train.py:90] Step 1800, Time 0.22, Loss: 0.51, Accuracy: 73.99, Validation Loss: 0.32, Validation Accuracy: 85.56
+I1214 11:53:30.082332 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:32.389403 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:34.942777 140666663466816 train.py:90] Step 1900, Time 0.19, Loss: 0.52, Accuracy: 72.65, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:53:34.944488 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:37.690005 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:40.267912 140666663466816 train.py:90] Step 2000, Time 0.20, Loss: 0.51, Accuracy: 73.73, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:53:40.269292 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:42.564918 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:45.095640 140666663466816 train.py:90] Step 2100, Time 0.19, Loss: 0.52, Accuracy: 73.36, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:53:45.097648 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:47.424934 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:49.984690 140666663466816 train.py:90] Step 2200, Time 0.20, Loss: 0.52, Accuracy: 72.88, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:53:49.987554 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:52.383596 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:54.941980 140666663466816 train.py:90] Step 2300, Time 0.20, Loss: 0.52, Accuracy: 72.81, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:53:54.943584 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:57.283925 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:53:59.802654 140666663466816 train.py:90] Step 2400, Time 0.20, Loss: 0.52, Accuracy: 72.65, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:53:59.804949 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:02.441684 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:05.019571 140666663466816 train.py:90] Step 2500, Time 0.22, Loss: 0.51, Accuracy: 73.50, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 11:54:05.021578 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:07.384435 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:09.956920 140666663466816 train.py:90] Step 2600, Time 0.19, Loss: 0.52, Accuracy: 73.50, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:54:09.958470 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:12.271426 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:14.825944 140666663466816 train.py:90] Step 2700, Time 0.19, Loss: 0.51, Accuracy: 74.05, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:54:14.827380 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:17.125445 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:19.678254 140666663466816 train.py:90] Step 2800, Time 0.18, Loss: 0.51, Accuracy: 73.91, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:54:19.680115 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:22.033153 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:25.035601 140666663466816 train.py:90] Step 2900, Time 0.20, Loss: 0.52, Accuracy: 72.68, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:54:25.037102 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:27.373898 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:29.891884 140666663466816 train.py:90] Step 3000, Time 0.20, Loss: 0.51, Accuracy: 73.79, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:54:29.894616 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:30.206494 140666663466816 train.py:114] Finished training after 3000 steps.
+I1214 11:54:30.511378 140666663466816 main.py:84] Starting model evaluation...
+I1214 11:54:30.970192 140666663466816 eval.py:53] 
+====Results of Test set evaluation on transfer_model ====
+I1214 11:54:30.970936 140666663466816 eval.py:54] Confusion Matrix: [33  6] [13 51]
+I1214 11:54:30.971178 140666663466816 eval.py:55] Accuracy(balanced): 80.61
+I1214 11:54:30.971393 140666663466816 eval.py:56] Accuracy(Unbalanced): 81.55
+I1214 11:54:30.971738 140666663466816 eval.py:57] Accuracy(Sparse Categorical) 81.55
+I1214 11:54:30.971964 140666663466816 eval.py:58] sensitivity: 71.74
+I1214 11:54:30.972168 140666663466816 eval.py:59] specificity: 89.47
+I1214 11:54:30.972368 140666663466816 eval.py:60] recall: 71.74
+I1214 11:54:30.972568 140666663466816 eval.py:61] precision: 84.62
+I1214 11:54:30.972785 140666663466816 eval.py:62] f1_score: 77.65
+I1214 11:54:30.973034 140666663466816 eval.py:63] AUC 0.82
+I1214 11:54:31.106027 140666663466816 eval.py:69] ----Evaluation completed----
+I1214 11:54:31.106551 140666663466816 main.py:74] ============ RUN 5================
+I1214 11:54:31.106888 140666663466816 main.py:76] Starting model training...
+Model: "transfer_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 3)]     0         
+                                                                 
+ densenet121 (Functional)    (None, 8, 8, 1024)        7037504   
+                                                                 
+ global_average_pooling2d (  (None, 1024)              0         
+ GlobalAveragePooling2D)                                         
+                                                                 
+ dropout (Dropout)           (None, 1024)              0         
+                                                                 
+ dense (Dense)               (None, 5)                 5125      
+                                                                 
+ dropout_1 (Dropout)         (None, 5)                 0         
+                                                                 
+ dense_1 (Dense)             (None, 2)                 12        
+                                                                 
+ dropout_2 (Dropout)         (None, 2)                 0         
+                                                                 
+ dense_2 (Dense)             (None, 2)                 6         
+                                                                 
+=================================================================
+Total params: 7042647 (26.87 MB)
+Trainable params: 5143 (20.09 KB)
+Non-trainable params: 7037504 (26.85 MB)
+_________________________________________________________________
+I1214 11:54:31.127322 140666663466816 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts
+I1214 11:54:39.779217 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:44.272121 140666663466816 train.py:90] Step 100, Time 2.17, Loss: 0.52, Accuracy: 73.37, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:54:44.273553 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:46.592527 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:49.152985 140666663466816 train.py:90] Step 200, Time 0.19, Loss: 0.52, Accuracy: 72.88, Validation Loss: 0.33, Validation Accuracy: 88.89
+I1214 11:54:49.155216 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:51.535665 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:54.503962 140666663466816 train.py:90] Step 300, Time 0.20, Loss: 0.52, Accuracy: 73.82, Validation Loss: 0.33, Validation Accuracy: 87.78
+I1214 11:54:54.505522 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:56.813397 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:54:59.341040 140666663466816 train.py:90] Step 400, Time 0.22, Loss: 0.52, Accuracy: 72.68, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:54:59.342761 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:01.633774 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:04.188782 140666663466816 train.py:90] Step 500, Time 0.19, Loss: 0.52, Accuracy: 72.71, Validation Loss: 0.33, Validation Accuracy: 88.89
+I1214 11:55:04.192561 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:06.561359 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:09.146789 140666663466816 train.py:90] Step 600, Time 0.20, Loss: 0.51, Accuracy: 74.02, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:55:09.148203 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:11.449970 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:13.980706 140666663466816 train.py:90] Step 700, Time 0.18, Loss: 0.51, Accuracy: 73.32, Validation Loss: 0.33, Validation Accuracy: 87.78
+I1214 11:55:13.982233 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:16.735299 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:19.314943 140666663466816 train.py:90] Step 800, Time 0.21, Loss: 0.51, Accuracy: 73.30, Validation Loss: 0.33, Validation Accuracy: 88.89
+I1214 11:55:19.317363 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:21.711668 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:24.245230 140666663466816 train.py:90] Step 900, Time 0.20, Loss: 0.52, Accuracy: 72.12, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:55:24.246584 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:26.573172 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:29.094605 140666663466816 train.py:90] Step 1000, Time 0.20, Loss: 0.52, Accuracy: 73.17, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 11:55:29.096348 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:31.435466 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:33.984932 140666663466816 train.py:90] Step 1100, Time 0.20, Loss: 0.52, Accuracy: 72.19, Validation Loss: 0.33, Validation Accuracy: 87.78
+I1214 11:55:33.986673 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:36.322340 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:38.919213 140666663466816 train.py:90] Step 1200, Time 0.19, Loss: 0.52, Accuracy: 73.66, Validation Loss: 0.34, Validation Accuracy: 91.11
+I1214 11:55:38.920731 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:41.655172 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:44.212271 140666663466816 train.py:90] Step 1300, Time 0.20, Loss: 0.52, Accuracy: 73.56, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:55:44.214774 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:46.572337 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:49.145629 140666663466816 train.py:90] Step 1400, Time 0.18, Loss: 0.52, Accuracy: 73.29, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:55:49.147280 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:51.485800 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:54.042967 140666663466816 train.py:90] Step 1500, Time 0.21, Loss: 0.52, Accuracy: 73.14, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:55:54.044548 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:56.388577 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:55:58.909880 140666663466816 train.py:90] Step 1600, Time 0.19, Loss: 0.53, Accuracy: 72.88, Validation Loss: 0.34, Validation Accuracy: 91.11
+I1214 11:55:58.912136 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:01.243779 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:03.793691 140666663466816 train.py:90] Step 1700, Time 0.21, Loss: 0.51, Accuracy: 73.82, Validation Loss: 0.33, Validation Accuracy: 88.89
+I1214 11:56:03.796327 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:06.192396 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:09.200642 140666663466816 train.py:90] Step 1800, Time 0.22, Loss: 0.52, Accuracy: 73.01, Validation Loss: 0.33, Validation Accuracy: 87.78
+I1214 11:56:09.202412 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:11.511862 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:14.056736 140666663466816 train.py:90] Step 1900, Time 0.20, Loss: 0.52, Accuracy: 73.43, Validation Loss: 0.33, Validation Accuracy: 87.78
+I1214 11:56:14.058629 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:16.416303 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:19.050106 140666663466816 train.py:90] Step 2000, Time 0.20, Loss: 0.51, Accuracy: 74.35, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 11:56:19.051591 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:21.371396 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:23.913944 140666663466816 train.py:90] Step 2100, Time 0.18, Loss: 0.52, Accuracy: 73.36, Validation Loss: 0.33, Validation Accuracy: 88.89
+I1214 11:56:23.915683 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:26.271657 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:28.822186 140666663466816 train.py:90] Step 2200, Time 0.21, Loss: 0.52, Accuracy: 73.37, Validation Loss: 0.33, Validation Accuracy: 88.89
+I1214 11:56:28.823905 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:31.586174 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:34.199559 140666663466816 train.py:90] Step 2300, Time 0.20, Loss: 0.52, Accuracy: 73.59, Validation Loss: 0.33, Validation Accuracy: 87.78
+I1214 11:56:34.200908 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:36.540086 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:39.078690 140666663466816 train.py:90] Step 2400, Time 0.20, Loss: 0.51, Accuracy: 73.63, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:56:39.081858 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:41.464533 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:44.005850 140666663466816 train.py:90] Step 2500, Time 0.22, Loss: 0.51, Accuracy: 73.50, Validation Loss: 0.33, Validation Accuracy: 83.33
+I1214 11:56:44.007490 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:46.341294 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:48.891855 140666663466816 train.py:90] Step 2600, Time 0.20, Loss: 0.51, Accuracy: 73.43, Validation Loss: 0.33, Validation Accuracy: 87.78
+I1214 11:56:48.893509 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:51.215392 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:53.790396 140666663466816 train.py:90] Step 2700, Time 0.21, Loss: 0.51, Accuracy: 74.12, Validation Loss: 0.33, Validation Accuracy: 87.78
+I1214 11:56:53.791952 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:56.535261 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:56:59.051473 140666663466816 train.py:90] Step 2800, Time 0.17, Loss: 0.51, Accuracy: 73.72, Validation Loss: 0.33, Validation Accuracy: 87.78
+I1214 11:56:59.053086 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:01.398948 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:03.951962 140666663466816 train.py:90] Step 2900, Time 0.20, Loss: 0.51, Accuracy: 72.81, Validation Loss: 0.33, Validation Accuracy: 85.56
+I1214 11:57:03.953698 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:06.294398 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:08.830270 140666663466816 train.py:90] Step 3000, Time 0.20, Loss: 0.51, Accuracy: 74.31, Validation Loss: 0.33, Validation Accuracy: 85.56
+I1214 11:57:08.831843 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:09.123397 140666663466816 train.py:114] Finished training after 3000 steps.
+I1214 11:57:09.431331 140666663466816 main.py:84] Starting model evaluation...
+I1214 11:57:09.885218 140666663466816 eval.py:53] 
+====Results of Test set evaluation on transfer_model ====
+I1214 11:57:09.885930 140666663466816 eval.py:54] Confusion Matrix: [31  8] [10 54]
+I1214 11:57:09.886114 140666663466816 eval.py:55] Accuracy(balanced): 81.35
+I1214 11:57:09.886286 140666663466816 eval.py:56] Accuracy(Unbalanced): 82.52
+I1214 11:57:09.886561 140666663466816 eval.py:57] Accuracy(Sparse Categorical) 82.52
+I1214 11:57:09.886729 140666663466816 eval.py:58] sensitivity: 75.61
+I1214 11:57:09.886892 140666663466816 eval.py:59] specificity: 87.10
+I1214 11:57:09.887056 140666663466816 eval.py:60] recall: 75.61
+I1214 11:57:09.887197 140666663466816 eval.py:61] precision: 79.49
+I1214 11:57:09.887363 140666663466816 eval.py:62] f1_score: 77.50
+I1214 11:57:09.887542 140666663466816 eval.py:63] AUC 0.82
+I1214 11:57:10.010400 140666663466816 eval.py:69] ----Evaluation completed----
+I1214 11:57:10.010810 140666663466816 main.py:74] ============ RUN 6================
+I1214 11:57:10.011167 140666663466816 main.py:76] Starting model training...
+Model: "transfer_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 3)]     0         
+                                                                 
+ densenet121 (Functional)    (None, 8, 8, 1024)        7037504   
+                                                                 
+ global_average_pooling2d (  (None, 1024)              0         
+ GlobalAveragePooling2D)                                         
+                                                                 
+ dropout (Dropout)           (None, 1024)              0         
+                                                                 
+ dense (Dense)               (None, 5)                 5125      
+                                                                 
+ dropout_1 (Dropout)         (None, 5)                 0         
+                                                                 
+ dense_1 (Dense)             (None, 2)                 12        
+                                                                 
+ dropout_2 (Dropout)         (None, 2)                 0         
+                                                                 
+ dense_2 (Dense)             (None, 2)                 6         
+                                                                 
+=================================================================
+Total params: 7042647 (26.87 MB)
+Trainable params: 5143 (20.09 KB)
+Non-trainable params: 7037504 (26.85 MB)
+_________________________________________________________________
+I1214 11:57:10.029523 140666663466816 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts
+I1214 11:57:19.350677 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:24.505864 140666663466816 train.py:90] Step 100, Time 2.77, Loss: 0.50, Accuracy: 74.22, Validation Loss: 0.32, Validation Accuracy: 91.11
+I1214 11:57:24.507181 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:26.835436 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:29.805460 140666663466816 train.py:90] Step 200, Time 0.20, Loss: 0.51, Accuracy: 75.36, Validation Loss: 0.32, Validation Accuracy: 86.67
+I1214 11:57:29.807219 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:32.115039 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:34.627577 140666663466816 train.py:90] Step 300, Time 0.20, Loss: 0.52, Accuracy: 73.53, Validation Loss: 0.33, Validation Accuracy: 90.00
+I1214 11:57:34.629903 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:36.957612 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:39.487699 140666663466816 train.py:90] Step 400, Time 0.20, Loss: 0.52, Accuracy: 73.79, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:57:39.489048 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:41.782319 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:44.319858 140666663466816 train.py:90] Step 500, Time 0.20, Loss: 0.52, Accuracy: 72.68, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:57:44.321210 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:46.594747 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:49.128101 140666663466816 train.py:90] Step 600, Time 0.19, Loss: 0.51, Accuracy: 73.69, Validation Loss: 0.33, Validation Accuracy: 87.78
+I1214 11:57:49.129437 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:51.422733 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:53.949185 140666663466816 train.py:90] Step 700, Time 0.19, Loss: 0.52, Accuracy: 72.50, Validation Loss: 0.33, Validation Accuracy: 90.00
+I1214 11:57:53.951626 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:56.550811 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:57:59.138646 140666663466816 train.py:90] Step 800, Time 0.20, Loss: 0.53, Accuracy: 72.06, Validation Loss: 0.33, Validation Accuracy: 88.89
+I1214 11:57:59.140362 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:01.489385 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:04.020732 140666663466816 train.py:90] Step 900, Time 0.19, Loss: 0.51, Accuracy: 73.17, Validation Loss: 0.33, Validation Accuracy: 90.00
+I1214 11:58:04.022365 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:06.380312 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:08.909192 140666663466816 train.py:90] Step 1000, Time 0.19, Loss: 0.52, Accuracy: 73.07, Validation Loss: 0.33, Validation Accuracy: 90.00
+I1214 11:58:08.910866 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:11.236683 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:13.781162 140666663466816 train.py:90] Step 1100, Time 0.21, Loss: 0.50, Accuracy: 73.99, Validation Loss: 0.32, Validation Accuracy: 86.67
+I1214 11:58:13.782852 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:16.101292 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:19.129097 140666663466816 train.py:90] Step 1200, Time 0.20, Loss: 0.53, Accuracy: 72.39, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:58:19.130724 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:21.465962 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:24.015801 140666663466816 train.py:90] Step 1300, Time 0.20, Loss: 0.52, Accuracy: 73.10, Validation Loss: 0.33, Validation Accuracy: 90.00
+I1214 11:58:24.017616 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:26.324868 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:28.916687 140666663466816 train.py:90] Step 1400, Time 0.18, Loss: 0.53, Accuracy: 72.43, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:58:28.918384 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:31.283049 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:34.190307 140666663466816 train.py:90] Step 1500, Time 0.20, Loss: 0.51, Accuracy: 73.82, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:58:34.191937 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:36.523082 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:39.049585 140666663466816 train.py:90] Step 1600, Time 0.20, Loss: 0.53, Accuracy: 72.52, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:58:39.051281 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:41.372553 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:43.931473 140666663466816 train.py:90] Step 1700, Time 0.19, Loss: 0.51, Accuracy: 74.67, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:58:43.933593 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:46.742836 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:49.301715 140666663466816 train.py:90] Step 1800, Time 0.21, Loss: 0.53, Accuracy: 72.42, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:58:49.303306 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:51.598564 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:54.136509 140666663466816 train.py:90] Step 1900, Time 0.20, Loss: 0.50, Accuracy: 74.58, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:58:54.138268 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:56.447757 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:58:59.012648 140666663466816 train.py:90] Step 2000, Time 0.20, Loss: 0.51, Accuracy: 73.63, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 11:58:59.014261 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:01.320906 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:03.867333 140666663466816 train.py:90] Step 2100, Time 0.18, Loss: 0.52, Accuracy: 73.45, Validation Loss: 0.34, Validation Accuracy: 91.11
+I1214 11:59:03.870101 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:06.246791 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:08.816044 140666663466816 train.py:90] Step 2200, Time 0.20, Loss: 0.53, Accuracy: 72.78, Validation Loss: 0.34, Validation Accuracy: 87.78
+I1214 11:59:08.818023 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:11.578751 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:14.097261 140666663466816 train.py:90] Step 2300, Time 0.20, Loss: 0.51, Accuracy: 74.35, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 11:59:14.099935 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:16.473869 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:19.027818 140666663466816 train.py:90] Step 2400, Time 0.20, Loss: 0.51, Accuracy: 73.79, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:59:19.029553 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:21.375065 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:23.921183 140666663466816 train.py:90] Step 2500, Time 0.22, Loss: 0.50, Accuracy: 74.02, Validation Loss: 0.33, Validation Accuracy: 85.56
+I1214 11:59:23.922768 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:26.226209 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:28.762471 140666663466816 train.py:90] Step 2600, Time 0.19, Loss: 0.53, Accuracy: 73.17, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 11:59:28.764048 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:31.076047 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:34.079357 140666663466816 train.py:90] Step 2700, Time 0.20, Loss: 0.51, Accuracy: 73.76, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 11:59:34.080895 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:36.401024 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:38.924023 140666663466816 train.py:90] Step 2800, Time 0.18, Loss: 0.51, Accuracy: 74.08, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 11:59:38.927253 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:41.302912 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:43.844956 140666663466816 train.py:90] Step 2900, Time 0.21, Loss: 0.53, Accuracy: 73.56, Validation Loss: 0.34, Validation Accuracy: 87.78
+I1214 11:59:43.846400 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:46.197363 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:48.722896 140666663466816 train.py:90] Step 3000, Time 0.20, Loss: 0.52, Accuracy: 74.08, Validation Loss: 0.33, Validation Accuracy: 90.00
+I1214 11:59:48.724459 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 11:59:49.005507 140666663466816 train.py:114] Finished training after 3000 steps.
+I1214 11:59:49.313256 140666663466816 main.py:84] Starting model evaluation...
+I1214 11:59:49.769801 140666663466816 eval.py:53] 
+====Results of Test set evaluation on transfer_model ====
+I1214 11:59:49.770726 140666663466816 eval.py:54] Confusion Matrix: [32  7] [12 52]
+I1214 11:59:49.770894 140666663466816 eval.py:55] Accuracy(balanced): 80.43
+I1214 11:59:49.771032 140666663466816 eval.py:56] Accuracy(Unbalanced): 81.55
+I1214 11:59:49.771312 140666663466816 eval.py:57] Accuracy(Sparse Categorical) 81.55
+I1214 11:59:49.771644 140666663466816 eval.py:58] sensitivity: 72.73
+I1214 11:59:49.771938 140666663466816 eval.py:59] specificity: 88.14
+I1214 11:59:49.772223 140666663466816 eval.py:60] recall: 72.73
+I1214 11:59:49.772509 140666663466816 eval.py:61] precision: 82.05
+I1214 11:59:49.772810 140666663466816 eval.py:62] f1_score: 77.11
+I1214 11:59:49.773156 140666663466816 eval.py:63] AUC 0.82
+I1214 11:59:49.906343 140666663466816 eval.py:69] ----Evaluation completed----
+I1214 11:59:49.906977 140666663466816 main.py:74] ============ RUN 7================
+I1214 11:59:49.907363 140666663466816 main.py:76] Starting model training...
+Model: "transfer_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 3)]     0         
+                                                                 
+ densenet121 (Functional)    (None, 8, 8, 1024)        7037504   
+                                                                 
+ global_average_pooling2d (  (None, 1024)              0         
+ GlobalAveragePooling2D)                                         
+                                                                 
+ dropout (Dropout)           (None, 1024)              0         
+                                                                 
+ dense (Dense)               (None, 5)                 5125      
+                                                                 
+ dropout_1 (Dropout)         (None, 5)                 0         
+                                                                 
+ dense_1 (Dense)             (None, 2)                 12        
+                                                                 
+ dropout_2 (Dropout)         (None, 2)                 0         
+                                                                 
+ dense_2 (Dense)             (None, 2)                 6         
+                                                                 
+=================================================================
+Total params: 7042647 (26.87 MB)
+Trainable params: 5143 (20.09 KB)
+Non-trainable params: 7037504 (26.85 MB)
+_________________________________________________________________
+I1214 11:59:49.925853 140666663466816 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts
+I1214 11:59:58.368093 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:02.947571 140666663466816 train.py:90] Step 100, Time 2.17, Loss: 0.51, Accuracy: 73.86, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:00:02.949209 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:05.717883 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:08.235130 140666663466816 train.py:90] Step 200, Time 0.20, Loss: 0.52, Accuracy: 72.78, Validation Loss: 0.33, Validation Accuracy: 81.11
+I1214 12:00:08.237652 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:10.630047 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:13.134428 140666663466816 train.py:90] Step 300, Time 0.19, Loss: 0.50, Accuracy: 74.71, Validation Loss: 0.32, Validation Accuracy: 90.00
+I1214 12:00:13.136859 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:15.525705 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:18.137515 140666663466816 train.py:90] Step 400, Time 0.22, Loss: 0.52, Accuracy: 72.94, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:00:18.140548 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:20.489252 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:23.015039 140666663466816 train.py:90] Step 500, Time 0.20, Loss: 0.51, Accuracy: 73.95, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:00:23.016668 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:25.326385 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:28.157168 140666663466816 train.py:90] Step 600, Time 0.20, Loss: 0.51, Accuracy: 73.20, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:00:28.159068 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:30.472665 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:33.027817 140666663466816 train.py:90] Step 700, Time 0.17, Loss: 0.51, Accuracy: 73.26, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 12:00:33.029501 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:35.366543 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:37.901214 140666663466816 train.py:90] Step 800, Time 0.20, Loss: 0.52, Accuracy: 73.27, Validation Loss: 0.33, Validation Accuracy: 85.56
+I1214 12:00:37.902549 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:40.218094 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:42.764431 140666663466816 train.py:90] Step 900, Time 0.20, Loss: 0.54, Accuracy: 72.09, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:00:42.767973 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:45.159604 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:47.700144 140666663466816 train.py:90] Step 1000, Time 0.19, Loss: 0.53, Accuracy: 72.32, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 12:00:47.702850 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:50.072923 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:52.626809 140666663466816 train.py:90] Step 1100, Time 0.20, Loss: 0.52, Accuracy: 72.45, Validation Loss: 0.34, Validation Accuracy: 91.11
+I1214 12:00:52.628249 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:55.193993 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:00:57.756712 140666663466816 train.py:90] Step 1200, Time 0.19, Loss: 0.52, Accuracy: 73.10, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 12:00:57.758494 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:00.077479 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:02.644423 140666663466816 train.py:90] Step 1300, Time 0.19, Loss: 0.52, Accuracy: 72.68, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 12:01:02.646047 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:04.972604 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:07.504734 140666663466816 train.py:90] Step 1400, Time 0.17, Loss: 0.51, Accuracy: 74.14, Validation Loss: 0.33, Validation Accuracy: 88.89
+I1214 12:01:07.506188 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:09.824419 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:12.352089 140666663466816 train.py:90] Step 1500, Time 0.20, Loss: 0.51, Accuracy: 74.05, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 12:01:12.355303 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:14.751882 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:17.331505 140666663466816 train.py:90] Step 1600, Time 0.20, Loss: 0.53, Accuracy: 72.39, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 12:01:17.333320 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:20.144826 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:22.672959 140666663466816 train.py:90] Step 1700, Time 0.20, Loss: 0.51, Accuracy: 73.76, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:01:22.674513 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:25.003813 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:27.554305 140666663466816 train.py:90] Step 1800, Time 0.21, Loss: 0.52, Accuracy: 73.53, Validation Loss: 0.33, Validation Accuracy: 85.56
+I1214 12:01:27.555729 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:29.876851 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:32.451750 140666663466816 train.py:90] Step 1900, Time 0.19, Loss: 0.51, Accuracy: 73.46, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:01:32.453231 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:34.756696 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:37.331080 140666663466816 train.py:90] Step 2000, Time 0.20, Loss: 0.51, Accuracy: 74.25, Validation Loss: 0.33, Validation Accuracy: 85.56
+I1214 12:01:37.332467 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:39.638723 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:42.212046 140666663466816 train.py:90] Step 2100, Time 0.17, Loss: 0.51, Accuracy: 74.31, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 12:01:42.213476 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:44.921766 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:47.527758 140666663466816 train.py:90] Step 2200, Time 0.21, Loss: 0.51, Accuracy: 73.99, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:01:47.529179 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:49.883802 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:52.404698 140666663466816 train.py:90] Step 2300, Time 0.20, Loss: 0.53, Accuracy: 73.07, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 12:01:52.406080 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:54.732611 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:57.276492 140666663466816 train.py:90] Step 2400, Time 0.20, Loss: 0.50, Accuracy: 74.54, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:01:57.277888 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:01:59.606577 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:02.152183 140666663466816 train.py:90] Step 2500, Time 0.21, Loss: 0.51, Accuracy: 74.31, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:02:02.154144 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:04.476955 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:07.018198 140666663466816 train.py:90] Step 2600, Time 0.19, Loss: 0.52, Accuracy: 73.46, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:02:07.019577 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:09.316829 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:12.324949 140666663466816 train.py:90] Step 2700, Time 0.20, Loss: 0.51, Accuracy: 73.86, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:02:12.326404 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:14.625216 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:17.227829 140666663466816 train.py:90] Step 2800, Time 0.17, Loss: 0.51, Accuracy: 74.31, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:02:17.230411 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:19.625960 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:22.225219 140666663466816 train.py:90] Step 2900, Time 0.19, Loss: 0.51, Accuracy: 73.63, Validation Loss: 0.34, Validation Accuracy: 87.78
+I1214 12:02:22.226787 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:24.562224 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:27.126087 140666663466816 train.py:90] Step 3000, Time 0.20, Loss: 0.52, Accuracy: 73.43, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 12:02:27.127793 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:27.403662 140666663466816 train.py:114] Finished training after 3000 steps.
+I1214 12:02:27.701179 140666663466816 main.py:84] Starting model evaluation...
+I1214 12:02:28.229622 140666663466816 eval.py:53] 
+====Results of Test set evaluation on transfer_model ====
+I1214 12:02:28.230461 140666663466816 eval.py:54] Confusion Matrix: [31  8] [10 54]
+I1214 12:02:28.230631 140666663466816 eval.py:55] Accuracy(balanced): 81.35
+I1214 12:02:28.230808 140666663466816 eval.py:56] Accuracy(Unbalanced): 82.52
+I1214 12:02:28.231093 140666663466816 eval.py:57] Accuracy(Sparse Categorical) 82.52
+I1214 12:02:28.231269 140666663466816 eval.py:58] sensitivity: 75.61
+I1214 12:02:28.231446 140666663466816 eval.py:59] specificity: 87.10
+I1214 12:02:28.231624 140666663466816 eval.py:60] recall: 75.61
+I1214 12:02:28.231784 140666663466816 eval.py:61] precision: 79.49
+I1214 12:02:28.231938 140666663466816 eval.py:62] f1_score: 77.50
+I1214 12:02:28.232121 140666663466816 eval.py:63] AUC 0.82
+I1214 12:02:28.376462 140666663466816 eval.py:69] ----Evaluation completed----
+I1214 12:02:28.377076 140666663466816 main.py:74] ============ RUN 8================
+I1214 12:02:28.377511 140666663466816 main.py:76] Starting model training...
+Model: "transfer_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 3)]     0         
+                                                                 
+ densenet121 (Functional)    (None, 8, 8, 1024)        7037504   
+                                                                 
+ global_average_pooling2d (  (None, 1024)              0         
+ GlobalAveragePooling2D)                                         
+                                                                 
+ dropout (Dropout)           (None, 1024)              0         
+                                                                 
+ dense (Dense)               (None, 5)                 5125      
+                                                                 
+ dropout_1 (Dropout)         (None, 5)                 0         
+                                                                 
+ dense_1 (Dense)             (None, 2)                 12        
+                                                                 
+ dropout_2 (Dropout)         (None, 2)                 0         
+                                                                 
+ dense_2 (Dense)             (None, 2)                 6         
+                                                                 
+=================================================================
+Total params: 7042647 (26.87 MB)
+Trainable params: 5143 (20.09 KB)
+Non-trainable params: 7037504 (26.85 MB)
+_________________________________________________________________
+I1214 12:02:28.402504 140666663466816 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts
+I1214 12:02:37.370336 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:42.323432 140666663466816 train.py:90] Step 100, Time 2.63, Loss: 0.50, Accuracy: 74.64, Validation Loss: 0.35, Validation Accuracy: 81.11
+I1214 12:02:42.325233 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:44.678240 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:47.197297 140666663466816 train.py:90] Step 200, Time 0.20, Loss: 0.52, Accuracy: 72.84, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:02:47.199030 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:49.534202 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:52.063157 140666663466816 train.py:90] Step 300, Time 0.19, Loss: 0.51, Accuracy: 73.69, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:02:52.064543 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:54.375560 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:56.920015 140666663466816 train.py:90] Step 400, Time 0.21, Loss: 0.53, Accuracy: 71.63, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:02:56.921819 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:02:59.220225 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:01.778400 140666663466816 train.py:90] Step 500, Time 0.19, Loss: 0.53, Accuracy: 72.29, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:03:01.781912 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:04.115945 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:07.132207 140666663466816 train.py:90] Step 600, Time 0.20, Loss: 0.52, Accuracy: 73.46, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:03:07.133780 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:09.445645 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:11.974991 140666663466816 train.py:90] Step 700, Time 0.17, Loss: 0.51, Accuracy: 74.24, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:03:11.977010 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:14.317086 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:16.881612 140666663466816 train.py:90] Step 800, Time 0.20, Loss: 0.51, Accuracy: 74.77, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 12:03:16.883147 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:19.206995 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:21.729500 140666663466816 train.py:90] Step 900, Time 0.20, Loss: 0.51, Accuracy: 73.95, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:03:21.731223 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:24.053097 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:26.584495 140666663466816 train.py:90] Step 1000, Time 0.20, Loss: 0.51, Accuracy: 74.22, Validation Loss: 0.34, Validation Accuracy: 84.44
+I1214 12:03:26.586712 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:28.906366 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:31.923276 140666663466816 train.py:90] Step 1100, Time 0.23, Loss: 0.51, Accuracy: 73.76, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:03:31.924839 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:34.229622 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:36.775382 140666663466816 train.py:90] Step 1200, Time 0.19, Loss: 0.53, Accuracy: 73.17, Validation Loss: 0.34, Validation Accuracy: 92.22
+I1214 12:03:36.776998 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:39.071131 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:41.632633 140666663466816 train.py:90] Step 1300, Time 0.20, Loss: 0.51, Accuracy: 74.15, Validation Loss: 0.33, Validation Accuracy: 90.00
+I1214 12:03:41.634201 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:43.936574 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:46.514100 140666663466816 train.py:90] Step 1400, Time 0.17, Loss: 0.54, Accuracy: 72.99, Validation Loss: 0.35, Validation Accuracy: 92.22
+I1214 12:03:46.515770 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:48.862509 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:51.418363 140666663466816 train.py:90] Step 1500, Time 0.20, Loss: 0.52, Accuracy: 73.63, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:03:51.419785 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:53.754198 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:56.717826 140666663466816 train.py:90] Step 1600, Time 0.20, Loss: 0.52, Accuracy: 73.30, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 12:03:56.719440 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:03:59.071090 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:01.598022 140666663466816 train.py:90] Step 1700, Time 0.20, Loss: 0.52, Accuracy: 72.84, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:04:01.599647 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:03.932036 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:06.485818 140666663466816 train.py:90] Step 1800, Time 0.21, Loss: 0.51, Accuracy: 73.37, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:04:06.487507 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:08.818860 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:11.420670 140666663466816 train.py:90] Step 1900, Time 0.19, Loss: 0.52, Accuracy: 73.33, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:04:11.422264 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:13.730561 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:16.292353 140666663466816 train.py:90] Step 2000, Time 0.20, Loss: 0.51, Accuracy: 73.33, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 12:04:16.294107 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:18.711376 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:21.719064 140666663466816 train.py:90] Step 2100, Time 0.17, Loss: 0.52, Accuracy: 73.88, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 12:04:21.720726 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:24.062991 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:26.607385 140666663466816 train.py:90] Step 2200, Time 0.20, Loss: 0.52, Accuracy: 73.04, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:04:26.609038 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:28.931333 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:31.499870 140666663466816 train.py:90] Step 2300, Time 0.21, Loss: 0.51, Accuracy: 73.63, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:04:31.502582 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:33.886852 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:36.459923 140666663466816 train.py:90] Step 2400, Time 0.20, Loss: 0.52, Accuracy: 72.94, Validation Loss: 0.34, Validation Accuracy: 91.11
+I1214 12:04:36.461420 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:38.780361 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:41.385083 140666663466816 train.py:90] Step 2500, Time 0.21, Loss: 0.51, Accuracy: 73.99, Validation Loss: 0.34, Validation Accuracy: 87.78
+I1214 12:04:41.386614 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:43.677760 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:46.289178 140666663466816 train.py:90] Step 2600, Time 0.20, Loss: 0.52, Accuracy: 73.01, Validation Loss: 0.33, Validation Accuracy: 90.00
+I1214 12:04:46.290748 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:49.099419 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:51.682638 140666663466816 train.py:90] Step 2700, Time 0.20, Loss: 0.52, Accuracy: 72.91, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:04:51.684070 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:53.978318 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:56.550642 140666663466816 train.py:90] Step 2800, Time 0.17, Loss: 0.52, Accuracy: 72.66, Validation Loss: 0.34, Validation Accuracy: 92.22
+I1214 12:04:56.552416 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:04:58.893244 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:01.456377 140666663466816 train.py:90] Step 2900, Time 0.20, Loss: 0.51, Accuracy: 73.63, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:05:01.460089 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:03.846309 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:06.393373 140666663466816 train.py:90] Step 3000, Time 0.20, Loss: 0.53, Accuracy: 72.65, Validation Loss: 0.33, Validation Accuracy: 90.00
+I1214 12:05:06.395461 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:06.683735 140666663466816 train.py:114] Finished training after 3000 steps.
+I1214 12:05:07.011300 140666663466816 main.py:84] Starting model evaluation...
+I1214 12:05:07.772573 140666663466816 eval.py:53] 
+====Results of Test set evaluation on transfer_model ====
+I1214 12:05:07.773396 140666663466816 eval.py:54] Confusion Matrix: [33  6] [12 52]
+I1214 12:05:07.773581 140666663466816 eval.py:55] Accuracy(balanced): 81.49
+I1214 12:05:07.773746 140666663466816 eval.py:56] Accuracy(Unbalanced): 82.52
+I1214 12:05:07.774042 140666663466816 eval.py:57] Accuracy(Sparse Categorical) 82.52
+I1214 12:05:07.774214 140666663466816 eval.py:58] sensitivity: 73.33
+I1214 12:05:07.774391 140666663466816 eval.py:59] specificity: 89.66
+I1214 12:05:07.774554 140666663466816 eval.py:60] recall: 73.33
+I1214 12:05:07.774729 140666663466816 eval.py:61] precision: 84.62
+I1214 12:05:07.774882 140666663466816 eval.py:62] f1_score: 78.57
+I1214 12:05:07.775084 140666663466816 eval.py:63] AUC 0.83
+I1214 12:05:07.897218 140666663466816 eval.py:69] ----Evaluation completed----
+I1214 12:05:07.897726 140666663466816 main.py:74] ============ RUN 9================
+I1214 12:05:07.898080 140666663466816 main.py:76] Starting model training...
+Model: "transfer_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 3)]     0         
+                                                                 
+ densenet121 (Functional)    (None, 8, 8, 1024)        7037504   
+                                                                 
+ global_average_pooling2d (  (None, 1024)              0         
+ GlobalAveragePooling2D)                                         
+                                                                 
+ dropout (Dropout)           (None, 1024)              0         
+                                                                 
+ dense (Dense)               (None, 5)                 5125      
+                                                                 
+ dropout_1 (Dropout)         (None, 5)                 0         
+                                                                 
+ dense_1 (Dense)             (None, 2)                 12        
+                                                                 
+ dropout_2 (Dropout)         (None, 2)                 0         
+                                                                 
+ dense_2 (Dense)             (None, 2)                 6         
+                                                                 
+=================================================================
+Total params: 7042647 (26.87 MB)
+Trainable params: 5143 (20.09 KB)
+Non-trainable params: 7037504 (26.85 MB)
+_________________________________________________________________
+I1214 12:05:07.916185 140666663466816 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts
+I1214 12:05:16.111045 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:20.919639 140666663466816 train.py:90] Step 100, Time 2.44, Loss: 0.51, Accuracy: 73.10, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:05:20.921365 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:23.263307 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:25.780182 140666663466816 train.py:90] Step 200, Time 0.19, Loss: 0.52, Accuracy: 73.04, Validation Loss: 0.34, Validation Accuracy: 87.78
+I1214 12:05:25.781996 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:28.099825 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:30.625630 140666663466816 train.py:90] Step 300, Time 0.20, Loss: 0.52, Accuracy: 73.07, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:05:30.627272 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:32.957269 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:35.532040 140666663466816 train.py:90] Step 400, Time 0.22, Loss: 0.50, Accuracy: 74.51, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 12:05:35.533410 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:37.831911 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:40.375857 140666663466816 train.py:90] Step 500, Time 0.19, Loss: 0.51, Accuracy: 74.18, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 12:05:40.377991 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:42.670699 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:45.227571 140666663466816 train.py:90] Step 600, Time 0.20, Loss: 0.51, Accuracy: 73.10, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:05:45.229220 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:48.011380 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:50.546836 140666663466816 train.py:90] Step 700, Time 0.17, Loss: 0.52, Accuracy: 73.72, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:05:50.548397 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:52.864478 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:55.398681 140666663466816 train.py:90] Step 800, Time 0.19, Loss: 0.52, Accuracy: 73.95, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 12:05:55.400134 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:05:57.736151 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:00.284168 140666663466816 train.py:90] Step 900, Time 0.20, Loss: 0.52, Accuracy: 73.53, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:06:00.285636 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:02.623072 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:05.174188 140666663466816 train.py:90] Step 1000, Time 0.21, Loss: 0.52, Accuracy: 72.52, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 12:06:05.177370 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:07.545973 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:10.351071 140666663466816 train.py:90] Step 1100, Time 0.22, Loss: 0.51, Accuracy: 73.59, Validation Loss: 0.33, Validation Accuracy: 91.11
+I1214 12:06:10.352691 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:12.640164 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:15.193991 140666663466816 train.py:90] Step 1200, Time 0.19, Loss: 0.52, Accuracy: 73.24, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:06:15.195804 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:17.510244 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:20.079592 140666663466816 train.py:90] Step 1300, Time 0.19, Loss: 0.51, Accuracy: 75.29, Validation Loss: 0.33, Validation Accuracy: 92.22
+I1214 12:06:20.081494 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:22.413009 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:24.930468 140666663466816 train.py:90] Step 1400, Time 0.17, Loss: 0.51, Accuracy: 73.78, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:06:24.932226 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:27.276150 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:29.818095 140666663466816 train.py:90] Step 1500, Time 0.20, Loss: 0.51, Accuracy: 73.04, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:06:29.820377 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:32.208819 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:34.793099 140666663466816 train.py:90] Step 1600, Time 0.21, Loss: 0.53, Accuracy: 72.39, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:06:34.795836 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:37.677646 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:40.215569 140666663466816 train.py:90] Step 1700, Time 0.20, Loss: 0.52, Accuracy: 73.01, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:06:40.217232 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:42.585942 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:45.136902 140666663466816 train.py:90] Step 1800, Time 0.22, Loss: 0.52, Accuracy: 72.68, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:06:45.139748 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:47.508349 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:50.112704 140666663466816 train.py:90] Step 1900, Time 0.19, Loss: 0.51, Accuracy: 74.48, Validation Loss: 0.34, Validation Accuracy: 83.33
+I1214 12:06:50.114477 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:52.432127 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:54.979431 140666663466816 train.py:90] Step 2000, Time 0.20, Loss: 0.53, Accuracy: 71.90, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:06:54.980883 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:57.294044 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:06:59.840997 140666663466816 train.py:90] Step 2100, Time 0.18, Loss: 0.51, Accuracy: 73.91, Validation Loss: 0.34, Validation Accuracy: 88.89
+I1214 12:06:59.842468 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:02.722160 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:05.264607 140666663466816 train.py:90] Step 2200, Time 0.20, Loss: 0.52, Accuracy: 73.10, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:07:05.266404 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:07.606712 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:10.126211 140666663466816 train.py:90] Step 2300, Time 0.20, Loss: 0.50, Accuracy: 75.07, Validation Loss: 0.33, Validation Accuracy: 86.67
+I1214 12:07:10.128932 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:12.521660 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:15.049284 140666663466816 train.py:90] Step 2400, Time 0.20, Loss: 0.51, Accuracy: 74.31, Validation Loss: 0.33, Validation Accuracy: 90.00
+I1214 12:07:15.052017 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:17.437519 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:19.993705 140666663466816 train.py:90] Step 2500, Time 0.23, Loss: 0.53, Accuracy: 71.73, Validation Loss: 0.34, Validation Accuracy: 87.78
+I1214 12:07:19.995490 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:22.310552 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:24.850551 140666663466816 train.py:90] Step 2600, Time 0.19, Loss: 0.52, Accuracy: 73.56, Validation Loss: 0.34, Validation Accuracy: 85.56
+I1214 12:07:24.852134 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:27.633991 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:30.172855 140666663466816 train.py:90] Step 2700, Time 0.19, Loss: 0.52, Accuracy: 73.99, Validation Loss: 0.34, Validation Accuracy: 91.11
+I1214 12:07:30.175572 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:32.561094 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:35.134731 140666663466816 train.py:90] Step 2800, Time 0.18, Loss: 0.51, Accuracy: 73.78, Validation Loss: 0.34, Validation Accuracy: 87.78
+I1214 12:07:35.138554 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:37.495711 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:40.023468 140666663466816 train.py:90] Step 2900, Time 0.20, Loss: 0.53, Accuracy: 72.39, Validation Loss: 0.34, Validation Accuracy: 87.78
+I1214 12:07:40.025743 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:42.366883 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:44.896229 140666663466816 train.py:90] Step 3000, Time 0.20, Loss: 0.51, Accuracy: 74.25, Validation Loss: 0.34, Validation Accuracy: 86.67
+I1214 12:07:44.897738 140666663466816 train.py:110] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts.
+I1214 12:07:45.219139 140666663466816 train.py:114] Finished training after 3000 steps.
+I1214 12:07:45.598871 140666663466816 main.py:84] Starting model evaluation...
+I1214 12:07:46.069668 140666663466816 eval.py:53] 
+====Results of Test set evaluation on transfer_model ====
+I1214 12:07:46.070712 140666663466816 eval.py:54] Confusion Matrix: [33  6] [12 52]
+I1214 12:07:46.070984 140666663466816 eval.py:55] Accuracy(balanced): 81.49
+I1214 12:07:46.071219 140666663466816 eval.py:56] Accuracy(Unbalanced): 82.52
+I1214 12:07:46.071600 140666663466816 eval.py:57] Accuracy(Sparse Categorical) 82.52
+I1214 12:07:46.071877 140666663466816 eval.py:58] sensitivity: 73.33
+I1214 12:07:46.072105 140666663466816 eval.py:59] specificity: 89.66
+I1214 12:07:46.072329 140666663466816 eval.py:60] recall: 73.33
+I1214 12:07:46.072550 140666663466816 eval.py:61] precision: 84.62
+I1214 12:07:46.072788 140666663466816 eval.py:62] f1_score: 78.57
+I1214 12:07:46.073084 140666663466816 eval.py:63] AUC 0.83
+I1214 12:07:46.197281 140666663466816 eval.py:69] ----Evaluation completed----
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+wandb: 🚀 View run /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007 at: https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/runs/iv9otxoz
+wandb: ️⚡ View job at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjExOTQ3MTI5Nw==/version_details/v107
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20231214_114114-iv9otxoz/logs
