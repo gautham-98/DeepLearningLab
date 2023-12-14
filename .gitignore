@@ -145,7 +145,6 @@ cython_debug/
 
 *.out
 *.yaml
-*.jpg
 *.png
 *.tfrecords
 *.txt
@@ -153,3 +152,4 @@ cython_debug/
 *.wandb
 *.sh
 diabetic_retinopathy/wandb/latest-run
+diabetic_retinopathy/.batch.sh.swp
