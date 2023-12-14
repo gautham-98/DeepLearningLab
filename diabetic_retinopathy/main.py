@@ -1,58 +1,71 @@
 import gin
 import logging
 from absl import app, flags
+import wandb
 
-from train import Trainer
+from deep_visu.deep_visualise import DeepVisualize
+from train import Trainer, TransferTrainer
 from evaluation.eval import evaluate
 from input_pipeline import datasets
 from utils import utils_params, utils_misc
-from models.architectures import vgg_like, cnn
+from models.architectures import vgg_like, cnn_1, cnn_se, transfer_model
 from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', True, 'Specify whether to train or evaluate a model.')
-flags.DEFINE_boolean('eval', False,
-                     'evaluate the specific model.')
-flags.DEFINE_string('model_name', 'cnn', 'Choose model to train. Default model cnn')
+flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
+flags.DEFINE_boolean('eval', False, 'Specify whether to evaluate  model.')
+flags.DEFINE_string('model_name', 'cnn_se', 'Choose model to train. Default model cnn')
+flags.DEFINE_boolean('deep_visu', False, 'perform deep visualization with grad_cam')
+
 
 def main(argv):
-
     # generate folder structures
     run_paths = utils_params.gen_run_folder()
-
-    # set loggers
-    utils_misc.set_loggers(run_paths['path_logs_train'], logging.INFO)
 
     # gin-config
     gin.parse_config_files_and_bindings(['configs/config.gin'], [])
     utils_params.save_config(run_paths['path_gin'], gin.config_str())
 
-    # create tf-records folder and files if they do not exist yet
     if tfrecords.make_tfrecords():
-        logging.info("Created TFRecords files at path specified in gin file")
-    else:
-        logging.info("TFRecords files already exist. Proceed with the execution")
+        logging.info("Created TFRecords files")
 
+    # setup wandb
+    wandb.init(project='diabetic-retinopathy', name=run_paths['path_model_id'],
+               config=utils_params.gin_config_to_readable_dictionary(gin.config._CONFIG))
     # setup pipeline
     ds_train, ds_val, ds_test, ds_info = datasets.load(data_dir=gin.query_parameter('make_tfrecords.target_dir'))
 
-    print("Data is ready, now entering to model part")
     # model
-    # if FLAGS.model_name == 'cnn01':
-    #     model = cnn01()
-    model = cnn()
+    if FLAGS.model_name == 'transfer_model':
+        model = transfer_model()
+    elif FLAGS.model_name == 'cnn_se':
+        model = cnn_se()
+    elif FLAGS.model_name == 'cnn_1':
+        model = cnn_1()
+    elif FLAGS.model_name == "vgg":
+        model = vgg_like()
 
     if FLAGS.train:
+        # set loggers
+        utils_misc.set_loggers(run_paths['path_logs_train'], logging.INFO)
         logging.info("Starting model training...")
-        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)  # TODO make train flag to true for training
+        model.summary()
+        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
         for _ in trainer.train():
             continue
-    else:
+
+    if FLAGS.eval:
+        # set loggers
+        utils_misc.set_loggers(run_paths['path_logs_eval'], logging.INFO)
+        logging.info(f"Starting model evaluation...")
         evaluate(model,
-                 checkpoint,
                  ds_test,
                  ds_info,
-                 run_paths)
+                 )
+
+    if FLAGS.deep_visu:
+        deep_visualize = DeepVisualize(model, run_paths, data_dir=gin.query_parameter('make_tfrecords.data_dir'))
+        deep_visualize.visualize()
 
 
 if __name__ == "__main__":
