@@ -12,10 +12,12 @@ from models.architectures import vgg_like, cnn_1, cnn_se, transfer_model
 from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', True, 'Specify whether to train  model.')
-flags.DEFINE_boolean('eval', True, 'Specify whether to evaluate  model.')
+flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
+flags.DEFINE_boolean('eval', False, 'Specify whether to evaluate  model.')
 flags.DEFINE_string('model_name', 'cnn_se', 'Choose model to train. Default model cnn')
-flags.DEFINE_boolean('deep_visu', True, 'perform deep visualization with grad_cam')
+flags.DEFINE_string('base_model', 'InceptionV3', 'Choose base model to train')
+flags.DEFINE_string('tfRecords', './tfrecords_data_grahams/', 'Choose tfRecords file')
+flags.DEFINE_boolean('deep_visu', False, 'perform deep visualization with grad_cam')
 
 
 def main(argv):
@@ -26,7 +28,7 @@ def main(argv):
     gin.parse_config_files_and_bindings(['configs/config.gin'], [])
     utils_params.save_config(run_paths['path_gin'], gin.config_str()) 
 
-    if tfrecords.make_tfrecords():
+    if tfrecords.make_tfrecords(FLAGS.tfRecords):
         logging.info("Created TFRecords files")
 
     # setup wandb
@@ -37,27 +39,23 @@ def main(argv):
 
     # model
     if FLAGS.model_name == 'transfer_model':
-        model, base_model = transfer_model()
+        model,_  = transfer_model(base_model_name=FLAGS.base_model)
     elif FLAGS.model_name == 'cnn_se':
         model = cnn_se()
     elif FLAGS.model_name == 'cnn_1':
         model = cnn_1()
+    elif FLAGS.model_name == "vgg":
+        model = vgg_like()
 
     if FLAGS.train:
         # set loggers
         utils_misc.set_loggers(run_paths['path_logs_train'], logging.INFO)
         logging.info("Starting model training...")
-        
-        if FLAGS.model_name == 'transfer_model':
-            trainer = TransferTrainer(model, base_model, ds_train, ds_val, ds_info, run_paths)
-            for _ in trainer.train():
-                continue
-        
-        else:
-            model.summary()
-            trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
-            for _ in trainer.train():
-                continue
+        model.summary()
+        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
+        #trainer = TransferTrainer(model, base_model, ds_train, ds_val, ds_info, run_paths)
+        for _ in trainer.train():
+            continue
 
     if FLAGS.eval:
         # set loggers

@@ -26,7 +26,7 @@ class DeepVisualize:
         self.chkpt = chkpt
 
         if (image_list_train is None) or (image_list_test is None):
-            logging.info("No images specified from either test or train set. gradCAM terminated")
+            logging.info("No images specified from either test or train set. Specify files from both. Exiting run.")
             sys.exit(0)
 
     def create_dataset(self):

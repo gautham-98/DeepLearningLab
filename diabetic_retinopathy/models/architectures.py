@@ -139,15 +139,15 @@ def cnn_se(input_shape, filters, kernel_size, strides, pool_size, dropout_rate, 
     out_dense = GlobalAveragePooling2D()(out[-1])
     out_dense = Dropout(dropout_rate)(out_dense)
     out_dense = Dense(units=32, kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0), activation='relu',
-                      kernel_initializer =tf.keras.initializers.HeNormal()
+                      #kernel_initializer =tf.keras.initializers.HeNormal()
                       )(out_dense)
     out_dense = Dropout(dropout_rate)(out_dense)
     out_dense = Dense(units=16, kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0), activation='relu',
-                      kernel_initializer =tf.keras.initializers.HeNormal()
+                      #kernel_initializer =tf.keras.initializers.HeNormal()
                       )(out_dense)
     out_dense = Dropout(dropout_rate)(out_dense)
     out_dense = Dense(units=4, 
-                      kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0)
+                      #kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0)
                       )(out_dense)
 
     outputs = Dense(units=2)(out_dense)
@@ -183,13 +183,21 @@ def transfer_model(input_shape, base_model_name, filters, dense_units, dropout_r
         base_model = tf.keras.applications.VGG16(include_top=False,
                                                                 weights="imagenet", 
                                                                 input_shape=input_shape, 
-                                                                pooling=None)
+                                                                pooling=None,
+                                                                training=False)
     elif base_model_name == 'DenseNet121':
         base_model = tf.keras.applications.DenseNet121(include_top=False,
                                                                 weights="imagenet", 
                                                                 input_shape=input_shape, 
                                                                 pooling=None)
 
+
+    base_model.trainable = True
+    for layer in base_model.layers:
+        if isinstance(layer, tf.keras.layers.BatchNormalization):
+            layer.trainable = False
+    for layer in base_model.layers[:-20]:
+        layer.trainable = False
 
     out = base_model(inputs)
     # out = Conv2D(filters=filters, kernel_size=3, strides=1, activation='relu', kernel_regularizer=regularizers.l1(0.01))(out)
