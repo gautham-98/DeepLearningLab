@@ -59,9 +59,6 @@ def cnn_1(input_shape, filters, kernel_size, strides, pool_size, dropout_rate, b
                         )
         out.append(out_block)
 
-        if SE_blocks:
-            out[-1] = squeeze_excite_block(out[-1])
-
         #Skip connection
         if skip_connection_pairs:
             skip_connect(out, block, skip_connection_pairs)
@@ -162,7 +159,7 @@ def cnn_se(input_shape, filters, kernel_size, strides, pool_size, dropout_rate, 
 
 
 @gin.configurable
-def transfer_model(input_shape, base_model_name, filters, dense_units, dropout_rate):
+def transfer_model(input_shape, filters, dense_units, dropout_rate,base_model_name="DenseNet121"):
 
     """returns both the whole model and the base_model
       further steps for making the layers trainable are
@@ -179,31 +176,29 @@ def transfer_model(input_shape, base_model_name, filters, dense_units, dropout_r
                                                                 weights="imagenet", 
                                                                 input_shape=input_shape, 
                                                                 pooling=None)
+        out = base_model(inputs)
+        out = Conv2D(filters=filters, kernel_size=3, strides=1, activation='relu', kernel_regularizer=regularizers.l1(0.01))(out)
+        #out = BatchNormalization()(out) 
     elif base_model_name == 'VGG16':
         base_model = tf.keras.applications.VGG16(include_top=False,
                                                                 weights="imagenet", 
                                                                 input_shape=input_shape, 
-                                                                pooling=None,
-                                                                training=False)
+                                                                pooling=None)
+        
+        out = base_model(inputs)
+
     elif base_model_name == 'DenseNet121':
         base_model = tf.keras.applications.DenseNet121(include_top=False,
                                                                 weights="imagenet", 
                                                                 input_shape=input_shape, 
                                                                 pooling=None)
+        out = base_model(inputs)
 
-
-    base_model.trainable = True
-    for layer in base_model.layers:
-        if isinstance(layer, tf.keras.layers.BatchNormalization):
-            layer.trainable = False
-    for layer in base_model.layers[:-20]:
-        layer.trainable = False
-
-    out = base_model(inputs)
-    # out = Conv2D(filters=filters, kernel_size=3, strides=1, activation='relu', kernel_regularizer=regularizers.l1(0.01))(out)
-    # out = BatchNormalization()(out) 
-
+    base_model.trainable = False
+    for layer in base_model.layers[-20:]:
+        layer.trainable = True
     out_dense = GlobalAveragePooling2D()(out)
+    out_dense = Dropout(dropout_rate)(out_dense)
     out_dense = Dense(units=int(dense_units/2), kernel_regularizer=regularizers.l2(0.01), activation='relu')(out_dense)
     out_dense = Dropout(dropout_rate)(out_dense)
     out_dense = Dense(units=int(dense_units/4), kernel_regularizer=regularizers.l2(0.01))(out_dense)
@@ -216,13 +211,5 @@ def transfer_model(input_shape, base_model_name, filters, dense_units, dropout_r
     logging.info(f"transfer_model input shape:  {model.input_shape}")
     logging.info(f"transfer_model output shape: {model.output_shape}")
 
-    return model, base_model
-
-
-    
-
-
-
-
-
+    return model
 

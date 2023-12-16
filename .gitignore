@@ -145,11 +145,12 @@ cython_debug/
 
 *.out
 *.yaml
-*.jpg
 *.png
+*.jpg
 *.tfrecords
 *.txt
 *.json
 *.wandb
 *.sh
 diabetic_retinopathy/wandb/latest-run
+diabetic_retinopathy/.batch.sh.swp
