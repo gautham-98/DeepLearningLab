@@ -176,23 +176,19 @@ def transfer_model(input_shape, filters, dense_units, dropout_rate,base_model_na
                                                                 weights="imagenet", 
                                                                 input_shape=input_shape, 
                                                                 pooling=None)
-        out = base_model(inputs)
-        out = Conv2D(filters=filters, kernel_size=3, strides=1, activation='relu', kernel_regularizer=regularizers.l1(0.01))(out)
-        #out = BatchNormalization()(out) 
     elif base_model_name == 'VGG16':
         base_model = tf.keras.applications.VGG16(include_top=False,
                                                                 weights="imagenet", 
                                                                 input_shape=input_shape, 
                                                                 pooling=None)
-        
-        out = base_model(inputs)
 
     elif base_model_name == 'DenseNet121':
         base_model = tf.keras.applications.DenseNet121(include_top=False,
                                                                 weights="imagenet", 
                                                                 input_shape=input_shape, 
                                                                 pooling=None)
-        out = base_model(inputs)
+    
+    out = base_model(inputs)
 
     base_model.trainable = False
     for layer in base_model.layers[-20:]:

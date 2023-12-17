@@ -16,7 +16,6 @@ flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
 flags.DEFINE_boolean('eval', False, 'Specify whether to evaluate  model.')
 flags.DEFINE_string('model_name', 'cnn_se', 'Choose model to train. Default model cnn')
 flags.DEFINE_string('base_model', 'InceptionV3', 'Choose base model to train')
-flags.DEFINE_string('tfRecords', './tfrecords_data_grahams/', 'Choose tfRecords file')
 flags.DEFINE_boolean('deep_visu', False, 'perform deep visualization with grad_cam')
 
 
@@ -28,7 +27,7 @@ def main(argv):
     gin.parse_config_files_and_bindings(['configs/config.gin'], [])
     utils_params.save_config(run_paths['path_gin'], gin.config_str()) 
 
-    if tfrecords.make_tfrecords(FLAGS.tfRecords):
+    if tfrecords.make_tfrecords():
         logging.info("Created TFRecords files")
 
     # setup wandb
@@ -39,7 +38,7 @@ def main(argv):
 
     # model
     if FLAGS.model_name == 'transfer_model':
-        model,_  = transfer_model(base_model_name=FLAGS.base_model)
+        model  = transfer_model(base_model_name=FLAGS.base_model)
     elif FLAGS.model_name == 'cnn_se':
         model = cnn_se()
     elif FLAGS.model_name == 'cnn_1':
