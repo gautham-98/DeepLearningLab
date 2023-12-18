@@ -115,6 +115,8 @@ GradCam.class_idx = 1
 ```
 ![img_15_label-1](https://media.github.tik.uni-stuttgart.de/user/7666/files/cddd1349-8bfc-47ef-af5e-0e54b0262f75)
 
+In the image above we can see how the model has learned to identify hard exudates to classify the image as RDR.
+
 note: If the class_idx is not specified in config grad-CAM is performed for the predicted class of the image.
 
 
