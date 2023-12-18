@@ -100,6 +100,21 @@ Please note that it is difficult to reprocude the same accuracy because of limit
 | InceptionNet V3 | 82.52 | 82.34 | 81.82 | 82.86 | 81.82 | 69.23 | 75.00 | 80.00 |
 | InceptionResnet | 81.55 | 80.68 | 77.78 | 83.58 | 77.78 | 71.79 | 74.67 | 80.00 |
 
+## Deep Visualisation
+An implementation of grad-CAM is done for visualisation. The following are to be specified in **'configs/config.gin'**:
+1) List of indices of the images to be visualised from the train and test set.
+2) The layer of the neural network at which grad-CAM is applied. 
+3) The class label for which visualisation is to be done. 
+
+```
+DeepVisualize.image_list_train = [5,6,7,8]
+DeepVisualize.image_list_test = [15,57,87,32]
+DeepVisualize.layer_name = 'activation_3'
+GradCam.class_idx = 1
+```
+![img_15_label-1](https://media.github.tik.uni-stuttgart.de/user/7666/files/cddd1349-8bfc-47ef-af5e-0e54b0262f75)
+
+note: If the class_idx is not specified in config grad-CAM is performed for the predicted class of the image.
 
 
 
