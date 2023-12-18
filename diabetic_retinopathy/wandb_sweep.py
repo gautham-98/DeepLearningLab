@@ -4,7 +4,7 @@ import gin
 import math
 
 from input_pipeline.datasets import load
-from models.architectures import vgg_like, cnn_1
+from models.architectures import vgg_like, cnn_1, cnn_se
 from train import Trainer
 from utils import utils_params, utils_misc
 from evaluation.eval import evaluate
@@ -25,7 +25,8 @@ def train_func():
             bindings.append(f'{key}={value}')
 
         # generate folder structures
-        run_paths = utils_params.gen_run_folder(','.join(bindings))
+        # run_paths = utils_params.gen_run_folder(','.join(bindings))
+        run_paths = utils_params.gen_run_folder("cnn_se")
 
         # set loggers
         utils_misc.set_loggers(run_paths['path_logs_train'], logging.INFO)
@@ -40,7 +41,7 @@ def train_func():
         ds_train, ds_val, ds_test, ds_info = load(data_dir=gin.query_parameter('make_tfrecords.target_dir'))
 
         # model
-        model = vgg_like()
+        model = cnn_se()
         #model = cnn_1()
         model.summary()
 
@@ -61,31 +62,38 @@ sweep_config = {
     'name': 'diabetic-retinopathy-sweep',
     'method': 'random',
     'metric': {
-        'name': 'val_loss',
-        'goal': 'minimize'
+        'name': 'val_acc',
+        'goal': 'maximize'
     },
     'parameters': {
         'Trainer.total_steps': {
-            'values': [5000, 7000, 7500, 8000, 10000]
+            'values': [17000, 20000, 25000, 30000, 40000]
         },
-        'Trainer.learning_rate': {
-            'values': [0.001, 0.003, 0.005, 0.0001, 0.0003]
+        'cnn_se.filters': {
+            'values': [(4, 8, 16, 32), (4,8,16,32,32)]
         },
-        'vgg_like.base_filters': {
-            'values': [4, 8, 16]
+        'cnn_se.kernel_size': {
+            'values': [3, 5]
         },
-        'vgg_like.n_blocks': {
-            'values': [4,5,6,7]
+        'cnn_se.strides': {
+            'values': [(1, 1, 1, 1, 1, 1)]
         },
-        'vgg_like.dense_units': {
-            'values': [16, 32, 64]
+        'cnn_se.pool_size': {
+            'values': [2, 3]
         },
-        'vgg_like.dropout_rate': {
+        'cnn_se.dropout_blocks': {
+            'values': [(1, 2)]
+        },
+        'cnn_se.maxpool_blocks': {
+            'values': [(1, 2)]
+        },
+        'cnn_se.dropout_rate': {
             'distribution': 'uniform',
-            'min': 0.1,
-            'max': 0.5
+            'min': 0.3,
+            'max': 0.4
         }
-    }
+    },
+    'count': 10  # Set the total number of runs
 }
 sweep_id = wandb.sweep(sweep_config)
 

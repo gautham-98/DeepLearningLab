@@ -15,6 +15,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
 flags.DEFINE_boolean('eval', False, 'Specify whether to evaluate  model.')
 flags.DEFINE_string('model_name', 'cnn_se', 'Choose model to train. Default model cnn')
+flags.DEFINE_string('base_model', 'InceptionV3', 'Choose base model to train')
 flags.DEFINE_boolean('deep_visu', False, 'perform deep visualization with grad_cam')
 
 
@@ -24,20 +25,20 @@ def main(argv):
 
     # gin-config
     gin.parse_config_files_and_bindings(['configs/config.gin'], [])
-    utils_params.save_config(run_paths['path_gin'], gin.config_str())
+    utils_params.save_config(run_paths['path_gin'], gin.config_str()) 
 
     if tfrecords.make_tfrecords():
         logging.info("Created TFRecords files")
 
     # setup wandb
     wandb.init(project='diabetic-retinopathy', name=run_paths['path_model_id'],
-               config=utils_params.gin_config_to_readable_dictionary(gin.config._CONFIG))
+            config=utils_params.gin_config_to_readable_dictionary(gin.config._CONFIG))
     # setup pipeline
     ds_train, ds_val, ds_test, ds_info = datasets.load(data_dir=gin.query_parameter('make_tfrecords.target_dir'))
 
     # model
     if FLAGS.model_name == 'transfer_model':
-        model = transfer_model()
+        model  = transfer_model(base_model_name=FLAGS.base_model)
     elif FLAGS.model_name == 'cnn_se':
         model = cnn_se()
     elif FLAGS.model_name == 'cnn_1':
@@ -51,6 +52,7 @@ def main(argv):
         logging.info("Starting model training...")
         model.summary()
         trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
+        #trainer = TransferTrainer(model, base_model, ds_train, ds_val, ds_info, run_paths)
         for _ in trainer.train():
             continue
 
@@ -59,9 +61,9 @@ def main(argv):
         utils_misc.set_loggers(run_paths['path_logs_eval'], logging.INFO)
         logging.info(f"Starting model evaluation...")
         evaluate(model,
-                 ds_test,
-                 ds_info,
-                 )
+                ds_test,
+                ds_info,
+                )
 
     if FLAGS.deep_visu:
         deep_visualize = DeepVisualize(model, run_paths, data_dir=gin.query_parameter('make_tfrecords.data_dir'))

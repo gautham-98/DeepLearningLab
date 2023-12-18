@@ -46,7 +46,7 @@ def skip_connect(out, block, skip_connection_pairs):
             if not (out[-1].shape[-1] == out_to_add.shape[-1]):
                 out_to_add = Conv2D(filters=out[-1].shape[-1], 
                                     kernel_size=(1,1), 
-                                    kernel_regularizer=regularizers.l1_l2(l1=0.005, l2=0.005)
+                                    #kernel_regularizer=regularizers.l1_l2(l1=0.005, l2=0.005)
                                     )(out_to_add)
                 out_to_add = Activation('relu')(out_to_add)
             out[-1] = Add()([out_to_add, out[-1]])
