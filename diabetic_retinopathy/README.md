@@ -100,6 +100,7 @@ Please note that it is difficult to reprocude the same accuracy because of limit
 | InceptionNet V3 | 82.52 | 82.34 | 81.82 | 82.86 | 81.82 | 69.23 | 75.00 | 80.00 |
 | InceptionResnet | 81.55 | 80.68 | 77.78 | 83.58 | 77.78 | 71.79 | 74.67 | 80.00 |
 
+
 ## Deep Visualisation
 An implementation of grad-CAM is done for visualisation. The following are to be specified in **'configs/config.gin'**:
 1) List of indices of the images to be visualised from the train and test set.
