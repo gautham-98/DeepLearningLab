@@ -105,7 +105,7 @@ Please note that it is difficult to reprocude the same accuracy because of limit
 An implementation of grad-CAM is done for visualisation. The following are to be specified in **'configs/config.gin'**:
 1) List of indices of the images to be visualised from the train and test set.
 2) The layer of the neural network at which grad-CAM is applied. 
-3) The class label for which visualisation is to be done. 
+3) The class label for which visualisation is to be done, if this is not specified the gradCAM is performed for the predicted class.
 
 ```
 DeepVisualize.image_list_train = [5,6,7,8]
@@ -117,7 +117,6 @@ GradCam.class_idx = 1
 
 In the image above we can see how the model has learned to identify hard exudates to classify the image as RDR.
 
-note: If the class_idx is not specified in config grad-CAM is performed for the predicted class of the image.
 
 
 
