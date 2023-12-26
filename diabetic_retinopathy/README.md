@@ -75,16 +75,16 @@ The logs are stored in **'good_performances/'** directory.
 
 |  | CNN_1 | CNN_SE | DenseNet121 | InceptionV3 | InceptionResnet |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| Run 1 | 82.52 | | 82.52 |  |  |
-| Run 2 | 78.64 | | 82.52 |  |  |
-| Run 3 | 77.67 | | 83.50 |  |  |
-| Run 4 | 84.47 | | 83.50 |  |  |
-| Run 5 | 77.67 | | 81.55 |  |  |
-| Run 6 | 82.52 | | 82.52 |  |  |
-| Run 7 | 81.55 | | 81.55 |  |  |
-| Run 8 | 78.64 | | 82.52 |  |  |
-| Run 9 | 79.61 | | 82.52 |  |  |
-| Run 10 | 82.52 | | 82.52 |  |  |
+| Run 1 | 82.52 | 82.52 | 82.52 | 82.52 | 78.64 |
+| Run 2 | 78.64 | 79.61| 82.52 | 80.58 | 76.70 |
+| Run 3 | 77.67 | 84.47 | 83.50 | 77.67 | 77.67 |
+| Run 4 | 84.47 | 83.50 | 83.50 | 79.61 | 79.61 |
+| Run 5 | 77.67 | 85.44 | 81.55 | 79.61 | 79.61 |
+| Run 6 | 82.52 | 83.50 | 82.52 | 78.64 | 76.70 |
+| Run 7 | 81.55 | 76.70 | 81.55 | 79.61 | 80.58 |
+| Run 8 | 78.64 | 84.47 | 82.52 | 79.61 | 74.76 |
+| Run 9 | 79.61 | 69.90 | 82.52 | 79.61 | 81.55 |
+| Run 10 | 82.52 | 80.58 | 82.52 | 78.64 | 77.67 |
 
 
 
@@ -94,14 +94,19 @@ Please note that it is difficult to reprocude the same accuracy because of limit
 
 |  | Accuracy (%) | Balanced Accuracy (%) | Sensitivity (%) | Specificity (%) | Recall (%) | Precision(%) | F1 Score(%) | AUC (%) | 
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| CNN_1 |84.35 | 84.47 |  72.55 | 96.15 | 72.55 | 94.87 | 82.22 | 86.00 |
-| CNN_SE | | |   |  |   |
+| CNN_1 | 84.47 | 84.35 |  72.55 | 96.15 | 72.55 | 94.87 | 82.22 | 86.00 |
+| CNN_SE | 85.44 | 84.44 | 80.00 | 88.89 | 80.00 | 82.05 | 81.01 | 85.00 |
 | DenseNet121 | 83.50 | 82.36 | 76.19 | 88.52 | 76.19 | 82.05 | 79.01 | 83.00 |
-| InceptionNet V3 |  |  |   |  | |
-| InceptionResnet |  | |  | |  |
+| InceptionNet V3 | 82.52 | 82.34 | 81.82 | 82.86 | 81.82 | 69.23 | 75.00 | 80.00 |
+| InceptionResnet | 81.55 | 80.68 | 77.78 | 83.58 | 77.78 | 71.79 | 74.67 | 80.00 |
 
+## Deep Visualisation
+An implementation of grad-CAM is done for visualisation. The following are to be specified in **'configs/config.gin'**:
+1) List of indices of the images to be visualised from the train and test set.
+2) The layer of the neural network at which grad-CAM is applied. 
+3) The class label for which visualisation is to be done. 
 
-
+![img_15_label-1](https://media.github.tik.uni-stuttgart.de/user/7666/files/e98a6663-0d2f-46a5-9e29-8d0011ec394c)
 
 
 
