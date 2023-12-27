@@ -3,15 +3,19 @@ from input_pipeline import datasets, tfrecords
 from absl import app, flags
 from utils import utils_params, utils_misc
 import warnings
+import tensorflow as tf 
+
+from models.architectures import model1_LSTM
+from train import Trainer
 
 # Ignore all FutureWarnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
+flags.DEFINE_boolean('train', True, 'Specify whether to train  model.')
 flags.DEFINE_boolean('eval', False, 'Specify whether to evaluate  model.')
-flags.DEFINE_string('model_name', 'cnn_se', 'Choose model to train. Default model cnn')
+flags.DEFINE_string('model_name', 'model1_LSTM', 'Choose model to train. Default model cnn')
 
 
 def main(argv):
@@ -32,6 +36,18 @@ def main(argv):
     ds_train, ds_val, ds_test, ds_info = datasets.load( name="har", data_dir=gin.query_parameter('make_tfrecords.target_dir'))
     logging.info(f"[DATASET loaded!] {ds_info}")
 
+    # model
+    if FLAGS.model_name == 'model1_LSTM':
+        model = model1_LSTM()
+
+    if FLAGS.train:
+        # set loggers
+        utils_misc.set_loggers(run_paths['path_logs_train'], logging.INFO)
+        logging.info("Starting model training...")
+        model.summary()
+        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
+        for _ in trainer.train():
+            continue
 
 
 if __name__ == '__main__':
