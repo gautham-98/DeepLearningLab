@@ -7,7 +7,7 @@ import wandb
 
 @gin.configurable
 class Trainer(object):
-    def __init__(self, model, ds_train, ds_val, ds_info, run_paths, total_steps, log_interval, ckpt_interval,
+    def __init__(self, model, ds_train, ds_val, ds_info, class_weights, run_paths, total_steps, log_interval, ckpt_interval,
                  learning_rate, ckpt_path=False, log_wandb=False):
        
         # Checkpoint Manager
@@ -26,7 +26,8 @@ class Trainer(object):
             logging.info(f"Initializing from scratch. Checkpoints stored in {run_paths['path_ckpts_train']}")
 
         # Loss objective
-        self.loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+        self.loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True, reduction='none')
+        self.class_weights = class_weights
         self.learning_rate = learning_rate
         self.optimizer = tf.keras.optimizers.Adam(learning_rate = self.learning_rate)
 
@@ -49,9 +50,13 @@ class Trainer(object):
 
     @tf.function
     def train_step(self, sequences, labels):
+        class_weights = tf.convert_to_tensor(self.class_weights, dtype=tf.float32)
         with tf.GradientTape() as tape:
             predictions = self.model(sequences, training=True)
             loss = self.loss_object(labels, predictions)
+            if class_weights is not None:
+                loss = loss * tf.gather(class_weights, labels)
+            loss = tf.reduce_mean(loss)
         gradients = tape.gradient(loss, self.model.trainable_variables)
         self.optimizer.apply_gradients(zip(gradients, self.model.trainable_variables))
 
@@ -62,7 +67,7 @@ class Trainer(object):
     def val_step(self, sequences, labels):
         predictions = self.model(sequences, training=False)
         t_loss = self.loss_object(labels, predictions)
-
+        
         self.val_loss(t_loss)
         self.val_accuracy(labels, predictions)
 

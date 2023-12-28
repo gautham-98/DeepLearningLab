@@ -7,6 +7,7 @@ import tensorflow as tf
 
 from models.architectures import model1_LSTM
 from train import Trainer
+from evaluation.eval import evaluate
 
 # Ignore all FutureWarnings
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -33,7 +34,7 @@ def main(argv):
         logging.info("TF Records Created")
 
     # load the dataset
-    ds_train, ds_val, ds_test, ds_info = datasets.load( name="har", data_dir=gin.query_parameter('make_tfrecords.target_dir'))
+    ds_train, ds_val, ds_test, ds_info, class_weights = datasets.load( name="har", data_dir=gin.query_parameter('make_tfrecords.target_dir'))
     logging.info(f"[DATASET loaded!] {ds_info}")
 
     # model
@@ -45,9 +46,14 @@ def main(argv):
         utils_misc.set_loggers(run_paths['path_logs_train'], logging.INFO)
         logging.info("Starting model training...")
         model.summary()
-        trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
+        trainer = Trainer(model, ds_train, ds_val, ds_info, class_weights, run_paths)
         for _ in trainer.train():
             continue
+    if FLAGS.eval:
+        # set loggers
+        utils_misc.set_loggers(run_paths['path_logs_eval'], logging.INFO)
+        logging.info(f"Starting model evaluation...")
+        evaluate(model, ds_test, ds_info)
 
 
 if __name__ == '__main__':
