@@ -45,15 +45,15 @@ def evaluate(model, ds_test, ds_info, ckpt_path=False, log_wandb=False):
     confusion_matrix.reset_state()
     sparse_accuracy = test_accuracy.result()
     formatted_recall = ["{:.2f}%".format(value*100) for value in recall]
-    fromatted_precsion = ["{:.2f}%".format(value*100) for value in precision]
+    fromatted_precision = ["{:.2f}%".format(value*100) for value in precision]
 
     logging.info(f"\n====Results of Test set evaluation on {model.name} ====")
     logging.info(f"Confusion Matrix:\n{np.array2string(cm_result.numpy(), separator=' ', max_line_width=np.inf)}")
     logging.info("Accuracy(balanced): {:.2f}".format(balanced_accuracy * 100))
     logging.info("Accuracy(Unbalanced): {:.2f}".format(ub_accuracy * 100))
     logging.info("Accuracy(Sparse Categorical) {:.2f}".format(sparse_accuracy * 100))
-    logging.info("recall: {}".format(recall))
-    logging.info("precision: {}".format(precision))
+    logging.info("recall: {}".format(formatted_recall))
+    logging.info("precision: {}".format(fromatted_precision))
     logging.info("macro_f1_score: {:.2f}".format(macro_f1_score * 100))
 
     # Get curves
