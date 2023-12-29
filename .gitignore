@@ -154,3 +154,6 @@ cython_debug/
 *.sh
 diabetic_retinopathy/wandb/latest-run
 diabetic_retinopathy/.batch.sh.swp
+config_operative.gin
+diabetic_retinopathy/good_performances/inception_v3/config.gin
+diabetic_retinopathy/good_performances/cnn_1/config.gin
