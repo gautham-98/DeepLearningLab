@@ -8,6 +8,7 @@ import seaborn as sns
 import numpy as np
 from sklearn import metrics
 import wandb
+from datetime import datetime
 
 @gin.configurable
 def evaluate(model, ds_test, ds_info, ckpt_path=False, log_wandb=False):
@@ -73,6 +74,7 @@ def plot_roc_curve(true_array, prediction_array):
     """
     Convert the array to 1 dim array first. Necessary for ROC AUC Curve input
     """
+    index = datetime.now().strftime("%d-%m-%y_%H:%M:%S")
     true_array = np.concatenate([tensor.numpy() for tensor in true_array])
     prediction_array = np.concatenate([tensor.numpy() for tensor in prediction_array])
 
@@ -89,14 +91,15 @@ def plot_roc_curve(true_array, prediction_array):
     plt.title(f'Receiver Operating Characteristic')
     plt.legend(loc="lower right")
     plt.show()
-    plt.savefig("ROC_AUC_Curve.png")
+    plt.savefig(f"ROC_AUC_Curve_{index}.png")
 
 
 def plot_confusion_mat(cm):
+    index = datetime.now().strftime("%d-%m-%y_%H:%M:%S")
     plt.figure(figsize=(6, 6))
     sns.heatmap(cm, annot=True, fmt='d')
     plt.title("Confusion Matrix")
     plt.ylabel("True")
     plt.xlabel("Predicted")
     plt.show()
-    plt.savefig("heatmap.png")
+    plt.savefig(f"heatmap_{index}.png")

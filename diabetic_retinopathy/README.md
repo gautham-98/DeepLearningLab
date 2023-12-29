@@ -120,5 +120,3 @@ In the image above we can see how the model has learned to identify hard exudate
 
 
 
-
-

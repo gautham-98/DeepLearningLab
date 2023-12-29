@@ -143,15 +143,16 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-*.out
+
 *.yaml
-*.png
 *.jpg
+*.png
 *.tfrecords
 *.txt
 *.json
 *.wandb
 *.sh
+*.out
 diabetic_retinopathy/wandb/latest-run
 diabetic_retinopathy/.batch.sh.swp
 config_operative.gin

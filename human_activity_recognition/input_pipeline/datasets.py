@@ -1,17 +1,19 @@
 import gin, logging
 import tensorflow as tf 
+from sklearn.utils import class_weight
+import numpy as np
 
 def read_tfrecords(record):
     # parse the record
     feature_description = {
-        'labels': tf.io.FixedLenFeature([], tf.string),
-        'features': tf.io.FixedLenFeature([], tf.string),
+        'label': tf.io.FixedLenFeature([], tf.string),
+        'feature': tf.io.FixedLenFeature([], tf.string),
     }
     parsed_data = tf.io.parse_single_example(record, feature_description)
 
     # decode and return
-    features = tf.io.parse_tensor(parsed_data['features'], out_type=tf.double)
-    labels = tf.io.parse_tensor(parsed_data['labels'], out_type=tf.double)
+    features = tf.io.parse_tensor(parsed_data['feature'], out_type=tf.double)
+    labels = tf.io.parse_tensor(parsed_data['label'], out_type=tf.double)
     return (features, labels)
 
 
@@ -37,6 +39,10 @@ def prepare(ds_train, ds_val, ds_test, ds_info, batch_size, caching, shuffle_buf
         preprocess, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     if caching:
         ds_train = ds_train.cache()
+    # computations for class weights
+    labels = [tf.squeeze(feature_label_pair[1]).numpy() for feature_label_pair in ds_train]
+    class_weights = class_weight.compute_class_weight('balanced', classes=np.unique(labels), y=labels)
+    # prepare the data
     ds_train = ds_train.shuffle(shuffle_buffer)
     ds_train = ds_train.batch(batch_size)
     ds_train = ds_train.repeat(-1)
@@ -58,7 +64,7 @@ def prepare(ds_train, ds_val, ds_test, ds_info, batch_size, caching, shuffle_buf
         ds_test = ds_test.cache()
     ds_test = ds_test.prefetch(tf.data.experimental.AUTOTUNE)
 
-    return ds_train, ds_val, ds_test, ds_info
+    return ds_train, ds_val, ds_test, ds_info, class_weights
 
 
 # converting labels 1-12 -> 0-11
