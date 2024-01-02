@@ -4,30 +4,25 @@ import tensorflow as tf
 import logging
 
 from tensorflow.keras import regularizers
-from tensorflow.keras.layers import Input, Conv2D, MaxPool2D, GlobalAveragePooling2D, Add, Dense, Flatten, Dropout, BatchNormalization
-from tensorflow.keras import layers, Sequential
+from tensorflow.keras import layers
 
+def one_lstm_layer(lstm_cells, dropout_rate):
+    return layers.LSTM(lstm_cells, dropout=dropout_rate,return_sequences=True)
 
 @gin.configurable
-def model1_LSTM(window_length, dropout=0.3):
-    
+def model1_LSTM(window_length,num_lstm,dense_units,lstm_cells ,dropout_rate=0.3):
     model = keras.Sequential([keras.Input(shape=(window_length,6))])
-    model.add(layers.LSTM(128, return_sequences=True))
-    model.add(layers.Dropout(dropout))
+    for e in range(num_lstm):
+        layer = one_lstm_layer(lstm_cells, dropout_rate=dropout_rate)
+        model.add(layer)
+        model.add(layers.BatchNormalization())
+    model.add(layers.LSTM(lstm_cells, dropout=dropout_rate))
     model.add(layers.BatchNormalization())
-    model.add(layers.LSTM(128, return_sequences=True))
-    model.add(layers.Dropout(dropout))
-    model.add(layers.BatchNormalization())
-    model.add(layers.LSTM(128, return_sequences=True))
-    model.add(layers.Dropout(dropout))
-    model.add(layers.BatchNormalization())
-    model.add(layers.LSTM(128))
-    model.add(layers.Dropout(dropout))
-    model.add(layers.BatchNormalization())
-    model.add(layers.Dense(16 , activation="relu"))
-    model.add(layers.Dropout(0.2))
+    model.add(layers.Dense(dense_units , activation="relu"))
+    model.add(layers.Dropout(dropout_rate))
     model.add(layers.Dense(12, activation="linear"))
     model.build()
+
 
     return model
 
