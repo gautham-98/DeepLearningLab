@@ -1,5 +1,5 @@
 #model
-model1_LSTM.input_shape = (100,6)
+model1_LSTM.window_length = 100
 
 
 # tfrecords
