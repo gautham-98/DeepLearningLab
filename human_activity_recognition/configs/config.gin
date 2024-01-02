@@ -1,6 +1,10 @@
-#model
-model1_LSTM.window_length = 100
 
+# model1_LSTM
+model1_LSTM.lstm_cells = 128
+model1_LSTM.num_lstm=2
+model1_LSTM.dense_units=16
+model1_LSTM.lstm_cells=128
+model1_LSTM.dropout_rate=0.35
 
 # tfrecords
 make_tfrecords.data_dir = "/home/data/HAPT_dataset/RawData/"
@@ -17,3 +21,7 @@ Trainer.total_steps = 3000
 Trainer.log_interval = 50
 Trainer.ckpt_interval = 50
 Trainer.learning_rate = 0.001
+
+# log wandb
+evaluate.log_wandb=True
+Trainer.log_wandb=True
