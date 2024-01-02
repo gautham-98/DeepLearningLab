@@ -8,6 +8,28 @@ from sklearn.utils import shuffle
 import re
 import matplotlib.pyplot as plt
 
+
+# tf.window() does not create exact window_size samples, so we need to define out own custom window maker. 
+# below is another function that makes the use of tf.window() function
+def custom_window_maker(data, window_size, shift):
+  features=[]
+  labels=[]
+  for i in range(0, int(data.shape[0]/shift) -1):
+    start = i*shift
+    end = i*shift + window_size
+    one_window = data[start:end].values
+    one_window_features = one_window[:, :-1]
+    one_window_labels = one_window[:, -1]
+    label = mode(one_window_labels, keepdims=False).mode
+    features.append(one_window_features)
+    labels.append(label)
+  features = np.array(features)
+  labels = np.array(labels)
+  labels = np.expand_dims(labels, axis=1)
+  return (features, labels)
+  
+
+# --- deprecated
 def window_maker(data, window_size, shift):
   features_list = []
   labels_list = []
@@ -18,10 +40,8 @@ def window_maker(data, window_size, shift):
   for window in windows_as_arrays:
     features = window[:, :-1]
     label, count = mode(window[:, -1], keepdims=False).mode, mode(window[:, -1]).count # setting keepdims to False will prevent adding extra axis 
-    if count==window_size:  # append the feature and label only if it is not a mixed activity window
-        features_list.append(features)
-        labels_list.append(label)
-        
+    features_list.append(features)
+    labels_list.append(label)
   features_list = np.array(features_list)
   labels_list = np.expand_dims(np.array(labels_list), axis=1)
   return features_list, labels_list
@@ -61,7 +81,6 @@ def make_tfrecords(data_dir, target_dir, window_length, shift):
     test_labels = np.empty(shape = (0,1))
 
     # loop over each file, normalize it, create windows and append it to arrays
-    print_data=True
     for e in range(len(acc_data_list)):
        
        acc_data = pd.read_csv(acc_data_list[e], delimiter=" ", header=None)
@@ -88,15 +107,6 @@ def make_tfrecords(data_dir, target_dir, window_length, shift):
 
        # remove first 5 seconds of data
        normalized_data = normalized_data.iloc[250:-250]
-
-       # group according to actid, helps reduce the number of mixed windows during windowing 
-       # now maximum possible mixed activity windows per experiment would be 12 while switching from one group to another
-    #    grouped_normalized_data = pd.DataFrame()
-    #    groupby_normalized_data = normalized_data.groupby('label')
-    #    for group, group_data in groupby_normalized_data:
-    #       grouped_normalized_data = pd.concat([grouped_normalized_data, group_data])
-
-       # create windows and shift 
        window_features, window_labels = window_maker(normalized_data, window_length, shift) # 50% overlapping
     
        if int(user_number) in range(1,22):
@@ -112,13 +122,6 @@ def make_tfrecords(data_dir, target_dir, window_length, shift):
 
     # resample
     # TODO
-    count = np.zeros(shape=[13])
-    for window, label in zip(train_data, train_labels):
-       count[int(label)]+=1
-
-    for label in range(13):
-       print(f'label: {label}')
-       print(count[int(label)])
     # delete unlabelled data
     train_data, train_labels = delete_no_activity(train_data, train_labels)
     test_data, test_labels = delete_no_activity(test_data, test_labels)
