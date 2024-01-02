@@ -18,7 +18,7 @@ def model1_LSTM(input_shape):
     model.add(layers.LSTM(128))
     model.add(layers.Dropout(0.2))
     model.add(layers.BatchNormalization())
-    model.add(layers.Dense(64 , activation="relu"))
+    model.add(layers.Dense(16 , activation="relu"))
     model.add(layers.Dropout(0.2))
     model.add(layers.Dense(12, activation="linear"))
     model.build()

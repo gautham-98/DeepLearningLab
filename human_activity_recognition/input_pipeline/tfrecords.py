@@ -8,7 +8,7 @@ from sklearn.utils import shuffle
 import re
 import matplotlib.pyplot as plt
 
-def window_maker(data, window_size, shift):
+def window_maker(data, is_train_data, window_size, shift, low_limit=0):
   features_list = []
   labels_list = []
   tf_dataset_normalized = tf.data.Dataset.from_tensor_slices(data)  # TODO: make label changes
@@ -18,9 +18,16 @@ def window_maker(data, window_size, shift):
   for window in windows_as_arrays:
     features = window[:, :-1]
     label, count = mode(window[:, -1], keepdims=False).mode, mode(window[:, -1]).count # setting keepdims to False will prevent adding extra axis 
-    if count==window_size:  # append the feature and label only if it is not a mixed activity window
+    max_activity = (count/window_size) * 100
+    # append the feature and label only if the count of max labels is greater than a certain low_limit for train data
+    if is_train_data and max_activity>=low_limit: 
         features_list.append(features)
         labels_list.append(label)
+    # append the feature and label only if the count of minimum labels is 0 for test and validation data 
+    if (not is_train_data) and max_activity==100:
+        features_list.append(features)
+        labels_list.append(label)
+       
         
   features_list = np.array(features_list)
   labels_list = np.expand_dims(np.array(labels_list), axis=1)
@@ -61,7 +68,6 @@ def make_tfrecords(data_dir, target_dir, window_length, shift):
     test_labels = np.empty(shape = (0,1))
 
     # loop over each file, normalize it, create windows and append it to arrays
-    print_data=True
     for e in range(len(acc_data_list)):
        
        acc_data = pd.read_csv(acc_data_list[e], delimiter=" ", header=None)
@@ -79,6 +85,9 @@ def make_tfrecords(data_dir, target_dir, window_length, shift):
        else:
         logging.error("[ERROR] Filename format does not match the expected pattern.")
 
+       is_train_data = int(user_number) in range(1,22)
+       is_val_data = int(user_number) in range(28,31)
+       is_test_data = int(user_number) in range(22,28)
        normalized_data = zscore(combined_data, axis=0)
        normalized_data["label"] = 0
 
@@ -88,24 +97,17 @@ def make_tfrecords(data_dir, target_dir, window_length, shift):
 
        # remove first 5 seconds of data
        normalized_data = normalized_data.iloc[250:-250]
-
-       # group according to actid, helps reduce the number of mixed windows during windowing 
-       # now maximum possible mixed activity windows per experiment would be 12 while switching from one group to another
-    #    grouped_normalized_data = pd.DataFrame()
-    #    groupby_normalized_data = normalized_data.groupby('label')
-    #    for group, group_data in groupby_normalized_data:
-    #       grouped_normalized_data = pd.concat([grouped_normalized_data, group_data])
-
+       
        # create windows and shift 
-       window_features, window_labels = window_maker(normalized_data, window_length, shift) # 50% overlapping
+       window_features, window_labels = window_maker(normalized_data, is_train_data, window_length, shift) # 50% overlapping
     
-       if int(user_number) in range(1,22):
+       if is_train_data:
         train_data = np.append(train_data, window_features, axis=0)
         train_labels = np.append(train_labels, window_labels, axis=0)
-       elif int(user_number) in range(22,28):
+       elif is_test_data:
         test_data = np.append(test_data, window_features, axis=0)
         test_labels = np.append(test_labels, window_labels, axis=0)
-       elif int(user_number) in range(28,31):
+       elif is_val_data:
         val_data = np.append(val_data, window_features, axis=0)
         val_labels = np.append(val_labels, window_labels, axis=0)
 
