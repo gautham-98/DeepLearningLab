@@ -4,6 +4,7 @@ from absl import app, flags
 from utils import utils_params, utils_misc
 import warnings
 import tensorflow as tf 
+import wandb
 
 from models.architectures import model1_LSTM
 from train import Trainer
@@ -33,6 +34,10 @@ def main(argv):
     if tfrecords.make_tfrecords():
         logging.info("TF Records Created")
 
+        # setup wandb
+    wandb.init(project='diabetic-retinopathy', name=run_paths['path_model_id'],
+            config=utils_params.gin_config_to_readable_dictionary(gin.config._CONFIG))
+    
     # load the dataset
     ds_train, ds_val, ds_test, ds_info, class_weights = datasets.load(name="har", data_dir=gin.query_parameter('make_tfrecords.target_dir'))
     logging.info(f"[DATASET loaded!] {ds_info}")
