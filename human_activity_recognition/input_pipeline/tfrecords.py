@@ -8,6 +8,28 @@ from sklearn.utils import shuffle
 import re
 import matplotlib.pyplot as plt
 
+
+# tf.window() does not create exact window_size samples, so we need to define out own custom window maker. 
+# below is another function that makes the use of tf.window() function
+def custom_window_maker(data, window_size, shift):
+  features=[]
+  labels=[]
+  for i in range(0, int(data.shape[0]/shift) -1):
+    start = i*shift
+    end = i*shift + window_size
+    one_window = data[start:end].values
+    one_window_features = one_window[:, :-1]
+    one_window_labels = one_window[:, -1]
+    label = mode(one_window_labels, keepdims=False).mode
+    features.append(one_window_features)
+    labels.append(label)
+  features = np.array(features)
+  labels = np.array(labels)
+  labels = np.expand_dims(labels, axis=1)
+  return (features, labels)
+  
+
+# --- deprecated
 def window_maker(data, is_train_data, window_size, shift, low_limit=0):
   features_list = []
   labels_list = []
@@ -114,13 +136,6 @@ def make_tfrecords(data_dir, target_dir, window_length, shift):
 
     # resample
     # TODO
-    count = np.zeros(shape=[13])
-    for window, label in zip(train_data, train_labels):
-       count[int(label)]+=1
-
-    for label in range(13):
-       print(f'label: {label}')
-       print(count[int(label)])
     # delete unlabelled data
     train_data, train_labels = delete_no_activity(train_data, train_labels)
     test_data, test_labels = delete_no_activity(test_data, test_labels)

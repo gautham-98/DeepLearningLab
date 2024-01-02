@@ -13,7 +13,7 @@ prepare.caching = False
 prepare.shuffle_buffer = 5000
 
 #Trainer
-Trainer.total_steps = 10000
+Trainer.total_steps = 3000
 Trainer.log_interval = 50
 Trainer.ckpt_interval = 50
 Trainer.learning_rate = 0.001

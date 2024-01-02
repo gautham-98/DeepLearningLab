@@ -14,7 +14,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', True, 'Specify whether to train  model.')
+flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
 flags.DEFINE_boolean('eval', False, 'Specify whether to evaluate  model.')
 flags.DEFINE_string('model_name', 'model1_LSTM', 'Choose model to train. Default model cnn')
 
@@ -34,12 +34,14 @@ def main(argv):
         logging.info("TF Records Created")
 
     # load the dataset
-    ds_train, ds_val, ds_test, ds_info, class_weights = datasets.load( name="har", data_dir=gin.query_parameter('make_tfrecords.target_dir'))
+    ds_train, ds_val, ds_test, ds_info, class_weights = datasets.load(name="har", data_dir=gin.query_parameter('make_tfrecords.target_dir'))
     logging.info(f"[DATASET loaded!] {ds_info}")
 
+    window_length = gin.query_parameter('make_tfrecords.window_length')
+    
     # model
     if FLAGS.model_name == 'model1_LSTM':
-        model = model1_LSTM()
+        model = model1_LSTM(window_length=window_length)
 
     if FLAGS.train:
         # set loggers
