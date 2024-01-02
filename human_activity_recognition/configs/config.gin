@@ -1,19 +1,17 @@
-#model
-model1_LSTM.input_shape = (120,6)
 
 
 # tfrecords
 make_tfrecords.data_dir = "/home/data/HAPT_dataset/RawData/"
 make_tfrecords.target_dir = "./tf_records_har/"
-make_tfrecords.window_length = 120
-make_tfrecords.shift = 60
+make_tfrecords.window_length = 250
+make_tfrecords.shift = 125
 
 prepare.batch_size = 32
 prepare.caching = False
 prepare.shuffle_buffer = 32
 
 #Trainer
-Trainer.total_steps = 10000
+Trainer.total_steps = 3000
 Trainer.log_interval = 50
 Trainer.ckpt_interval = 50
 Trainer.learning_rate = 0.001
