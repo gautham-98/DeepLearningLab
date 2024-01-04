@@ -8,16 +8,22 @@ model1_LSTM.dropout_rate=0.35
 
 # tfrecords
 make_tfrecords.data_dir = "/home/data/HAPT_dataset/RawData/"
-make_tfrecords.target_dir = "./tf_records_har/"
+make_tfrecords.target_dir = "./tfrecords_hapt/"
 make_tfrecords.window_length = 100
 make_tfrecords.shift = 50
+
+# tfrecords RW har 2016
+make_tfrecords_rwhar.data_dir = "/home/data/realworld2016_dataset/"
+make_tfrecords_rwhar.target_dir = "./tfrecords_rwhar/chest/"  
+make_tfrecords_rwhar.window_length = 250
+make_tfrecords_rwhar.shift = 125
 
 prepare.batch_size = 500
 prepare.caching = False
 prepare.shuffle_buffer = 5000
 
 #Trainer
-Trainer.total_steps = 3000
+Trainer.total_steps = 1000
 Trainer.log_interval = 50
 Trainer.ckpt_interval = 50
 Trainer.learning_rate = 0.001
@@ -25,3 +31,6 @@ Trainer.learning_rate = 0.001
 # log wandb
 evaluate.log_wandb=True
 Trainer.log_wandb=True
+
+# evaluate
+# evaluate.ckpt_path = "/home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-01-04T23-19-10-880422/ckpts"
