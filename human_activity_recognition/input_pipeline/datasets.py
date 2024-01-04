@@ -19,6 +19,18 @@ def read_tfrecords(record):
 
 @gin.configurable
 def load(name, data_dir):
+    if name == "hapt":
+        logging.info(f"Preparing dataset {name}...")
+        train_raw = tf.data.TFRecordDataset(data_dir + "train.tfrecords")
+        test_raw = tf.data.TFRecordDataset(data_dir + "test.tfrecords")
+        val_raw = tf.data.TFRecordDataset(data_dir + "val.tfrecords")
+
+        decoded_train = train_raw.map(read_tfrecords)
+        decoded_test = test_raw.map(read_tfrecords)
+        decoded_val = val_raw.map(read_tfrecords)
+
+        return prepare(decoded_train, decoded_test, decoded_val, "hapt")
+    
     if name == "har":
         logging.info(f"Preparing dataset {name}...")
         train_raw = tf.data.TFRecordDataset(data_dir + "train.tfrecords")
@@ -30,6 +42,7 @@ def load(name, data_dir):
         decoded_val = val_raw.map(read_tfrecords)
 
         return prepare(decoded_train, decoded_test, decoded_val, "har")
+
     
 
 @gin.configurable
