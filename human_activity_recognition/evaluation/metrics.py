@@ -2,12 +2,13 @@ import tensorflow as tf
 
 class ConfusionMatrix(tf.keras.metrics.Metric):
 
-    def __init__(self, name="confusion_matrix", **kwargs):
-        super(ConfusionMatrix, self).__init__(name=name, **kwargs)
-        self.ConfusionMat = self.add_weight("confusion_matrix", (12, 12), dtype=tf.int32, initializer="zeros")
+    def __init__(self,n_classes ,name="confusion_matrix" ,**kwargs):
+        super(ConfusionMatrix, self).__init__(name=name ,**kwargs)
+        self.ConfusionMat = self.add_weight("confusion_matrix", (n_classes, n_classes), dtype=tf.int32, initializer="zeros")
+        self.n_classes = n_classes
 
     def update_state(self, y_true, y_pred):
-        mtx = tf.math.confusion_matrix(y_true, y_pred, num_classes=12)
+        mtx = tf.math.confusion_matrix(y_true, y_pred, num_classes=self.n_classes)
         self.ConfusionMat.assign_add(mtx)
 
     def reset_state(self):
