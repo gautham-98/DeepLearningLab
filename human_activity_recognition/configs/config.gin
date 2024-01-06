@@ -6,6 +6,25 @@ model1_LSTM.dense_units=16
 model1_LSTM.lstm_cells=128
 model1_LSTM.dropout_rate=0.35
 
+# model_bidirectional_LSTM
+model_bidirectional_LSTM.lstm_cells = 32
+model_bidirectional_LSTM.num_lstm=3
+model_bidirectional_LSTM.dense_units=16
+model_bidirectional_LSTM.dropout_rate=0.35
+
+#model1_GRU function
+model1_GRU.num_gru = 3
+model1_GRU.gru_cells = 32
+model1_GRU.dense_units = 16
+model1_GRU.dropout_rate = 0.35
+
+#1D convolutional
+model1D_Conv.num_conv_layers = 2
+model1D_Conv.filters = 64
+model1D_Conv.kernel_size = 3
+model1D_Conv.dense_units = 16
+model1D_Conv.dropout_rate = 0.35
+
 # tfrecords
 make_tfrecords.data_dir = "/home/data/HAPT_dataset/RawData/"
 make_tfrecords.target_dir = "./tfrecords_hapt/"
@@ -21,9 +40,10 @@ make_tfrecords_rwhar.shift = 125
 prepare.batch_size = 500
 prepare.caching = False
 prepare.shuffle_buffer = 5000
+prepare.generate_class_weights = True
 
 #Trainer
-Trainer.total_steps = 1000
+Trainer.total_steps = 2000
 Trainer.log_interval = 50
 Trainer.ckpt_interval = 50
 Trainer.learning_rate = 0.001
