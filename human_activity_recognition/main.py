@@ -5,8 +5,10 @@ from utils import utils_params, utils_misc
 import warnings
 import tensorflow as tf 
 import wandb
+import numpy as np
 
-from models.architectures import model1_LSTM
+
+from models.architectures import model1_LSTM, model_bidirectional_LSTM, model1_GRU, model1D_Conv
 from train import Trainer
 from evaluation.eval import evaluate
 
@@ -15,11 +17,12 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
-flags.DEFINE_boolean('eval', False, 'Specify whether to evaluate  model.')
-flags.DEFINE_string('model_name', 'model1_LSTM', 'Choose model to train. Default model cnn')
-flags.DEFINE_boolean('hapt', False, 'hapt dataset' ) # UCI HAR dataset
+flags.DEFINE_boolean('train', True, 'Specify whether to train  model.')
+flags.DEFINE_boolean('eval', True, 'Specify whether to evaluate  model.')
+flags.DEFINE_string('model_name', 'model1_LSTM', 'Choose model to train. Default model model1_LSTM')
+flags.DEFINE_boolean('hapt', True, 'hapt dataset' ) # UCI HAR dataset
 flags.DEFINE_boolean('har', False, 'har dataset' )  # real world har dataset
+flags.DEFINE_boolean('createTFliteModel', True, 'create TFlite model')
 
 
 def main(argv):
@@ -64,6 +67,14 @@ def main(argv):
     # model
     if FLAGS.model_name == 'model1_LSTM':
         model = model1_LSTM(window_length=window_length, n_classes=n_classes)
+    elif FLAGS.model_name == 'model_bidirectional_LSTM':
+        model = model_bidirectional_LSTM(window_length=window_length, n_classes=n_classes)
+    elif FLAGS.model_name == 'model1_GRU':
+        model = model1_GRU(window_length=window_length, n_classes=n_classes)
+    elif FLAGS.model_name == 'model1D_Conv':
+        model = model1D_Conv(window_length=window_length, n_classes=n_classes)
+
+    
 
     if FLAGS.train:
         # set loggers
@@ -78,6 +89,22 @@ def main(argv):
         utils_misc.set_loggers(run_paths['path_logs_eval'], logging.INFO)
         logging.info(f"Starting model evaluation...")
         evaluate(model, ds_test, ds_info)
+
+    if FLAGS.createTFliteModel:
+        run_model = tf.function(lambda x: model(x))
+        batch_size = 1
+        input_size = 6
+        concrete_func = run_model.get_concrete_function(tf.TensorSpec([batch_size, window_length, input_size], model.inputs[0].dtype))
+
+        # model directory.
+        model_dir = "./TFlite_model"
+        model.save(model_dir, save_format="tf", signatures=concrete_func)
+
+        converter = tf.lite.TFLiteConverter.from_saved_model(model_dir)
+        tflite_model = converter.convert()
+        with open(model_dir+"/model.tflite", "wb") as f:
+            f.write(tflite_model)
+
 
 
 if __name__ == '__main__':
