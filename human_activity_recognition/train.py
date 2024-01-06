@@ -26,7 +26,11 @@ class Trainer(object):
             logging.info(f"Initializing from scratch. Checkpoints stored in {run_paths['path_ckpts_train']}")
 
         # Loss objective
-        self.loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True, reduction='none')
+        if class_weights is not None:
+            self.loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True, reduction='none')
+        else:
+            self.loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+
         self.class_weights = class_weights
         self.learning_rate = learning_rate
         self.optimizer = tf.keras.optimizers.Adam(learning_rate = self.learning_rate)
@@ -50,13 +54,12 @@ class Trainer(object):
 
     @tf.function
     def train_step(self, sequences, labels):
-        class_weights = tf.convert_to_tensor(self.class_weights, dtype=tf.float32)
         with tf.GradientTape() as tape:
             predictions = self.model(sequences, training=True)
             loss = self.loss_object(labels, predictions)
-            if class_weights is not None:
+            if self.class_weights is not None:
+                class_weights = tf.convert_to_tensor(self.class_weights, dtype=tf.float32)
                 loss = loss * tf.gather(class_weights, labels)
-            loss = tf.reduce_mean(loss)
         gradients = tape.gradient(loss, self.model.trainable_variables)
         self.optimizer.apply_gradients(zip(gradients, self.model.trainable_variables))
 
@@ -66,9 +69,12 @@ class Trainer(object):
     @tf.function
     def val_step(self, sequences, labels):
         predictions = self.model(sequences, training=False)
-        t_loss = self.loss_object(labels, predictions)
-        
-        self.val_loss(t_loss)
+        loss = self.loss_object(labels, predictions)
+        if self.class_weights is not None:
+            class_weights = tf.convert_to_tensor(self.class_weights, dtype=tf.float32)
+            loss = loss * tf.gather(class_weights, labels)
+    
+        self.val_loss(loss)
         self.val_accuracy(labels, predictions)
 
     def train(self):
