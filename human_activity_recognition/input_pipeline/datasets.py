@@ -29,7 +29,7 @@ def load(name, data_dir):
         decoded_test = test_raw.map(read_tfrecords)
         decoded_val = val_raw.map(read_tfrecords)
 
-        return prepare(decoded_train, decoded_test, decoded_val, "hapt")
+        return prepare(decoded_train, decoded_val, decoded_test, "hapt")
     
     if name == "har":
         logging.info(f"Preparing dataset {name}...")
@@ -41,12 +41,12 @@ def load(name, data_dir):
         decoded_test = test_raw.map(read_tfrecords)
         decoded_val = val_raw.map(read_tfrecords)
 
-        return prepare(decoded_train, decoded_test, decoded_val, "har")
+        return prepare(decoded_train, decoded_val, decoded_test, "har")
 
     
 
 @gin.configurable
-def prepare(ds_train, ds_val, ds_test, ds_info, batch_size, caching, shuffle_buffer=32):
+def prepare(ds_train, ds_val, ds_test, ds_info, batch_size, caching, shuffle_buffer=32, generate_class_weights=False):
     # Prepare training dataset
     ds_train = ds_train.map(
         preprocess, num_parallel_calls=tf.data.experimental.AUTOTUNE)
@@ -54,7 +54,10 @@ def prepare(ds_train, ds_val, ds_test, ds_info, batch_size, caching, shuffle_buf
         ds_train = ds_train.cache()
     # computations for class weights
     labels = [tf.squeeze(feature_label_pair[1]).numpy() for feature_label_pair in ds_train]
-    class_weights = class_weight.compute_class_weight('balanced', classes=np.unique(labels), y=labels)
+    if generate_class_weights:
+        class_weights = class_weight.compute_class_weight('balanced', classes=np.unique(labels), y=labels)
+    else:
+        class_weights = None
     # prepare the data
     ds_train = ds_train.shuffle(shuffle_buffer)
     ds_train = ds_train.batch(batch_size)
