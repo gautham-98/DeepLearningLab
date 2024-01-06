@@ -7,6 +7,7 @@ import numpy as np
 from sklearn.utils import shuffle
 import re
 import matplotlib.pyplot as plt
+import sys
 
 
 labels = {
@@ -87,7 +88,8 @@ def read_individually(filepath, bodypart, label):
       if label in e and g:
         acc_df = pd.read_csv(filepath+e)
         gyr_df = pd.read_csv(filepath+g)
-        acc_gyr_combined = pd.concat([acc_df, gyr_df], axis=1)
+        # acc_gyr_combined = pd.concat([acc_df, gyr_df], axis=1)
+        acc_gyr_combined = pd.merge(acc_df, gyr_df, left_on='attr_time', right_on='attr_time')
         acc_gyr_combined['label'] = labels[label]
         df.append(acc_gyr_combined)
   return df
@@ -132,11 +134,11 @@ def make_tfrecords_rwhar(data_dir, target_dir, window_length, shift, bodypart):
     train_users = [1,2,5,8,11,12,13,15]
     val_user = [3]
     test_user = [9,10]
-    train_data = np.empty(shape=(0, 250, 6))
+    train_data = np.empty(shape=(0, window_length, 6))
     train_labels = np.empty(shape = (0,1))
-    val_data = np.empty(shape=(0, 250, 6))
+    val_data = np.empty(shape=(0, window_length, 6))
     val_labels = np.empty(shape = (0,1))
-    test_data = np.empty(shape=(0, 250, 6))
+    test_data = np.empty(shape=(0, window_length, 6))
     test_labels = np.empty(shape = (0,1))
     for proband in file_list:
         if 'proband' in proband:
@@ -144,15 +146,15 @@ def make_tfrecords_rwhar(data_dir, target_dir, window_length, shift, bodypart):
             user_id = int(''.join(c for c in proband if c.isdigit()))
             proband_data = get_one_proband_data(filepath, bodypart)
             data = pd.concat(proband_data, axis=0, ignore_index=True)
-            data.columns = ["id_acc","attr_time_acc","acc_x", "acc_y", "acc_z","id_gyr","attr_time_gyr" ,"gyr_x", "gyr_y", "gyr_z", "label"]
+            data.columns = ["id_acc","attr_time","acc_x", "acc_y", "acc_z","id_gyr","gyr_x", "gyr_y", "gyr_z", "label"]
             data_cleaned = data.dropna()
-            data_cleaned.drop(["id_acc", "attr_time_acc", "id_gyr", "attr_time_gyr"],axis=1, inplace=True)
+            data_cleaned.drop(["id_acc", "attr_time", "id_gyr"],axis=1, inplace=True)
             to_normalize = data_cleaned.drop(["label"], axis=1)
-            normalized_data = zscore(to_normalize)
+            normalized_data = zscore(to_normalize, axis=0)
             normalized_data['label'] = data_cleaned['label']
             normalized_data = normalized_data.iloc[250:-250]
             is_train_data = (user_id in train_users)
-            window_features, window_labels = window_maker(normalized_data, is_train_data, 250, 125)
+            window_features, window_labels = window_maker(normalized_data, is_train_data, window_length, shift)
             if user_id in train_users:
               train_data= np.append(train_data, window_features, axis=0)
               train_labels= np.append(train_labels, window_labels, axis=0)
@@ -162,7 +164,7 @@ def make_tfrecords_rwhar(data_dir, target_dir, window_length, shift, bodypart):
             if user_id in test_user:
               test_data= np.append(test_data, window_features, axis=0)
               test_labels= np.append(test_labels, window_labels, axis=0)
-            print(f"Loaded user {user_id} with features shape {window_features.shape} labels shape {window_labels.shape}")
+            print(f"Loaded user {user_id} with features shape {window_features.shape} labels shape {window_labels.shape}")  
     
     train_data, train_labels = resample_data(train_data, train_labels)
 
