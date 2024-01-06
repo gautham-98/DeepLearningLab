@@ -9,6 +9,7 @@ import re
 import matplotlib.pyplot as plt
 
 
+
 # tf.window() does not create exact window_size samples, so we need to define out own custom window maker. 
 # below is another function that makes the use of tf.window() function
 def custom_window_maker(data, window_size, shift):
@@ -55,7 +56,20 @@ def window_maker(data, is_train_data, window_size, shift, low_limit=0):
   labels_list = np.expand_dims(np.array(labels_list), axis=1)
   return features_list, labels_list
 
+def resample_data(features, labels):
+    features_resampled = np.empty((0, features.shape[1], features.shape[2]))
+    labels_resampeld = np.empty((0, labels.shape[1]))
+    activities, activity_counts = np.unique(labels, return_counts=True)
+    max_act = np.max(activity_counts)
+    for activity in activities:
+        activity_indices = np.where(labels == activity)[0]
+        indices = np.random.choice(activity_indices, size=max_act, replace=True)
+        labels_resampeld = np.append(labels_resampeld, labels[indices], axis=0)
+        features_resampled = np.append(features_resampled, features[indices], axis=0)
 
+    return features_resampled, labels_resampeld 
+
+   
 @gin.configurable
 def make_tfrecords(data_dir, target_dir, window_length, shift):
     if os.path.exists(target_dir):
@@ -121,7 +135,7 @@ def make_tfrecords(data_dir, target_dir, window_length, shift):
        normalized_data = normalized_data.iloc[250:-250]
        
        # create windows and shift 
-       window_features, window_labels = window_maker(normalized_data, is_train_data, window_length, shift) # 50% overlapping
+       window_features, window_labels = window_maker(normalized_data, is_train_data, window_length, shift) # overlapping as per config.gin
     
        if is_train_data:
         train_data = np.append(train_data, window_features, axis=0)
@@ -133,13 +147,13 @@ def make_tfrecords(data_dir, target_dir, window_length, shift):
         val_data = np.append(val_data, window_features, axis=0)
         val_labels = np.append(val_labels, window_labels, axis=0)
 
-
-    # resample
-    # TODO
-    # delete unlabelled data
+    # delete unlabelled data 
     train_data, train_labels = delete_no_activity(train_data, train_labels)
     test_data, test_labels = delete_no_activity(test_data, test_labels)
     val_data, val_labels = delete_no_activity(val_data, val_labels)
+
+    # resample data
+    train_data, train_labels = resample_data(train_data, train_labels)
 
     # shuffle
     train_data, train_labels = shuffle(train_data, train_labels)
