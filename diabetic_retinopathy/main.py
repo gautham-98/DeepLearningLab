@@ -9,6 +9,7 @@ from evaluation.eval import evaluate
 from input_pipeline import datasets
 from utils import utils_params, utils_misc
 from models.architectures import vgg_like, cnn_1, cnn_se, transfer_model
+from ensemble_learning import EnsembleModel
 from input_pipeline import tfrecords
 
 FLAGS = flags.FLAGS
@@ -45,12 +46,16 @@ def main(argv):
         model = cnn_1()
     elif FLAGS.model_name == "vgg":
         model = vgg_like()
+    elif FLAGS.model_name == "ensemble_model":
+        ensemble_model = EnsembleModel(type='hard')
+        model = ensemble_model()
+    model.summary()
 
     if FLAGS.train:
         # set loggers
         utils_misc.set_loggers(run_paths['path_logs_train'], logging.INFO)
         logging.info("Starting model training...")
-        model.summary()
+        
         trainer = Trainer(model, ds_train, ds_val, ds_info, run_paths)
         #trainer = TransferTrainer(model, base_model, ds_train, ds_val, ds_info, run_paths)
         for _ in trainer.train():
@@ -62,7 +67,7 @@ def main(argv):
         logging.info(f"Starting model evaluation...")
         evaluate(model,
                 ds_test,
-                ds_info,
+                ds_info
                 )
 
     if FLAGS.deep_visu:

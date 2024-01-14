@@ -2,7 +2,6 @@
 
 #Transfer Model Parameters
 transfer_model.input_shape = (256,256,3)
-transfer_model.filters = 8
 transfer_model.dense_units = 10
 transfer_model.dropout_rate = 0.3
 transfer_model.base_model_name = 'InceptionV3'
@@ -50,7 +49,7 @@ vgg_block.kernel_size = (3, 3)
 vgg_like.n_classes = 2
 vgg_like.base_filters = 4
 vgg_like.n_blocks = 4
-vgg_like.dense_units = 64
+vgg_like.dense_units = 64   
 vgg_like.dropout_rate = 0.486
 
 # Training
@@ -104,6 +103,21 @@ preprocess_image.with_bens = True
 
 # Evaluation checkpoint path
 # evaluate.ckpt_path = "/home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts"
+
+#Ensemble learning
+EnsembleModel.models = ['cnn_se', 
+                            'cnn_1', 
+                            'DenseNet121', 
+                            'InceptionV3', 
+                            'InceptionResnet'
+                            ]
+EnsembleModel.ckpt_paths = ['/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments/run_2023-12-17T14-33-38-798134/ckpts',
+                                '/home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-13T20-55-13-184676/ckpts',
+                                '/home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts',
+                                '/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments/run_2023-12-17T12-21-21-868527/ckpts',
+                                '/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments/run_2023-12-17T13-23-51-249155/ckpts'
+                                ]
+EnsembleModel.input_shape = (256,256,3)
 
 # wandb logging
 evaluate.log_wandb = True
