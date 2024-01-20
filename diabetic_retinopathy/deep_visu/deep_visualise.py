@@ -11,6 +11,7 @@ import wandb
 from datetime import datetime
 from deep_visu.grad_cam import GradCam
 from deep_visu.integrated_gradients import Integrated_gradients
+from deep_visu.guided_backprop import GuidedBackprop
 from input_pipeline.tfrecords import preprocess_image, convert_to_binary
 from input_pipeline.preprocessing import preprocess
 import matplotlib.pyplot as plt
@@ -77,8 +78,8 @@ class DeepVisualize:
         return image
     
 
-    def plot(self, img,grad_img, int_grad_img, label, path):
-        fig, axs = plt.subplots(nrows=2, ncols=2, squeeze=False, figsize=(8, 8))
+    def plot(self, img,grad_img, int_grad_img,guided_bp ,label, path):
+        fig, axs = plt.subplots(nrows=2, ncols=3, squeeze=False, figsize=(8, 8))
         fig.suptitle(f"Deep Viz outputs\n Label: {label}", fontsize=10)
 
         axs[0, 0].set_title('Original Image')
@@ -89,6 +90,10 @@ class DeepVisualize:
         axs[0, 1].imshow(grad_img)
         axs[0, 1].axis('off')
 
+        axs[0, 2].set_title('Guided Backprop')
+        axs[0, 2].imshow(guided_bp)
+        axs[0, 2].axis('off')
+
         axs[1, 0].set_title('Integrated Gradient')
         axs[1, 0].imshow(int_grad_img, cmap=plt.cm.inferno)
         axs[1, 0].axis('off')
@@ -97,6 +102,9 @@ class DeepVisualize:
         axs[1, 1].imshow(int_grad_img, cmap=plt.cm.inferno)
         axs[1, 1].imshow(img, alpha=0.4)
         axs[1, 1].axis('off')
+
+        axs[1, 2].axis('off')
+  
 
         plt.tight_layout()
         plt.savefig(path)
@@ -133,22 +141,27 @@ class DeepVisualize:
 
         gradcam = GradCam(self.model, self.layer_name)
         int_grad = Integrated_gradients(self.model)
+        guided_backprop = GuidedBackprop(self.model)
         
         # deep viz for train_images
         for i, (image, label) in enumerate(ds_train):
             img_name = f"deep_viz_{self.image_list_train[i]}"
             grad_img = gradcam.apply_gradcam_one_image(image)
             int_grad_img = int_grad.apply_intgrad_one_image(image)
+            guided_backprop_img = guided_backprop.apply_guidedbackprop_one_image(image)
             save_path = os.path.join(train_dir, img_name)
-            _ = self.plot(image, grad_img=grad_img, int_grad_img=int_grad_img, label=label, path= save_path)
+            _ = self.plot(image, grad_img=grad_img, int_grad_img=int_grad_img, guided_bp = guided_backprop_img,\
+                          label=label, path= save_path)
 
         # deep viz for test images
         for i, (image, label) in enumerate(ds_test):
             img_name = f"deep_viz_{self.image_list_test[i]}"
             grad_img = gradcam.apply_gradcam_one_image(image)
             intgrad_img = int_grad.apply_intgrad_one_image(image)
+            guided_backprop_img = guided_backprop.apply_guidedbackprop_one_image(image)
             save_path = os.path.join(test_dir, img_name)
-            _ = self.plot(image, grad_img=grad_img, int_grad_img=intgrad_img, label=label, path=save_path)
+            _ = self.plot(image, grad_img=grad_img, int_grad_img=intgrad_img,guided_bp = guided_backprop_img,\
+                          label=label, path=save_path)
 
         logging.info(f"images saved in {deepviz_out_dir}")
         logging.info("\n=============== Deep Visualisation Completed ================")
