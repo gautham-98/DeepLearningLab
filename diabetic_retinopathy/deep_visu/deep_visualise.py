@@ -10,8 +10,10 @@ import wandb
 
 from datetime import datetime
 from deep_visu.grad_cam import GradCam
+from deep_visu.integrated_gradients import Integrated_gradients
 from input_pipeline.tfrecords import preprocess_image, convert_to_binary
 from input_pipeline.preprocessing import preprocess
+import matplotlib.pyplot as plt
 
 @gin.configurable
 class DeepVisualize:
@@ -29,6 +31,8 @@ class DeepVisualize:
             logging.info("No images specified from either test or train set. Specify files from both. Exiting run.")
             sys.exit(0)
 
+
+    # creates specific dataset which contains only labelled images from config.gin
     def create_dataset(self):
         labels_path = self.data_dir + "labels/"
         images_path = self.data_dir + "images/"
@@ -71,6 +75,33 @@ class DeepVisualize:
             image = preprocess_image(image, with_clahe=False, with_bens=False)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         return image
+    
+
+    def plot(self, img,grad_img, int_grad_img, label, path):
+        fig, axs = plt.subplots(nrows=2, ncols=2, squeeze=False, figsize=(8, 8))
+        fig.suptitle(f"Deep Viz outputs\n Label: {label}", fontsize=10)
+
+        axs[0, 0].set_title('Original Image')
+        axs[0, 0].imshow(img)
+        axs[0, 0].axis('off')
+
+        axs[0, 1].set_title('Gradcam')
+        axs[0, 1].imshow(grad_img)
+        axs[0, 1].axis('off')
+
+        axs[1, 0].set_title('Integrated Gradient')
+        axs[1, 0].imshow(int_grad_img, cmap=plt.cm.inferno)
+        axs[1, 0].axis('off')
+
+        axs[1, 1].set_title('Integrated Gradient (overlay)')
+        axs[1, 1].imshow(int_grad_img, cmap=plt.cm.inferno)
+        axs[1, 1].imshow(img, alpha=0.4)
+        axs[1, 1].axis('off')
+
+        plt.tight_layout()
+        plt.savefig(path)
+        return fig
+
 
     def visualize(self):
         logging.info("\n===============Starting Deep Visualisation================")
@@ -87,28 +118,38 @@ class DeepVisualize:
             checkpoint.restore(tf.train.latest_checkpoint(self.run_paths['path_ckpts_train']))
             logging.info(f"model loaded with checkpoint from {self.run_paths['path_ckpts_train']}")
 
-        output_dir = os.path.join(self.target_dir, 'gradcam_out')
+        output_dir = os.path.join(self.target_dir, 'deepviz_output')
         os.makedirs(output_dir, exist_ok=True)
 
         timestamp = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
         out_dir = f"out_at_{timestamp}"
-        gradcam_out_dir = self.target_dir + "gradcam_out/" + f"{out_dir}/"
-        os.makedirs(gradcam_out_dir)
+        deepviz_out_dir = self.target_dir + "deepviz_output/" + f"{out_dir}/"
+        os.makedirs(deepviz_out_dir)
 
-        train_dir = os.path.join(gradcam_out_dir, 'train')
+        train_dir = os.path.join(deepviz_out_dir, 'train')
         os.makedirs(train_dir)
-        test_dir = os.path.join(gradcam_out_dir, 'test')
+        test_dir = os.path.join(deepviz_out_dir, 'test')
         os.makedirs(test_dir)
 
-        logging.info("applying gradCAM")
-        gradcam_test = GradCam(self.model, self.layer_name, ds_test, images_test)
-        gradcam_train = GradCam(self.model, self.layer_name, ds_train, images_train)
+        gradcam = GradCam(self.model, self.layer_name)
+        int_grad = Integrated_gradients(self.model)
+        
+        # deep viz for train_images
+        for i, (image, label) in enumerate(ds_train):
+            img_name = f"deep_viz_{self.image_list_train[i]}"
+            grad_img = gradcam.apply_gradcam_one_image(image)
+            int_grad_img = int_grad.apply_intgrad_one_image(image)
+            save_path = os.path.join(train_dir, img_name)
+            _ = self.plot(image, grad_img=grad_img, int_grad_img=int_grad_img, label=label, path= save_path)
 
-        for gradcam_image, image_name, save_path  in gradcam_train.apply_gradcam(self.image_list_train, train_dir):
-            wandb.log({f"gradcam_train_image_{image_name}": wandb.Image(gradcam_image)})
-            tf.keras.preprocessing.image.save_img(save_path, gradcam_image)
-        for gradcam_image, image_name, save_path  in gradcam_test.apply_gradcam(self.image_list_test, test_dir):
-            wandb.log({f"gradcam_test_image_{image_name}": wandb.Image(gradcam_image)})
-            tf.keras.preprocessing.image.save_img(save_path, gradcam_image)
+        # deep viz for test images
+        for i, (image, label) in enumerate(ds_test):
+            img_name = f"deep_viz_{self.image_list_test[i]}"
+            grad_img = gradcam.apply_gradcam_one_image(image)
+            intgrad_img = int_grad.apply_intgrad_one_image(image)
+            save_path = os.path.join(test_dir, img_name)
+            _ = self.plot(image, grad_img=grad_img, int_grad_img=intgrad_img, label=label, path=save_path)
 
-        logging.info(f"images saved in {gradcam_out_dir}")
+        logging.info(f"images saved in {deepviz_out_dir}")
+        logging.info("\n=============== Deep Visualisation Completed ================")
+        
