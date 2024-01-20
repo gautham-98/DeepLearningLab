@@ -8,11 +8,9 @@ import cv2
 
 @gin.configurable
 class GradCam:
-    def __init__(self, model, layer_name, dataset, original_images, class_idx=None):
+    def __init__(self, model, layer_name,class_idx=None):
         self.model = model
         self.layer_name = layer_name
-        self.original_images = original_images
-        self.dataset = dataset
         self.class_idx = class_idx
         self.grad_model = tf.keras.models.Model(self.model.inputs,
                                                 [self.model.get_layer(name=self.layer_name).output, self.model.output])
@@ -51,6 +49,16 @@ class GradCam:
         return jet_heatmap
 
 
+    def apply_gradcam_one_image(self, image , alpha = 0.5):
+        ds_image = tf.expand_dims(image, axis=0)
+        heatmap = self.get_heatmap(ds_image)
+        ds_image = tf.squeeze(ds_image, axis=0)
+        jet_heatmap = self.get_jet_heatmap(heatmap, ds_image)
+        superimposed_img = jet_heatmap * alpha + ds_image * (1-alpha)
+        return superimposed_img
+
+
+    # ----------deprecated: apply gradcam for whole list of images: use above function instead that applys gradcam for one image
     def apply_gradcam(self, image_list, save_dir, alpha=0.5):
         for i, (ds_image, label) in enumerate(self.dataset):
             img_idx = image_list[i]
