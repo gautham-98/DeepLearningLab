@@ -45,7 +45,7 @@ class GradCam:
         jet_heatmap = tf.keras.utils.array_to_img(jet_heatmap)
         jet_heatmap = jet_heatmap.resize((image.shape[1], image.shape[0]))
         jet_heatmap = tf.keras.utils.img_to_array(jet_heatmap)
-        jet_heatmap = jet_heatmap/255.0
+        jet_heatmap = jet_heatmap/jet_heatmap.max()
         return jet_heatmap
 
 
