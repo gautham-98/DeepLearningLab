@@ -6,23 +6,25 @@ import warnings
 import tensorflow as tf 
 import wandb
 import numpy as np
+import sys
 
 
 from models.architectures import model1_LSTM, model_bidirectional_LSTM, model1_GRU, model1D_Conv
 from train import Trainer
 from evaluation.eval import evaluate
+from ensemble_learning import EnsembleModel
 
 # Ignore all FutureWarnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', True, 'Specify whether to train  model.')
-flags.DEFINE_boolean('eval', True, 'Specify whether to evaluate  model.')
-flags.DEFINE_string('model_name', 'model1_LSTM', 'Choose model to train. Default model model1_LSTM')
-flags.DEFINE_boolean('hapt', True, 'hapt dataset' ) # UCI HAR dataset
+flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
+flags.DEFINE_boolean('eval', False, 'Specify whether to evaluate  model.')
+flags.DEFINE_string('model_name', 'ensemble_model', 'Choose model to train. Default model model1_LSTM')
+flags.DEFINE_boolean('hapt', False, 'hapt dataset' ) # UCI HAR dataset
 flags.DEFINE_boolean('har', False, 'har dataset' )  # real world har dataset
-flags.DEFINE_boolean('createTFliteModel', True, 'create TFlite model')
+flags.DEFINE_boolean('createTFliteModel', False, 'create TFlite model')
 
 
 def main(argv):
@@ -73,14 +75,20 @@ def main(argv):
         model = model1_GRU(window_length=window_length, n_classes=n_classes)
     elif FLAGS.model_name == 'model1D_Conv':
         model = model1D_Conv(window_length=window_length, n_classes=n_classes)
+    elif FLAGS.model_name == 'ensemble_model':
+        ensemble_model = EnsembleModel(window_length=window_length, n_classes=n_classes, type='soft')
+        model = ensemble_model()
+    model.summary()
 
     
 
     if FLAGS.train:
+        if FLAGS.model_name == 'ensemble_model':
+            logging.error("Trying to train ensemble model, ensemble model cannot be trained.\n Load the checkpoints in config.gin to evaluate the ensemble model.")
+            sys.exit(1)
         # set loggers
         utils_misc.set_loggers(run_paths['path_logs_train'], logging.INFO)
         logging.info("Starting model training...")
-        model.summary()
         trainer = Trainer(model, ds_train, ds_val, ds_info, class_weights, run_paths)
         for _ in trainer.train():
             continue

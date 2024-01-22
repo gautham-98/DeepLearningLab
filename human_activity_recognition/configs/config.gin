@@ -48,6 +48,18 @@ Trainer.log_interval = 50
 Trainer.ckpt_interval = 50
 Trainer.learning_rate = 0.001
 
+#Ensemble learning
+EnsembleModel.models = ['model_bidirectional_LSTM', 
+                            'model1_LSTM', 
+                            'model1_GRU', 
+                            'model1D_Conv', 
+                            ]
+EnsembleModel.ckpt_paths = ['/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-01-22T20-58-14-923652/ckpts',
+                                '/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-01-22T20-55-33-660798/ckpts',
+                                '/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-01-22T21-00-29-076177/ckpts',
+                                '/home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-01-22T21-03-05-682011/ckpts',
+                                ]
+
 # log wandb
 evaluate.log_wandb=True
 Trainer.log_wandb=True

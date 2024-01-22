@@ -5,15 +5,8 @@ import logging
 
 from tensorflow.keras import regularizers
 from tensorflow.keras import layers
+from models.layers import one_lstm_layer, one_bidirectional_lstm_layer, one_gru_layer
 
-def one_lstm_layer(lstm_cells, dropout_rate):
-    return layers.LSTM(lstm_cells, dropout=dropout_rate,return_sequences=True)
-
-def one_bidirectional_lstm_layer(lstm_cells, dropout_rate):
-    return layers.Bidirectional(layers.LSTM(lstm_cells, dropout=dropout_rate, return_sequences=True))
-
-def one_gru_layer(gru_cells, dropout_rate):
-    return layers.GRU(gru_cells, dropout=dropout_rate, return_sequences=True)
 
 @gin.configurable
 def model_bidirectional_LSTM(window_length, num_lstm, dense_units, lstm_cells, n_classes, dropout_rate=0.3):
