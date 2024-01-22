@@ -2,6 +2,7 @@ import gin
 import logging
 from absl import app, flags
 import wandb
+import sys
 
 from deep_visu.deep_visualise import DeepVisualize
 from train import Trainer, TransferTrainer
@@ -52,6 +53,9 @@ def main(argv):
     model.summary()
 
     if FLAGS.train:
+        if FLAGS.model_name == 'ensemble_model':
+            logging.error("Trying to train ensemble model, ensemble model cannot be trained.\n Load the checkpoints in config.gin to evaluate the ensemble model.")
+            sys.exit(1)
         # set loggers
         utils_misc.set_loggers(run_paths['path_logs_train'], logging.INFO)
         logging.info("Starting model training...")
