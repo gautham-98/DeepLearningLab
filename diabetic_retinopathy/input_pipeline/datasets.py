@@ -13,15 +13,15 @@ from utils import utils_tfrecords
 def load(name, data_dir):
     if name == "idrid":
         logging.info(f"Preparing dataset {name}...")
-        ds_train_raw = tf.data.TFRecordDataset(data_dir + "train.tfrecords")
-        ds_test_raw = tf.data.TFRecordDataset(data_dir + "test.tfrecords")
-        ds_val_raw = tf.data.TFRecordDataset(data_dir + "validation.tfrecords")
+        train_raw = tf.data.TFRecordDataset(data_dir + "train.tfrecords")
+        test_raw = tf.data.TFRecordDataset(data_dir + "test.tfrecords")
+        val_raw = tf.data.TFRecordDataset(data_dir + "validation.tfrecords")
 
-        decoded_ds_train = ds_train_raw.map(utils_tfrecords.parse_and_decode_record)
-        decoded_ds_test = ds_test_raw.map(utils_tfrecords.parse_and_decode_record)
-        decoded_ds_val = ds_val_raw.map(utils_tfrecords.parse_and_decode_record)
+        ds_train = train_raw.map(utils_tfrecords.parse_and_decode_record)
+        ds_test = test_raw.map(utils_tfrecords.parse_and_decode_record)
+        ds_val = val_raw.map(utils_tfrecords.parse_and_decode_record)
 
-        return prepare(decoded_ds_train, decoded_ds_val, decoded_ds_test, "idrid_dataset")
+        return prepare(ds_train, ds_test, ds_val, "idrid")
 
     elif name == "eyepacs":
         logging.info(f"Preparing dataset {name}...")
