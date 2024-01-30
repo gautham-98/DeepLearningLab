@@ -6,6 +6,9 @@ import logging
 from tensorflow.keras import regularizers
 from tensorflow.keras import layers
 from models.layers import one_lstm_layer, one_bidirectional_lstm_layer, one_gru_layer
+from tensorflow import keras
+from tensorflow.keras import layers
+
 
 
 @gin.configurable
@@ -71,9 +74,6 @@ def model1_GRU(window_length, num_gru, dense_units, gru_cells, n_classes, dropou
     print(model.output_shape)
     
     return model
-
-from tensorflow import keras
-from tensorflow.keras import layers
 
 @gin.configurable
 def model1D_Conv(window_length, num_conv_layers, filters, kernel_size, dense_units, n_classes, dropout_rate=0.3):

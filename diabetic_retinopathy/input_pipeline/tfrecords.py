@@ -34,8 +34,8 @@ def make_tfrecords(data_dir, target_dir):
 
     df_train, df_val = train_test_split(df_train_val, test_size=0.2, shuffle=True)
 
-    df_train = resample_df(df_train)
-   # df_val = resample_df(df_val)
+    df_train = resample_(df_train)
+   # df_val = resample_(df_val)
 
     if not (os.path.isdir(IMAGES_PATH + 'train/') or IMAGES_PATH + 'test/'):
         logging.error(f"Path does not exist: {IMAGES_PATH}train/")
@@ -118,7 +118,7 @@ def convert_to_binary(df):
     return df
 
 
-def resample_df(df):
+def resample_(df):
     max_idx = df['Retinopathy grade'].value_counts().idxmax()
     total_samples = df['Retinopathy grade'].value_counts().max()
     df0 = df.loc[df['Retinopathy grade'] == 0]

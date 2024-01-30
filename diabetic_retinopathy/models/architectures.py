@@ -161,10 +161,6 @@ def cnn_se(input_shape, filters, kernel_size, strides, pool_size, dropout_rate, 
 @gin.configurable
 def transfer_model(input_shape, dense_units, dropout_rate,base_model_name="DenseNet121", model_name = 'transfer_model'):
 
-    """returns both the whole model and the base_model
-      further steps for making the layers trainable are
-      done by TransferTrainer"""
-
     inputs = Input(shape=input_shape)
     if base_model_name == 'InceptionResnet':
         base_model = tf.keras.applications.InceptionResNetV2(include_top=False,
