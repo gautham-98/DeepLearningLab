@@ -163,3 +163,4 @@ diabetic_retinopathy/good_performances/cnn_1/config.gin
 
 human_activity_recognition/wandb/latest-run
 human_activity_recognition/ideas
+human_activity_recognition/TFlite_model/model.tflite
