@@ -19,10 +19,10 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
-flags.DEFINE_boolean('eval', False, 'Specify whether to evaluate  model.')
-flags.DEFINE_string('model_name', 'ensemble_model', 'Choose model to train. Default model model1_LSTM')
-flags.DEFINE_boolean('hapt', False, 'hapt dataset' ) # UCI HAR dataset
+flags.DEFINE_boolean('train', True, 'Specify whether to train  model.')
+flags.DEFINE_boolean('eval', True, 'Specify whether to evaluate  model.')
+flags.DEFINE_string('model_name', 'model1_LSTM', 'Choose model to train. Default model model1_LSTM')
+flags.DEFINE_boolean('hapt', True, 'hapt dataset' ) # UCI HAR dataset
 flags.DEFINE_boolean('har', False, 'har dataset' )  # real world har dataset
 flags.DEFINE_boolean('createTFliteModel', False, 'create TFlite model')
 
@@ -44,6 +44,8 @@ def main(argv):
         data_dir = gin.query_parameter('make_tfrecords.target_dir')
         name="hapt"
         n_classes =12
+        activity_labels = ["walking", "walking_upstairs", "walking_downstairs", "sitting", "standing", "laying", "stand_to_sit", "sit_to_stand"\
+                     ,"sit_to_lie", "lie_to_sit", "stand_to_lie", "lie_to_stand"]
         window_length = gin.query_parameter('make_tfrecords.window_length')
 
 
@@ -54,10 +56,12 @@ def main(argv):
         data_dir=gin.query_parameter('make_tfrecords_rwhar.target_dir')
         name="har"
         n_classes = 8
+        activity_labels = ["climbingdown", "climbingup", "jumping", "lying", "standing"\
+                     ,"sitting", "running", "walking"]
         window_length = gin.query_parameter('make_tfrecords_rwhar.window_length')
 
         # setup wandb
-    wandb.init(project='diabetic-retinopathy', name=run_paths['path_model_id'],
+    wandb.init(project='human_activity_recognition', name=run_paths['path_model_id'],
             config=utils_params.gin_config_to_readable_dictionary(gin.config._CONFIG))
     
     # load the dataset
@@ -96,7 +100,7 @@ def main(argv):
         # set loggers
         utils_misc.set_loggers(run_paths['path_logs_eval'], logging.INFO)
         logging.info(f"Starting model evaluation...")
-        evaluate(model, ds_test, ds_info)
+        evaluate(model, ds_test, ds_info, activity_labels=activity_labels)
 
     if FLAGS.createTFliteModel:
         run_model = tf.function(lambda x: model(x))
@@ -112,7 +116,6 @@ def main(argv):
         tflite_model = converter.convert()
         with open(model_dir+"/model.tflite", "wb") as f:
             f.write(tflite_model)
-
 
 
 if __name__ == '__main__':
