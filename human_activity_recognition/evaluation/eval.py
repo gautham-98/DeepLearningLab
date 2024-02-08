@@ -11,7 +11,7 @@ import wandb
 from datetime import datetime
 
 @gin.configurable
-def evaluate(model, ds_test, ds_info,ckpt_path=False ,log_wandb=False):
+def evaluate(model, ds_test, ds_info,activity_labels,ckpt_path=False ,log_wandb=False):
     test_accuracy = tf.keras.metrics.SparseCategoricalAccuracy(name='test_accuracy')
     # Restore model to the latest checkpoint
     if ckpt_path:
@@ -56,15 +56,19 @@ def evaluate(model, ds_test, ds_info,ckpt_path=False ,log_wandb=False):
     logging.info("macro_f1_score: {:.2f}".format(macro_f1_score * 100))
 
     # Get curves
-    plot_confusion_mat(cm_result)
+    plot_confusion_mat(cm_result, activity_labels)
     logging.info("----Evaluation completed----")
     return
 
 
-def plot_confusion_mat(cm):
+def plot_confusion_mat(cm, activity_labels):
     index = datetime.now().strftime("%d-%m-%y_%H:%M:%S")
-    plt.figure(figsize=(6, 6))
+    plt.figure(figsize=(15, 15))
     sns.heatmap(cm, annot=True, fmt='d')
+    
+    # Set custom xticks and yticks
+    plt.xticks(ticks=range(len(activity_labels)), labels=activity_labels, rotation=60 )
+    plt.yticks(ticks=range(len(activity_labels)), labels=activity_labels, rotation=60)
     plt.title("Confusion Matrix")
     plt.ylabel("True")
     plt.xlabel("Predicted")
