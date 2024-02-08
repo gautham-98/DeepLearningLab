@@ -65,4 +65,4 @@ evaluate.log_wandb=True
 Trainer.log_wandb=True
 
 # evaluate
-# evaluate.ckpt_path = "/home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-01-04T23-19-10-880422/ckpts"
+# evaluate.ckpt_path = ""
