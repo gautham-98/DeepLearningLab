@@ -22,7 +22,7 @@ In the [batch.sh](/human_activity_recognition/batch.sh) file you can set various
 To run the code you can type the following command in terminal. **The train and evaluate flags are set to off by default. Make sure to provide the flags.** Details below. 
 
 ```
-sbatch batch.sh
+python3 main.py --train --eval --model_name "model1_LSTM" --hapt
 ```
 ## Datasets  
 The model can be trained on two datasets described above. You can choose between the datasets HAPT or HAR by providing the flags **--hapt** or **--har**
