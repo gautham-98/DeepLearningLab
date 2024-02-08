@@ -56,7 +56,7 @@ def train_func():
 # method: 'bayes', 'grid', 'random'
 sweep_config = {
     'name': 'hapt-LSTM-sweep1',
-    'method': 'random',
+    'method': 'bayes',
     'metric': {
         'name': 'val_acc',
         'goal': 'maximize'
