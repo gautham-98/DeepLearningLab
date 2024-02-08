@@ -68,6 +68,7 @@ def window_maker(data, is_train_data, window_size, shift, low_limit=0):
   return features_list, labels_list
 
 
+# this functions has acc and gyr data combined for each body part with the activity labels as last column
 def get_one_proband_data(filepath, bodypart):
   df=[]
   for l in labels:
@@ -77,6 +78,7 @@ def get_one_proband_data(filepath, bodypart):
       df.append(df_ind)
   return df
 
+# For a single proband - this functions read acc data and gyr data for each bodypart and combined them in one dataframe. 
 def read_individually(filepath, bodypart, label):
   df=[]
   file_list = os.listdir(filepath)
