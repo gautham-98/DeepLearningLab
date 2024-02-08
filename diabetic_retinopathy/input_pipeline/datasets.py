@@ -21,7 +21,7 @@ def load(name, data_dir):
         ds_test = test_raw.map(utils_tfrecords.parse_and_decode_record)
         ds_val = val_raw.map(utils_tfrecords.parse_and_decode_record)
 
-        return prepare(ds_train, ds_test, ds_val, "idrid")
+        return prepare(ds_train, ds_val, ds_test, "idrid")
 
     elif name == "eyepacs":
         logging.info(f"Preparing dataset {name}...")
