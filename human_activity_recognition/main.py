@@ -19,8 +19,8 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('train', True, 'Specify whether to train  model.')
-flags.DEFINE_boolean('eval', True, 'Specify whether to evaluate  model.')
+flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
+flags.DEFINE_boolean('eval', False, 'Specify whether to evaluate  model.')
 flags.DEFINE_string('model_name', 'model1_LSTM', 'Choose model to train. Default model model1_LSTM')
 flags.DEFINE_boolean('hapt', True, 'hapt dataset' ) # UCI HAR dataset
 flags.DEFINE_boolean('har', False, 'har dataset' )  # real world har dataset
