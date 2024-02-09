@@ -83,7 +83,7 @@ We ran each model 5 times to see the variation in accuracy. The metric shown her
 | Run 4 | 94.48 | 92.92 | 94.74 | 95.96 | 
 | Run 5 | 94.11 | 95.10 | 89.94 | 96.59 |
 
-| |Ensemble Type | Accuracy |
+| Ensemble Type | Accuracy |
 | :---: | :---: |
 | Hard Voting | 95.73 |
 | Soft Voting | 96.06 |
