@@ -22,7 +22,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_boolean('train', False, 'Specify whether to train  model.')
 flags.DEFINE_boolean('eval', False, 'Specify whether to evaluate  model.')
 flags.DEFINE_string('model_name', 'model1_LSTM', 'Choose model to train. Default model model1_LSTM')
-flags.DEFINE_boolean('hapt', True, 'hapt dataset' ) # UCI HAR dataset
+flags.DEFINE_boolean('hapt', False, 'hapt dataset' ) # UCI HAR dataset
 flags.DEFINE_boolean('har', False, 'har dataset' )  # real world har dataset
 flags.DEFINE_boolean('createTFliteModel', False, 'create TFlite model')
 
@@ -80,7 +80,7 @@ def main(argv):
     elif FLAGS.model_name == 'model1D_Conv':
         model = model1D_Conv(window_length=window_length, n_classes=n_classes)
     elif FLAGS.model_name == 'ensemble_model':
-        ensemble_model = EnsembleModel(window_length=window_length, n_classes=n_classes, type='soft')
+        ensemble_model = EnsembleModel(window_length=window_length, n_classes=n_classes)
         model = ensemble_model()
     model.summary()
 

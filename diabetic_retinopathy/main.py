@@ -48,7 +48,7 @@ def main(argv):
     elif FLAGS.model_name == "vgg":
         model = vgg_like()
     elif FLAGS.model_name == "ensemble_model":
-        ensemble_model = EnsembleModel(type='hard')
+        ensemble_model = EnsembleModel()
         model = ensemble_model()
     model.summary()
 

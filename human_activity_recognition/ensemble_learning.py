@@ -7,7 +7,7 @@ from models.layers import ModeLayer
 @gin.configurable
 class EnsembleModel:
     
-    def __init__(self, models, ckpt_paths, window_length, n_classes, type='soft'):
+    def __init__(self, models, ckpt_paths, window_length, n_classes, type='hard'):
         self.type = type 
         self.window_length = window_length
         self.n_classes = n_classes
