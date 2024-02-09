@@ -4,17 +4,17 @@
 transfer_model.input_shape = (256,256,3)
 transfer_model.dense_units = 10
 transfer_model.dropout_rate = 0.3
-transfer_model.base_model_name = 'InceptionV3'
+#transfer_model.base_model_name = 'InceptionV3'
 
 # cnn_1
 cnn_1.input_shape    = (256,256,3)
 cnn_1.filters        = (4, 8, 16, 32)
-cnn_1.kernel_size    = 7
+cnn_1.kernel_size    = 3
 cnn_1.strides        = (1, 1, 1, 1)
-cnn_1.pool_size      = 2
-cnn_1.dropout_rate   = 0.422
+cnn_1.pool_size      = 3
+cnn_1.dropout_rate   = 0.3
 cnn_1.dropout_blocks = (1, 2)
-cnn_1.maxpool_blocks = (2, 3)
+cnn_1.maxpool_blocks = (1, 2)
 
 ##cnn_se Model Parameters
 ##layers are as given (0, 1, 2, 3)
@@ -52,9 +52,13 @@ vgg_like.dense_units = 64
 vgg_like.dropout_rate = 0.486
 
 # Training
-Trainer.total_steps = 30000
-Trainer.log_interval = 13
-Trainer.ckpt_interval = 50
+#Trainer.total_steps = 3000 
+#Trainer.log_interval = 1000
+#Trainer.ckpt_interval = 50
+#Trainer.learning_rate = 0.0012
+Trainer.total_steps = 17000
+Trainer.log_interval = 10000
+Trainer.ckpt_interval = 1000
 Trainer.learning_rate = 0.001
 #Trainer.ckpt_path = 'home/RUS_CIP/st184914/dl-lab-23w-team10/experiments/run_2023-12-05T11-34-02-793743/ckpts'
 TransferTrainer.coarse_learning_rate = 0.001
@@ -83,12 +87,12 @@ preprocess_image.with_clahe = False
 preprocess_image.with_bens = False
 
 #Deep Visu
-#DeepVisualize.target_dir = './'
+DeepVisualize.target_dir = './'
 #DeepVisualize.chkpt = ''
-#DeepVisualize.layer_name = 'activation_3'
-#DeepVisualize.image_list_train = [5,6,7,8]
-#DeepVisualize.image_list_test = [15,57,87,32]
-#GradCam.class_idx = 1
+DeepVisualize.layer_name = 'activation_3'
+DeepVisualize.image_list_train = [5,6,7,8]
+DeepVisualize.image_list_test = [15,57,87,32]
+GradCam.class_idx = 1
 
 # Evaluation checkpoint path
 # evaluate.ckpt_path = "/home/RUS_CIP/st184584/dl-lab-23w-team10/experiments/run_2023-12-14T11-41-13-221007/ckpts"
