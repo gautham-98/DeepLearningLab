@@ -1,0 +1,144 @@
+2024-01-14 21:56:02.326149: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-01-14 21:56:03.029226: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+/usr/local/lib/python3.8/dist-packages/tensorflow_addons/utils/tfa_eol_msg.py:23: UserWarning: 
+
+TensorFlow Addons (TFA) has ended development and introduction of new features.
+TFA has entered a minimal maintenance and release mode until a planned end of life in May 2024.
+Please modify downstream libraries to take dependencies from other repositories in our TensorFlow community (e.g. Keras, Keras-CV, and Keras-NLP). 
+
+For more information see: https://github.com/tensorflow/addons/issues/2807 
+
+  warnings.warn(
+2024-01-14 21:56:04.423220: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-01-14 21:56:04.442359: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-01-14 21:56:04.442807: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+wandb: Currently logged in as: gauthammohan1998 (dl-lab-uni-stuttgart). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.0
+wandb: Run data is saved locally in /home/RUS_CIP/st184914/dl-lab-23w-team10/diabetic_retinopathy/wandb/run-20240114_215605-bkdpefnz
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments/run_2024-01-14T21-56-04-443363
+wandb: ⭐️ View project at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy
+wandb: 🚀 View run at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/runs/bkdpefnz
+I0114 21:56:05.997669 139728657364800 datasets.py:15] Preparing dataset idrid...
+2024-01-14 21:56:05.999951: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-01-14 21:56:06.000459: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-01-14 21:56:06.000870: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-01-14 21:56:06.076373: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-01-14 21:56:06.076785: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-01-14 21:56:06.077129: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-01-14 21:56:06.077454: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 9804 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:4b:00.0, compute capability: 7.5
+I0114 21:56:07.851699 139728657364800 architectures.py:155] cnn_se input shape:  (None, 256, 256, 3)
+I0114 21:56:07.851977 139728657364800 architectures.py:156] cnn_se output shape: (None, 2)
+I0114 21:56:07.929337 139728657364800 architectures.py:94] cnn_1 input shape:  (None, 256, 256, 3)
+I0114 21:56:07.929589 139728657364800 architectures.py:95] cnn_1 output shape: (None, 2)
+I0114 21:56:10.116566 139728657364800 architectures.py:207] transfer_model input shape:  (None, 256, 256, 3)
+I0114 21:56:10.116904 139728657364800 architectures.py:208] transfer_model output shape: (None, 2)
+I0114 21:56:11.655377 139728657364800 architectures.py:207] transfer_model input shape:  (None, 256, 256, 3)
+I0114 21:56:11.655709 139728657364800 architectures.py:208] transfer_model output shape: (None, 2)
+I0114 21:56:16.267765 139728657364800 architectures.py:207] transfer_model input shape:  (None, 256, 256, 3)
+I0114 21:56:16.268117 139728657364800 architectures.py:208] transfer_model output shape: (None, 2)
+WARNING:tensorflow:From /home/RUS_CIP/st184914/.local/lib/python3.8/site-packages/tensorflow/python/util/deprecation.py:648: calling map_fn_v2 (from tensorflow.python.ops.map_fn) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Use fn_output_signature instead
+W0114 21:56:21.186415 139728657364800 deprecation.py:569] From /home/RUS_CIP/st184914/.local/lib/python3.8/site-packages/tensorflow/python/util/deprecation.py:648: calling map_fn_v2 (from tensorflow.python.ops.map_fn) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Use fn_output_signature instead
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_9 (InputLayer)        [(None, 256, 256, 3)]        0         []                            
+                                                                                                  
+ cnn_se (Functional)         (None, 2)                    8281      ['input_9[0][0]']             
+                                                                                                  
+ cnn_1 (Functional)          (None, 2)                    35238     ['input_9[0][0]']             
+                                                                                                  
+ DenseNet121 (Functional)    (None, 2)                    7042647   ['input_9[0][0]']             
+                                                                                                  
+ InceptionV3 (Functional)    (None, 2)                    2181304   ['input_9[0][0]']             
+                                                          7                                       
+                                                                                                  
+ InceptionResnet (Functiona  (None, 2)                    5434443   ['input_9[0][0]']             
+ l)                                                       9                                       
+                                                                                                  
+ tf.nn.softmax (TFOpLambda)  (None, 2)                    0         ['cnn_se[0][0]']              
+                                                                                                  
+ tf.nn.softmax_1 (TFOpLambd  (None, 2)                    0         ['cnn_1[0][0]']               
+ a)                                                                                               
+                                                                                                  
+ tf.nn.softmax_2 (TFOpLambd  (None, 2)                    0         ['DenseNet121[0][0]']         
+ a)                                                                                               
+                                                                                                  
+ tf.nn.softmax_3 (TFOpLambd  (None, 2)                    0         ['InceptionV3[0][0]']         
+ a)                                                                                               
+                                                                                                  
+ tf.nn.softmax_4 (TFOpLambd  (None, 2)                    0         ['InceptionResnet[0][0]']     
+ a)                                                                                               
+                                                                                                  
+ tf.math.argmax (TFOpLambda  (None,)                      0         ['tf.nn.softmax[0][0]']       
+ )                                                                                                
+                                                                                                  
+ tf.math.argmax_1 (TFOpLamb  (None,)                      0         ['tf.nn.softmax_1[0][0]']     
+ da)                                                                                              
+                                                                                                  
+ tf.math.argmax_2 (TFOpLamb  (None,)                      0         ['tf.nn.softmax_2[0][0]']     
+ da)                                                                                              
+                                                                                                  
+ tf.math.argmax_3 (TFOpLamb  (None,)                      0         ['tf.nn.softmax_3[0][0]']     
+ da)                                                                                              
+                                                                                                  
+ tf.math.argmax_4 (TFOpLamb  (None,)                      0         ['tf.nn.softmax_4[0][0]']     
+ da)                                                                                              
+                                                                                                  
+ tf.stack (TFOpLambda)       (None, 5)                    0         ['tf.math.argmax[0][0]',      
+                                                                     'tf.math.argmax_1[0][0]',    
+                                                                     'tf.math.argmax_2[0][0]',    
+                                                                     'tf.math.argmax_3[0][0]',    
+                                                                     'tf.math.argmax_4[0][0]']    
+                                                                                                  
+ mode_layer (ModeLayer)      (None, 2)                    0         ['tf.stack[0][0]']            
+                                                                                                  
+==================================================================================================
+Total params: 83243652 (317.55 MB)
+Trainable params: 66628 (260.27 KB)
+Non-trainable params: 83177024 (317.30 MB)
+__________________________________________________________________________________________________
+I0114 21:56:21.255364 139728657364800 main.py:67] Starting model evaluation...
+2024-01-14 21:56:21.421267: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8600
+I0114 21:56:26.530709 139728657364800 eval.py:52] 
+====Results of Test set evaluation on model ====
+I0114 21:56:26.531180 139728657364800 eval.py:53] Confusion Matrix: [22 17] [ 2 62]
+I0114 21:56:26.531274 139728657364800 eval.py:54] Accuracy(balanced): 85.07
+I0114 21:56:26.531337 139728657364800 eval.py:55] Accuracy(Unbalanced): 81.55
+I0114 21:56:26.531506 139728657364800 eval.py:56] Accuracy(Sparse Categorical) 81.55
+I0114 21:56:26.531584 139728657364800 eval.py:57] sensitivity: 91.67
+I0114 21:56:26.531643 139728657364800 eval.py:58] specificity: 78.48
+I0114 21:56:26.531695 139728657364800 eval.py:59] recall: 91.67
+I0114 21:56:26.531753 139728657364800 eval.py:60] precision: 56.41
+I0114 21:56:26.531804 139728657364800 eval.py:61] f1_score: 69.84
+I0114 21:56:26.531900 139728657364800 eval.py:62] AUC 0.77
+I0114 21:56:26.686780 139728657364800 eval.py:68] ----Evaluation completed----
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+wandb: 
+wandb: Run history:
+wandb: test_balanced_accuracy █▅▁▁
+wandb:       test_sensitivity ██▁▂
+wandb:        test_sparse_acc █▄▂▁
+wandb:       test_specificity █▄▂▁
+wandb: 
+wandb: Run summary:
+wandb: test_balanced_accuracy 85.07384
+wandb:       test_sensitivity 0.91667
+wandb:        test_sparse_acc 81.5534
+wandb:       test_specificity 0.78481
+wandb: 
+wandb: 🚀 View run /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments/run_2024-01-14T21-56-04-443363 at: https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/runs/bkdpefnz
+wandb: ️⚡ View job at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjExOTQ3MTI5Nw==/version_details/v127
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240114_215605-bkdpefnz/logs

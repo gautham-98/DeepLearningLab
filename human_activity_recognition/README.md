@@ -98,6 +98,14 @@ The results particularly in this dataset is hard to reproduce. We have seen 15% 
 | Upperarm | 68.16 | 63.10 | 65.99 | 71.60 |
 | Waist | 65.33 | 72.08 | 73.27 | 72.45 |
 
+# Results - HAPT dataset on Ensemble Model 
+Two schemes of voting were tested with all the 4 models and the results are given below-  
+
+|  |Ensemble Type| Sparse Categorical Accuracy| 
+| :---: | :---: |  
+| Hard Voting | 95.73 | 
+| Soft Voting | 96.06 | 
+
 
 ## Converting the model into TFlite
 You can set *--tflite* flag to convert the trained model into tflite format which can be further used in any android application. This will generate a .tflite model and .pb file.  
