@@ -81,7 +81,9 @@ We ran each model 5 times to see the variation in accuracy. The metric shown her
 | Run 2 | 92.95 | 93.71 | 94.21 | 96.39 | 
 | Run 3 | 93.88 | 94.57 | 91.20 | 96.33 | 
 | Run 4 | 94.48 | 92.92 | 94.74 | 95.96 | 
-| Run 5 | 94.11 | 95.10 | 89.94 | 96.59 | 
+| Run 5 | 94.11 | 95.10 | 89.94 | 96.59 |
+|Ensemble Hard | 95.73 |
+|Ensemble Soft | 96.06 |
 
 
 # Results - HAR dataset
@@ -97,14 +99,6 @@ The results particularly in this dataset is hard to reproduce. We have seen 15% 
 | Thigh | 65.88 | 62.61 | 64.89 | 66.45 | 
 | Upperarm | 68.16 | 63.10 | 65.99 | 71.60 |
 | Waist | 65.33 | 72.08 | 73.27 | 72.45 |
-
-# Results - HAPT dataset on Ensemble Model 
-Two schemes of voting were tested with all the 4 models and the results are given below-  
-
-|  |Ensemble Type| Sparse Categorical Accuracy| 
-| :---: | :---: |  
-| Hard Voting | 95.73 | 
-| Soft Voting | 96.06 | 
 
 
 ## Converting the model into TFlite
