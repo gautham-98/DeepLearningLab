@@ -9,7 +9,6 @@ import tensorflow as tf
 import logging
 import gin
 from sklearn.model_selection import train_test_split
-from utils import utils_tfrecords
 from sklearn.utils import resample
 import sys
 
@@ -56,7 +55,6 @@ def record_writer(df, record_path, images_path):
         for index, row in df.iterrows():
             image = cv2.imread(images_path + row["Image name"] + ".jpg")
             preprocessed_image = preprocess_image(image)
-            #preprocessed_image = cv2.resize(image, (256, 256))
             label = row["Retinopathy grade"]
             tf_example = image_example(preprocessed_image, label)
             writer.write(tf_example.SerializeToString())
@@ -68,14 +66,20 @@ def image_example(image, label):
     """ Create the features dictionary - Adapted from tensorflow docs"""
     string_image = cv2.imencode('.jpg', image)[1].tobytes()
     feature = {
-        'label': utils_tfrecords.int64_feature(label),
-        'image_raw': utils_tfrecords.bytes_feature(string_image),
+        'label': tf.train.Feature(int64_list=tf.train.Int64List(value=[label])),
+        'image_raw': bytes_feature(string_image)
     }
 
     return tf.train.Example(features=tf.train.Features(feature=feature))
 
 
-#Preprocess will crop the image and resize the image
+def bytes_feature(value):
+    if isinstance(value, type(tf.constant(0))):
+        value = value.numpy()
+    return tf.train.Feature(bytes_list=tf.train.BytesList(value=[value]))
+
+
+#crop and resize the image
 def crop_image(image):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     _, threshold = cv2.threshold(gray, 15, 255, cv2.THRESH_BINARY)
@@ -102,10 +106,8 @@ def apply_clahe(image):
 def preprocess_image(image, with_clahe=False, with_bens=False):
     img_size = 256
     image = crop_image(image)
-
     if with_clahe:
         image = apply_clahe(image)
-    
     if with_bens:
         image = cv2.addWeighted (image,4, cv2.GaussianBlur( image , (0,0) ,img_size/30) ,-4 ,128)
 
@@ -118,6 +120,7 @@ def convert_to_binary(df):
     return df
 
 
+# we will resample only the minority class
 def resample_(df):
     max_idx = df['Retinopathy grade'].value_counts().idxmax()
     total_samples = df['Retinopathy grade'].value_counts().max()

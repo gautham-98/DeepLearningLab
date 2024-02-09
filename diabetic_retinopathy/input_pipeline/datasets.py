@@ -6,9 +6,6 @@ import tensorflow_datasets as tfds
 from input_pipeline.preprocessing import preprocess, augment
 
 
-from utils import utils_tfrecords
-
-
 @gin.configurable
 def load(name, data_dir):
     if name == "idrid":
@@ -17,9 +14,9 @@ def load(name, data_dir):
         test_raw = tf.data.TFRecordDataset(data_dir + "test.tfrecords")
         val_raw = tf.data.TFRecordDataset(data_dir + "validation.tfrecords")
 
-        ds_train = train_raw.map(utils_tfrecords.parse_and_decode_record)
-        ds_test = test_raw.map(utils_tfrecords.parse_and_decode_record)
-        ds_val = val_raw.map(utils_tfrecords.parse_and_decode_record)
+        ds_train = train_raw.map(read_tfrecords)
+        ds_test = test_raw.map(read_tfrecords)
+        ds_val = val_raw.map(read_tfrecords)
 
         return prepare(ds_train, ds_val, ds_test, "idrid")
 
@@ -58,6 +55,20 @@ def load(name, data_dir):
     else:
         raise ValueError
 
+
+
+def read_tfrecords(record):
+    # parse record
+    name_to_features = {
+        'label': tf.io.FixedLenFeature([1], tf.int64),
+        'image_raw': tf.io.FixedLenFeature([], tf.string),
+    }
+    parsed_data =  tf.io.parse_single_example(record, name_to_features)
+
+    # decode record
+    image = tf.io.decode_jpeg(parsed_data['image_raw'], channels=3)
+    label = parsed_data['label']
+    return (image, label)
 
 @gin.configurable
 def prepare(ds_train, ds_val, ds_test, ds_info, batch_size, caching, shuffle_buffer=300, to_augment=False):
