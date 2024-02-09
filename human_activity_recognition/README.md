@@ -101,7 +101,7 @@ python3 main.py --train --eval --model_name "model1_LSTM" --hapt --tflite
 
 ## Android Application
 
-We have also implemented an Android Application which detects the real time activites. The dataset used to develop this application is HAR dataset. The source code of the project can be found in [Android-app-har](/Android-app-har/) directory.  
+We have also implemented an Android Application which detects the real time activites. The dataset used to develop this application is HAR dataset. The source code of the project can be found in [Har App ](/har_app/har2/) directory.  
 We've used the model trained on Real World (HAR) dataset specifically for the chest bodypart which gave us the highest result.    
 Here's a screenshot of the application.  
 ![image2](/human_activity_recognition/android_ss2.jpg)
