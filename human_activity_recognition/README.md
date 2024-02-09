@@ -55,6 +55,13 @@ If you want to evaluate a pretrained model using a particular checkpoint. You ca
 ```
 python3 main.py --eval --model_name "model1_LSTM" --hapt
 ```
+## Ensemble learning
+You can create an ensemble of the available pretrained models by specifying the model type and their checkpoints in the **configs/config.gin**  file.
+The voting can be done in both hard and soft methods. This can also be specified in the **configs/config.gin**  file. 
+
+```
+python3 main.py --eval --model_name "ensemble_model" --hapt
+```
 
 ## Wandb sweep: Bayesian Hyperparameter Optimization
 You can a run a sweep configuration for a particular model inside **'wandb_sweep.py'**. You can select various parameters predefined in the file for any of the above models.
@@ -70,11 +77,11 @@ We ran each model 5 times to see the variation in accuracy. The metric shown her
 
 |  | LSTM | Bi-directional LSTM | GRU | 1-D Convolutional Model | 
 | :---: | :---: | :---: | :---: | :---: | 
-| Run 1 |  |  |  |  | 
-| Run 2 |  | | | | 
-| Run 3 |  |  | | | 
-| Run 4 |  |  | | | 
-| Run 5 |  |  |  |  | 
+| Run 1 | 94.51 | 93.05 | 92.19 | 96.03 | 
+| Run 2 | 92.95 | 93.71 | 94.21 | 96.39 | 
+| Run 3 | 93.88 | 94.57 | 91.20 | 96.33 | 
+| Run 4 | 94.48 | 92.92 | 94.74 | 95.96 | 
+| Run 5 | 94.11 | 95.10 | 89.94 | 96.59 | 
 
 
 # Results - HAR dataset

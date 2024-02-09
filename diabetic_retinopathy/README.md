@@ -55,6 +55,13 @@ Make sure to provide evaluation checkpoint in **'configs/config.gin'**
 ```
 python3 main.py --eval
 ```
+## Ensemble learning
+You can create an ensemble of the available pretrained models by specifying the model type and their checkpoints in the **configs/config.gin**  file.
+The voting can be done in both hard and soft methods. This can also be specified in the **configs/config.gin**  file. 
+
+```
+python3 main.py --eval --model_name "ensemble_model" 
+```
 
 ## Wandb sweep
 You can a run a sweep configuration for a particular model.  
