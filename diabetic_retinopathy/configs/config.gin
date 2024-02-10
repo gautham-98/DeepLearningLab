@@ -16,7 +16,7 @@ cnn_1.dropout_rate   = 0.3
 cnn_1.dropout_blocks = (1, 2)
 cnn_1.maxpool_blocks = (1, 2)
 
-##cnn_se Model Parameters
+# cnn_se Model Parameters
 ##layers are as given (0, 1, 2, 3)
 cnn_se.input_shape = (256,256,3)
 cnn_se.filters = (4, 8, 16, 32)
@@ -28,28 +28,6 @@ cnn_se.dropout_rate = 0.30
 cnn_se.dropout_blocks = (1, 2)
 cnn_se.maxpool_blocks = (1, 2)
 cnn_se.SE_blocks = True
-
-##cnn_1 Model Parameters
-##layers are as given (0, 1, 2, 3)
-#res_cnn.input_shape    = (256,256,3)
-#res_cnn.filters        = (4, 8, 16, 32)
-#res_cnn.kernel_size    = 3
-#res_cnn.strides        = (1, 1, 1, 1)
-#res_cnn.pool_size      = 3
-#res_cnn.dropout_rate   = 0.3
-##res_cnn.batch_norm_blocks = (0,)
-#res_cnn.dropout_blocks = (1, 2)
-#res_cnn.maxpool_blocks = (1, 2)
-#res_cnn.skip_connection_pairs = ((0,1), (1,2))
-
-# Layers
-vgg_like.input_shape = (256, 256, 3)
-vgg_block.kernel_size = (3, 3)
-vgg_like.n_classes = 2
-vgg_like.base_filters = 4
-vgg_like.n_blocks = 4
-vgg_like.dense_units = 64   
-vgg_like.dropout_rate = 0.486
 
 # Training
 Trainer.total_steps = 30000
