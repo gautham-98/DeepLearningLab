@@ -4,13 +4,13 @@
 
 ## Diabetic Retinopathy Detection
 
-To run the code you can type the following command in terminal  
+To run the code you can add different flags inside the batch.sh file. To simply train and evaluate a cnn_se model.
 
 ```
-sbatch batch.sh
+python3 main.py --train --eval --model_name "cnn_se" 
 ```
 
-You can change the model name nside the **'batch.sh** file under **'--model_name'** flag.  
+You can change the model name inside the **'batch.sh** file under **'--model_name'** flag.  
 Currently three models are available. 
 1) **cnn_1**: Custom CNN model
 2) **cnn_se**: Custom CNN model with squeeze and excitation blocks
@@ -68,12 +68,6 @@ You can a run a sweep configuration for a particular model.
 Inside the **'sweep_configs/'** directory, different sweep configurations are available. Copy and paste the sweep into **'wandb_sweep.py'**. 
 ```
 python3 wandb_sweep.py
-```
-
-## Ensemble learning
-Make sure to provide checkpoints of the particular model inside **'ensemble.py'** file.  
-```
-python3 ensemble.py
 ```
 
 # Results
