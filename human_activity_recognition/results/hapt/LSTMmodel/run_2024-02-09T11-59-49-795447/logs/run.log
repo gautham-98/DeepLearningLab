@@ -1,0 +1,215 @@
+[INFO] Records already exists
+Preparing dataset hapt...
+[DATASET loaded!] hapt
+Starting model training...
+Starting model training...
+Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts
+Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts
+Step 50, Time 1.37, Loss: 1.82, Accuracy: 39.07, Validation Loss: 1.92, Validation Accuracy: 54.25
+Step 50, Time 1.37, Loss: 1.82, Accuracy: 39.07, Validation Loss: 1.92, Validation Accuracy: 54.25
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 100, Time 0.09, Loss: 1.08, Accuracy: 65.81, Validation Loss: 1.31, Validation Accuracy: 66.73
+Step 100, Time 0.09, Loss: 1.08, Accuracy: 65.81, Validation Loss: 1.31, Validation Accuracy: 66.73
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 150, Time 0.09, Loss: 0.79, Accuracy: 74.93, Validation Loss: 0.88, Validation Accuracy: 77.46
+Step 150, Time 0.09, Loss: 0.79, Accuracy: 74.93, Validation Loss: 0.88, Validation Accuracy: 77.46
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 200, Time 0.09, Loss: 0.64, Accuracy: 79.26, Validation Loss: 0.50, Validation Accuracy: 82.73
+Step 200, Time 0.09, Loss: 0.64, Accuracy: 79.26, Validation Loss: 0.50, Validation Accuracy: 82.73
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 250, Time 0.09, Loss: 0.53, Accuracy: 82.74, Validation Loss: 0.60, Validation Accuracy: 82.46
+Step 250, Time 0.09, Loss: 0.53, Accuracy: 82.74, Validation Loss: 0.60, Validation Accuracy: 82.46
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 300, Time 0.09, Loss: 0.46, Accuracy: 84.66, Validation Loss: 0.57, Validation Accuracy: 86.64
+Step 300, Time 0.09, Loss: 0.46, Accuracy: 84.66, Validation Loss: 0.57, Validation Accuracy: 86.64
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 350, Time 0.09, Loss: 0.42, Accuracy: 85.92, Validation Loss: 0.43, Validation Accuracy: 87.31
+Step 350, Time 0.09, Loss: 0.42, Accuracy: 85.92, Validation Loss: 0.43, Validation Accuracy: 87.31
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 400, Time 0.09, Loss: 0.39, Accuracy: 86.97, Validation Loss: 0.50, Validation Accuracy: 87.38
+Step 400, Time 0.09, Loss: 0.39, Accuracy: 86.97, Validation Loss: 0.50, Validation Accuracy: 87.38
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 450, Time 0.07, Loss: 0.37, Accuracy: 87.69, Validation Loss: 0.52, Validation Accuracy: 87.25
+Step 450, Time 0.07, Loss: 0.37, Accuracy: 87.69, Validation Loss: 0.52, Validation Accuracy: 87.25
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 500, Time 0.09, Loss: 0.36, Accuracy: 87.81, Validation Loss: 0.48, Validation Accuracy: 86.71
+Step 500, Time 0.09, Loss: 0.36, Accuracy: 87.81, Validation Loss: 0.48, Validation Accuracy: 86.71
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 550, Time 0.09, Loss: 0.32, Accuracy: 89.34, Validation Loss: 0.51, Validation Accuracy: 89.41
+Step 550, Time 0.09, Loss: 0.32, Accuracy: 89.34, Validation Loss: 0.51, Validation Accuracy: 89.41
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 600, Time 0.10, Loss: 0.29, Accuracy: 90.38, Validation Loss: 0.45, Validation Accuracy: 88.80
+Step 600, Time 0.10, Loss: 0.29, Accuracy: 90.38, Validation Loss: 0.45, Validation Accuracy: 88.80
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 650, Time 0.09, Loss: 0.26, Accuracy: 91.41, Validation Loss: 0.49, Validation Accuracy: 88.60
+Step 650, Time 0.09, Loss: 0.26, Accuracy: 91.41, Validation Loss: 0.49, Validation Accuracy: 88.60
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 700, Time 0.09, Loss: 0.27, Accuracy: 91.30, Validation Loss: 0.59, Validation Accuracy: 85.96
+Step 700, Time 0.09, Loss: 0.27, Accuracy: 91.30, Validation Loss: 0.59, Validation Accuracy: 85.96
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 750, Time 0.09, Loss: 0.28, Accuracy: 90.36, Validation Loss: 0.58, Validation Accuracy: 86.03
+Step 750, Time 0.09, Loss: 0.28, Accuracy: 90.36, Validation Loss: 0.58, Validation Accuracy: 86.03
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 800, Time 0.09, Loss: 0.25, Accuracy: 91.42, Validation Loss: 0.61, Validation Accuracy: 87.72
+Step 800, Time 0.09, Loss: 0.25, Accuracy: 91.42, Validation Loss: 0.61, Validation Accuracy: 87.72
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 850, Time 0.09, Loss: 0.24, Accuracy: 91.74, Validation Loss: 0.47, Validation Accuracy: 88.87
+Step 850, Time 0.09, Loss: 0.24, Accuracy: 91.74, Validation Loss: 0.47, Validation Accuracy: 88.87
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 900, Time 0.08, Loss: 0.24, Accuracy: 91.79, Validation Loss: 0.58, Validation Accuracy: 86.30
+Step 900, Time 0.08, Loss: 0.24, Accuracy: 91.79, Validation Loss: 0.58, Validation Accuracy: 86.30
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 950, Time 0.09, Loss: 0.24, Accuracy: 92.06, Validation Loss: 0.56, Validation Accuracy: 88.60
+Step 950, Time 0.09, Loss: 0.24, Accuracy: 92.06, Validation Loss: 0.56, Validation Accuracy: 88.60
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1000, Time 0.09, Loss: 0.22, Accuracy: 92.46, Validation Loss: 0.54, Validation Accuracy: 87.18
+Step 1000, Time 0.09, Loss: 0.22, Accuracy: 92.46, Validation Loss: 0.54, Validation Accuracy: 87.18
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1050, Time 0.09, Loss: 0.21, Accuracy: 93.12, Validation Loss: 0.60, Validation Accuracy: 85.63
+Step 1050, Time 0.09, Loss: 0.21, Accuracy: 93.12, Validation Loss: 0.60, Validation Accuracy: 85.63
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1100, Time 0.09, Loss: 0.22, Accuracy: 92.89, Validation Loss: 0.62, Validation Accuracy: 87.72
+Step 1100, Time 0.09, Loss: 0.22, Accuracy: 92.89, Validation Loss: 0.62, Validation Accuracy: 87.72
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1150, Time 0.09, Loss: 0.23, Accuracy: 92.41, Validation Loss: 0.49, Validation Accuracy: 89.81
+Step 1150, Time 0.09, Loss: 0.23, Accuracy: 92.41, Validation Loss: 0.49, Validation Accuracy: 89.81
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1200, Time 0.09, Loss: 0.22, Accuracy: 92.86, Validation Loss: 0.42, Validation Accuracy: 87.99
+Step 1200, Time 0.09, Loss: 0.22, Accuracy: 92.86, Validation Loss: 0.42, Validation Accuracy: 87.99
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1250, Time 0.09, Loss: 0.22, Accuracy: 92.69, Validation Loss: 0.49, Validation Accuracy: 88.26
+Step 1250, Time 0.09, Loss: 0.22, Accuracy: 92.69, Validation Loss: 0.49, Validation Accuracy: 88.26
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1300, Time 0.09, Loss: 0.18, Accuracy: 93.76, Validation Loss: 0.69, Validation Accuracy: 87.58
+Step 1300, Time 0.09, Loss: 0.18, Accuracy: 93.76, Validation Loss: 0.69, Validation Accuracy: 87.58
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1350, Time 0.08, Loss: 0.20, Accuracy: 93.16, Validation Loss: 0.60, Validation Accuracy: 87.18
+Step 1350, Time 0.08, Loss: 0.20, Accuracy: 93.16, Validation Loss: 0.60, Validation Accuracy: 87.18
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1400, Time 0.09, Loss: 0.20, Accuracy: 93.35, Validation Loss: 0.55, Validation Accuracy: 88.39
+Step 1400, Time 0.09, Loss: 0.20, Accuracy: 93.35, Validation Loss: 0.55, Validation Accuracy: 88.39
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1450, Time 0.09, Loss: 0.20, Accuracy: 93.31, Validation Loss: 0.62, Validation Accuracy: 90.28
+Step 1450, Time 0.09, Loss: 0.20, Accuracy: 93.31, Validation Loss: 0.62, Validation Accuracy: 90.28
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1500, Time 0.09, Loss: 0.18, Accuracy: 93.81, Validation Loss: 0.60, Validation Accuracy: 87.92
+Step 1500, Time 0.09, Loss: 0.18, Accuracy: 93.81, Validation Loss: 0.60, Validation Accuracy: 87.92
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1550, Time 0.10, Loss: 0.16, Accuracy: 94.34, Validation Loss: 0.57, Validation Accuracy: 90.22
+Step 1550, Time 0.10, Loss: 0.16, Accuracy: 94.34, Validation Loss: 0.57, Validation Accuracy: 90.22
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1600, Time 0.09, Loss: 0.16, Accuracy: 94.67, Validation Loss: 0.62, Validation Accuracy: 89.34
+Step 1600, Time 0.09, Loss: 0.16, Accuracy: 94.67, Validation Loss: 0.62, Validation Accuracy: 89.34
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1650, Time 0.09, Loss: 0.15, Accuracy: 94.58, Validation Loss: 0.72, Validation Accuracy: 87.92
+Step 1650, Time 0.09, Loss: 0.15, Accuracy: 94.58, Validation Loss: 0.72, Validation Accuracy: 87.92
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1700, Time 0.09, Loss: 0.15, Accuracy: 94.75, Validation Loss: 0.74, Validation Accuracy: 87.11
+Step 1700, Time 0.09, Loss: 0.15, Accuracy: 94.75, Validation Loss: 0.74, Validation Accuracy: 87.11
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1750, Time 0.09, Loss: 0.19, Accuracy: 93.88, Validation Loss: 0.52, Validation Accuracy: 89.54
+Step 1750, Time 0.09, Loss: 0.19, Accuracy: 93.88, Validation Loss: 0.52, Validation Accuracy: 89.54
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1800, Time 0.08, Loss: 0.17, Accuracy: 94.15, Validation Loss: 0.51, Validation Accuracy: 91.36
+Step 1800, Time 0.08, Loss: 0.17, Accuracy: 94.15, Validation Loss: 0.51, Validation Accuracy: 91.36
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1850, Time 0.09, Loss: 0.16, Accuracy: 94.33, Validation Loss: 0.60, Validation Accuracy: 88.06
+Step 1850, Time 0.09, Loss: 0.16, Accuracy: 94.33, Validation Loss: 0.60, Validation Accuracy: 88.06
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1900, Time 0.09, Loss: 0.15, Accuracy: 94.60, Validation Loss: 0.66, Validation Accuracy: 88.46
+Step 1900, Time 0.09, Loss: 0.15, Accuracy: 94.60, Validation Loss: 0.66, Validation Accuracy: 88.46
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 1950, Time 0.09, Loss: 0.18, Accuracy: 94.10, Validation Loss: 0.57, Validation Accuracy: 87.99
+Step 1950, Time 0.09, Loss: 0.18, Accuracy: 94.10, Validation Loss: 0.57, Validation Accuracy: 87.99
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Step 2000, Time 0.09, Loss: 0.16, Accuracy: 94.80, Validation Loss: 0.81, Validation Accuracy: 89.07
+Step 2000, Time 0.09, Loss: 0.16, Accuracy: 94.80, Validation Loss: 0.81, Validation Accuracy: 89.07
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Saving checkpoint to /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T11-59-49-795447/ckpts.
+Finished training after 2000 steps.
+Finished training after 2000 steps.
+Starting model evaluation...
+Starting model evaluation...
+
+====Results of Test set evaluation on sequential ====
+
+====Results of Test set evaluation on sequential ====
+Confusion Matrix:
+[[448   0   0   0   0   0   0   0   0   0   0   0]
+ [  1 409   0   0   0   0   0   0   0   0   0   0]
+ [  0   0 373   0   0   0   0   0   2   1   2   2]
+ [  0   0   0 450  78   0   0   0   2   1   0   0]
+ [  0   0   0  24 537   0   1   1   0   0   0   0]
+ [  0   0   0   0   0 541   0   0   9   0  14   1]
+ [  0   0   0   0   1   0  13   0   0   0   3   0]
+ [  0   0   0   0   0   0   0   6   0   0   0   0]
+ [  0   0   0   0   0   0   0   0  17   0   9   0]
+ [  0   0   0   0   0   0   0   0   0  19   0   3]
+ [  0   0   0   0   1   0   1   0   4   1  23   0]
+ [  0   0   0   0   0   0   0   0   0   4   1  20]]
+Confusion Matrix:
+[[448   0   0   0   0   0   0   0   0   0   0   0]
+ [  1 409   0   0   0   0   0   0   0   0   0   0]
+ [  0   0 373   0   0   0   0   0   2   1   2   2]
+ [  0   0   0 450  78   0   0   0   2   1   0   0]
+ [  0   0   0  24 537   0   1   1   0   0   0   0]
+ [  0   0   0   0   0 541   0   0   9   0  14   1]
+ [  0   0   0   0   1   0  13   0   0   0   3   0]
+ [  0   0   0   0   0   0   0   6   0   0   0   0]
+ [  0   0   0   0   0   0   0   0  17   0   9   0]
+ [  0   0   0   0   0   0   0   0   0  19   0   3]
+ [  0   0   0   0   1   0   1   0   4   1  23   0]
+ [  0   0   0   0   0   0   0   0   0   4   1  20]]
+Accuracy(balanced): 88.22
+Accuracy(balanced): 88.22
+Accuracy(Unbalanced): 94.48
+Accuracy(Unbalanced): 94.48
+Accuracy(Sparse Categorical) 94.48
+Accuracy(Sparse Categorical) 94.48
+recall: ['100.00%', '99.76%', '98.16%', '84.75%', '95.38%', '95.75%', '76.47%', '100.00%', '65.38%', '86.36%', '76.67%', '80.00%']
+recall: ['100.00%', '99.76%', '98.16%', '84.75%', '95.38%', '95.75%', '76.47%', '100.00%', '65.38%', '86.36%', '76.67%', '80.00%']
+precision: ['99.78%', '100.00%', '100.00%', '94.94%', '87.03%', '100.00%', '86.67%', '85.71%', '50.00%', '73.08%', '44.23%', '76.92%']
+precision: ['99.78%', '100.00%', '100.00%', '94.94%', '87.03%', '100.00%', '86.67%', '85.71%', '50.00%', '73.08%', '44.23%', '76.92%']
+macro_f1_score: 85.64
+macro_f1_score: 85.64
+----Evaluation completed----
+----Evaluation completed----
