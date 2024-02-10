@@ -6,8 +6,32 @@ from scipy.stats import zscore, mode
 import numpy as np
 from sklearn.utils import shuffle
 import re
+import matplotlib.pyplot as plt
 
-def window_maker(data, window_size, shift):
+
+
+# tf.window() does not create exact window_size samples, so we need to define out own custom window maker. 
+# below is another function that makes the use of tf.window() function
+def custom_window_maker(data, window_size, shift):
+  features=[]
+  labels=[]
+  for i in range(0, int(data.shape[0]/shift) -1):
+    start = i*shift
+    end = i*shift + window_size
+    one_window = data[start:end].values
+    one_window_features = one_window[:, :-1]
+    one_window_labels = one_window[:, -1]
+    label = mode(one_window_labels, keepdims=False).mode
+    features.append(one_window_features)
+    labels.append(label)
+  features = np.array(features)
+  labels = np.array(labels)
+  labels = np.expand_dims(labels, axis=1)
+  return (features, labels)
+  
+
+# --- deprecated
+def window_maker(data, is_train_data, window_size, shift, low_limit=0):
   features_list = []
   labels_list = []
   tf_dataset_normalized = tf.data.Dataset.from_tensor_slices(data)  # TODO: make label changes
@@ -17,14 +41,35 @@ def window_maker(data, window_size, shift):
   for window in windows_as_arrays:
     features = window[:, :-1]
     label, count = mode(window[:, -1], keepdims=False).mode, mode(window[:, -1]).count # setting keepdims to False will prevent adding extra axis 
-    features_list.append(features)
-    labels_list.append(label)
-    
+    max_activity = (count/window_size) * 100
+    # append the feature and label only if the count of max labels is greater than a certain low_limit for train data
+    if is_train_data and max_activity>=low_limit: 
+        features_list.append(features)
+        labels_list.append(label)
+    # append the feature and label only if the count of minimum labels is 0 for test and validation data 
+    if (not is_train_data) and max_activity==100:
+        features_list.append(features)
+        labels_list.append(label)
+       
+        
   features_list = np.array(features_list)
   labels_list = np.expand_dims(np.array(labels_list), axis=1)
   return features_list, labels_list
 
+def resample_data(features, labels):
+    features_resampled = np.empty((0, features.shape[1], features.shape[2]))
+    labels_resampled = np.empty((0, labels.shape[1]))
+    activities, activity_counts = np.unique(labels, return_counts=True)
+    max_activity = np.max(activity_counts)
+    for activity in activities:
+        activity_indices = np.where(labels == activity)[0]
+        indices = np.random.choice(activity_indices, size=max_activity, replace=True)
+        labels_resampled = np.append(labels_resampled, labels[indices], axis=0)
+        features_resampled = np.append(features_resampled, features[indices], axis=0)
 
+    return features_resampled, labels_resampled 
+
+   
 @gin.configurable
 def make_tfrecords(data_dir, target_dir, window_length, shift):
     if os.path.exists(target_dir):
@@ -76,6 +121,9 @@ def make_tfrecords(data_dir, target_dir, window_length, shift):
        else:
         logging.error("[ERROR] Filename format does not match the expected pattern.")
 
+       is_train_data = int(user_number) in range(1,22)
+       is_val_data = int(user_number) in range(28,31)
+       is_test_data = int(user_number) in range(22,28)
        normalized_data = zscore(combined_data, axis=0)
        normalized_data["label"] = 0
 
@@ -83,31 +131,29 @@ def make_tfrecords(data_dir, target_dir, window_length, shift):
        for index, (actid, start, end) in labels[['actid', 'start', 'end']].iterrows():
             normalized_data.loc[start:end, "label"] = actid
 
-
        # remove first 5 seconds of data
        normalized_data = normalized_data.iloc[250:-250]
-
+       
        # create windows and shift 
-       window_features, window_labels = window_maker(normalized_data, window_length, shift) # 50% overlapping
+       window_features, window_labels = window_maker(normalized_data, is_train_data, window_length, shift) # overlapping as per config.gin
     
-       if int(user_number) in range(1,22):
+       if is_train_data:
         train_data = np.append(train_data, window_features, axis=0)
         train_labels = np.append(train_labels, window_labels, axis=0)
-       elif int(user_number) in range(22,28):
+       elif is_test_data:
         test_data = np.append(test_data, window_features, axis=0)
         test_labels = np.append(test_labels, window_labels, axis=0)
-       elif int(user_number) in range(28,31):
+       elif is_val_data:
         val_data = np.append(val_data, window_features, axis=0)
         val_labels = np.append(val_labels, window_labels, axis=0)
 
-
-    # resample
-    # TODO
-
-    # delete unlabelled data
+    # delete unlabelled data 
     train_data, train_labels = delete_no_activity(train_data, train_labels)
     test_data, test_labels = delete_no_activity(test_data, test_labels)
     val_data, val_labels = delete_no_activity(val_data, val_labels)
+
+    # resample data
+    train_data, train_labels = resample_data(train_data, train_labels)
 
     # shuffle
     train_data, train_labels = shuffle(train_data, train_labels)
@@ -134,10 +180,10 @@ def write_as_tfrecord(features, labels, filepath):
    with tf.io.TFRecordWriter(filepath) as writer:
       for feature, label in dataset:
          feature = tf.io.serialize_tensor(feature)
-         labels =  tf.io.serialize_tensor(label)
+         label =  tf.io.serialize_tensor(label)
          example_dict = {
          "feature":tf.train.Feature(bytes_list=tf.train.BytesList(value=[feature.numpy()])),
-         "labels": tf.train.Feature(bytes_list=tf.train.BytesList(value=[labels.numpy()]))
+         "label": tf.train.Feature(bytes_list=tf.train.BytesList(value=[label.numpy()]))
         }
          example = tf.train.Example(features=tf.train.Features(feature=example_dict))
          writer.write(example.SerializeToString())

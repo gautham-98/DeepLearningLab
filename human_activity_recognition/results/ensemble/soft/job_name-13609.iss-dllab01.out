@@ -1,0 +1,114 @@
+2024-02-09 16:29:54.977589: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-02-09 16:29:55.711493: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+2024-02-09 16:29:57.531583: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-09 16:29:57.549488: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-09 16:29:57.549941: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+I0209 16:29:57.555361 140155998709568 tfrecords.py:76] [INFO] Records already exists
+wandb: Currently logged in as: gauthammohan1998 (dl-lab-uni-stuttgart). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.16.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.0
+wandb: Run data is saved locally in /home/RUS_CIP/st184914/dl-lab-23w-team10/human_activity_recognition/wandb/run-20240209_162958-3s1ee4h1
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T16-29-57-550448
+wandb: ⭐️ View project at https://wandb.ai/dl-lab-uni-stuttgart/human_activity_recognition
+wandb: 🚀 View run at https://wandb.ai/dl-lab-uni-stuttgart/human_activity_recognition/runs/3s1ee4h1
+I0209 16:29:59.111121 140155998709568 datasets.py:23] Preparing dataset hapt...
+2024-02-09 16:29:59.113429: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-09 16:29:59.114055: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-09 16:29:59.114523: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-09 16:29:59.194189: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-09 16:29:59.194532: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-09 16:29:59.194840: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-09 16:29:59.195122: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 9804 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:21:00.0, compute capability: 7.5
+I0209 16:30:02.268015 140155998709568 main.py:69] [DATASET loaded!] hapt
+(None, 100, 6)
+(None, 12)
+(None, 100, 6)
+(None, 12)
+(None, 100, 6)
+(None, 12)
+(None, 100, 6)
+(None, 12)
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_5 (InputLayer)        [(None, 100, 6)]             0         []                            
+                                                                                                  
+ sequential (Sequential)     (None, 12)                   86748     ['input_5[0][0]']             
+                                                                                                  
+ sequential_1 (Sequential)   (None, 12)                   336092    ['input_5[0][0]']             
+                                                                                                  
+ sequential_2 (Sequential)   (None, 12)                   24092     ['input_5[0][0]']             
+                                                                                                  
+ sequential_3 (Sequential)   (None, 12)                   15324     ['input_5[0][0]']             
+                                                                                                  
+ tf.nn.softmax (TFOpLambda)  (None, 12)                   0         ['sequential[0][0]']          
+                                                                                                  
+ tf.nn.softmax_1 (TFOpLambd  (None, 12)                   0         ['sequential_1[0][0]']        
+ a)                                                                                               
+                                                                                                  
+ tf.nn.softmax_2 (TFOpLambd  (None, 12)                   0         ['sequential_2[0][0]']        
+ a)                                                                                               
+                                                                                                  
+ tf.nn.softmax_3 (TFOpLambd  (None, 12)                   0         ['sequential_3[0][0]']        
+ a)                                                                                               
+                                                                                                  
+ tf.stack (TFOpLambda)       (None, 12, 4)                0         ['tf.nn.softmax[0][0]',       
+                                                                     'tf.nn.softmax_1[0][0]',     
+                                                                     'tf.nn.softmax_2[0][0]',     
+                                                                     'tf.nn.softmax_3[0][0]']     
+                                                                                                  
+ tf.math.reduce_mean (TFOpL  (None, 12)                   0         ['tf.stack[0][0]']            
+ ambda)                                                                                           
+                                                                                                  
+==================================================================================================
+Total params: 462256 (1.76 MB)
+Trainable params: 460464 (1.76 MB)
+Non-trainable params: 1792 (7.00 KB)
+__________________________________________________________________________________________________
+I0209 16:30:05.748054 140155998709568 main.py:102] Starting model evaluation...
+2024-02-09 16:30:05.819960: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8600
+I0209 16:30:06.781183 140155998709568 eval.py:49] 
+====Results of Test set evaluation on model ====
+I0209 16:30:06.781757 140155998709568 eval.py:50] Confusion Matrix:
+[[448   0   0   0   0   0   0   0   0   0   0   0]
+ [  0 410   0   0   0   0   0   0   0   0   0   0]
+ [  5   0 374   0   0   0   0   0   0   0   1   0]
+ [  0   0   0 459  71   0   1   0   0   0   0   0]
+ [  0   0   0   5 558   0   0   0   0   0   0   0]
+ [  0   0   0   0   0 556   0   0   4   0   2   3]
+ [  0   0   0   0   1   0  14   0   0   0   2   0]
+ [  0   0   0   0   0   0   0   6   0   0   0   0]
+ [  0   0   0   0   0   0   0   0  21   0   5   0]
+ [  0   0   0   0   0   0   0   0   0  20   0   2]
+ [  0   0   0   0   1   0   1   0   8   1  19   0]
+ [  0   1   0   0   0   0   1   1   0   3   0  19]]
+I0209 16:30:06.781860 140155998709568 eval.py:51] Accuracy(balanced): 89.65
+I0209 16:30:06.781942 140155998709568 eval.py:52] Accuracy(Unbalanced): 96.06
+I0209 16:30:06.782114 140155998709568 eval.py:53] Accuracy(Sparse Categorical) 96.06
+I0209 16:30:06.782217 140155998709568 eval.py:54] recall: ['100.00%', '100.00%', '98.42%', '86.44%', '99.11%', '98.41%', '82.35%', '100.00%', '80.77%', '90.91%', '63.33%', '76.00%']
+I0209 16:30:06.782291 140155998709568 eval.py:55] precision: ['98.90%', '99.76%', '100.00%', '98.92%', '88.43%', '100.00%', '82.35%', '85.71%', '63.64%', '83.33%', '65.52%', '79.17%']
+I0209 16:30:06.782355 140155998709568 eval.py:56] macro_f1_score: 88.38
+I0209 16:30:07.382564 140155998709568 eval.py:60] ----Evaluation completed----
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+wandb: 
+wandb: Run history:
+wandb:         macro_f1_score  ▇█▁▃▅▅
+wandb: test_balanced_accuracy  ▇█▁▃▄▅
+wandb:        test_sparse_acc ▁▅█▄▆▇▇
+wandb: 
+wandb: Run summary:
+wandb:         macro_f1_score 88.37699
+wandb: test_balanced_accuracy 89.64544
+wandb:        test_sparse_acc 96.06351
+wandb: 
+wandb: 🚀 View run /home/RUS_CIP/st184914/dl-lab-23w-team10/experiments_har/run_2024-02-09T16-29-57-550448 at: https://wandb.ai/dl-lab-uni-stuttgart/human_activity_recognition/runs/3s1ee4h1
+wandb: ️⚡ View job at https://wandb.ai/dl-lab-uni-stuttgart/human_activity_recognition/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzODQzMzU1OA==/version_details/v3
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240209_162958-3s1ee4h1/logs

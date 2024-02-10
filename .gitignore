@@ -8,6 +8,7 @@ __pycache__/
 
 # Custom
 experiments/
+experiments_har/
 
 # C extensions
 *.so
@@ -143,14 +144,27 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-*.out
+
 *.yaml
-*.png
 *.jpg
+*.png
 *.tfrecords
 *.txt
 *.json
 *.wandb
 *.sh
+*.out
+*.index
 diabetic_retinopathy/wandb/latest-run
 diabetic_retinopathy/.batch.sh.swp
+config_operative.gin
+diabetic_retinopathy/good_performances/inception_v3/config.gin
+diabetic_retinopathy/good_performances/cnn_1/config.gin
+
+human_activity_recognition/wandb/latest-run
+human_activity_recognition/ideas
+human_activity_recognition/TFlite_model/fingerprint.pb
+human_activity_recognition/TFlite_model/keras_metadata.pb
+human_activity_recognition/TFlite_model/model.tflite
+human_activity_recognition/TFlite_model/saved_model.pb
+human_activity_recognition/TFlite_model/variables/variables.data-00000-of-00001

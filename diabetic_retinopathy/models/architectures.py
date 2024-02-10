@@ -159,11 +159,7 @@ def cnn_se(input_shape, filters, kernel_size, strides, pool_size, dropout_rate, 
 
 
 @gin.configurable
-def transfer_model(input_shape, filters, dense_units, dropout_rate,base_model_name="DenseNet121"):
-
-    """returns both the whole model and the base_model
-      further steps for making the layers trainable are
-      done by TransferTrainer"""
+def transfer_model(input_shape, dense_units, dropout_rate,base_model_name="DenseNet121", model_name = 'transfer_model'):
 
     inputs = Input(shape=input_shape)
     if base_model_name == 'InceptionResnet':
@@ -202,7 +198,7 @@ def transfer_model(input_shape, filters, dense_units, dropout_rate,base_model_na
 
     outputs = Dense(units=2)(out_dense)
     
-    model = keras.Model(inputs=inputs, outputs=outputs, name="transfer_model")
+    model = keras.Model(inputs=inputs, outputs=outputs, name=model_name)
 
     logging.info(f"transfer_model input shape:  {model.input_shape}")
     logging.info(f"transfer_model output shape: {model.output_shape}")

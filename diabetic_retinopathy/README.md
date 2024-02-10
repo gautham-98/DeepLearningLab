@@ -4,13 +4,13 @@
 
 ## Diabetic Retinopathy Detection
 
-To run the code you can type the following command in terminal  
+To run the code you can add different flags inside the batch.sh file. To simply train and evaluate a cnn_se model.
 
 ```
-sbatch batch.sh
+python3 main.py --train --eval --model_name "cnn_se" 
 ```
 
-You can change the model name nside the **'batch.sh** file under **'--model_name'** flag.  
+You can change the model name inside the **'batch.sh** file under **'--model_name'** flag.  
 Currently three models are available. 
 1) **cnn_1**: Custom CNN model
 2) **cnn_se**: Custom CNN model with squeeze and excitation blocks
@@ -55,18 +55,19 @@ Make sure to provide evaluation checkpoint in **'configs/config.gin'**
 ```
 python3 main.py --eval
 ```
+## Ensemble learning
+You can create an ensemble of the available pretrained models by specifying the model type and their checkpoints in the **configs/config.gin**  file.
+The voting can be done in both hard and soft methods. This can also be specified in the **configs/config.gin**  file. 
+
+```
+python3 main.py --eval --model_name "ensemble_model" 
+```
 
 ## Wandb sweep
 You can a run a sweep configuration for a particular model.  
 Inside the **'sweep_configs/'** directory, different sweep configurations are available. Copy and paste the sweep into **'wandb_sweep.py'**. 
 ```
 python3 wandb_sweep.py
-```
-
-## Ensemble learning
-Make sure to provide checkpoints of the particular model inside **'ensemble.py'** file.  
-```
-python3 ensemble.py
 ```
 
 # Results
@@ -113,11 +114,9 @@ DeepVisualize.image_list_test = [15,57,87,32]
 DeepVisualize.layer_name = 'activation_3'
 GradCam.class_idx = 1
 ```
-![img_15_label-1](https://media.github.tik.uni-stuttgart.de/user/7666/files/cddd1349-8bfc-47ef-af5e-0e54b0262f75)
+![](deep_viz_8.png)
 
 In the image above we can see how the model has learned to identify hard exudates to classify the image as RDR.
-
-
 
 
 

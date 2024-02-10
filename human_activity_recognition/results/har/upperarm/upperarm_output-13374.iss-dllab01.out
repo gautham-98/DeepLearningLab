@@ -1,0 +1,788 @@
+2024-02-08 12:42:58.446877: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-02-08 12:42:58.948917: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+2024-02-08 12:43:00.610354: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:43:00.631280: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:43:00.631719: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+I0208 12:43:00.636939 140511766632256 tfrecords_realworldhar.py:130] [INFO] Records already exists
+wandb: Currently logged in as: utsavpanchal (dl-lab-uni-stuttgart). Use `wandb login --relogin` to force relogin
+wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: | Waiting for wandb.init()...wandb: / Waiting for wandb.init()...wandb: - Waiting for wandb.init()...wandb: wandb version 0.16.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.0
+wandb: Run data is saved locally in /home/RUS_CIP/st184584/dl-lab-23w-team10/human_activity_recognition/wandb/run-20240208_124301-km49k6ld
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209
+wandb: ⭐️ View project at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy
+wandb: 🚀 View run at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/runs/km49k6ld
+I0208 12:43:05.779844 140511766632256 datasets.py:35] Preparing dataset har...
+2024-02-08 12:43:05.781584: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:43:05.782133: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:43:05.782580: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:43:05.861822: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:43:05.862233: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:43:05.862574: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:43:05.862892: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 9804 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:21:00.0, compute capability: 7.5
+I0208 12:43:08.304615 140511766632256 main.py:65] [DATASET loaded!] har
+(None, 250, 6)
+(None, 8)
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ lstm (LSTM)                 (None, 250, 128)          69120     
+                                                                 
+ batch_normalization (Batch  (None, 250, 128)          512       
+ Normalization)                                                  
+                                                                 
+ lstm_1 (LSTM)               (None, 250, 128)          131584    
+                                                                 
+ batch_normalization_1 (Bat  (None, 250, 128)          512       
+ chNormalization)                                                
+                                                                 
+ lstm_2 (LSTM)               (None, 128)               131584    
+                                                                 
+ batch_normalization_2 (Bat  (None, 128)               512       
+ chNormalization)                                                
+                                                                 
+ dense (Dense)               (None, 16)                2064      
+                                                                 
+ dropout (Dropout)           (None, 16)                0         
+                                                                 
+ dense_1 (Dense)             (None, 8)                 136       
+                                                                 
+=================================================================
+Total params: 336024 (1.28 MB)
+Trainable params: 335256 (1.28 MB)
+Non-trainable params: 768 (3.00 KB)
+_________________________________________________________________
+I0208 12:43:08.724488 140511766632256 main.py:91] Starting model training...
+I0208 12:43:08.724969 140511766632256 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts
+2024-02-08 12:43:11.342784: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8600
+2024-02-08 12:43:11.606436: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7fca0c1820f0 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2024-02-08 12:43:11.606484: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): NVIDIA GeForce RTX 2080 Ti, Compute Capability 7.5
+2024-02-08 12:43:11.626081: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:255] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2024-02-08 12:43:11.822490: I ./tensorflow/compiler/jit/device_compiler.h:186] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+I0208 12:43:19.210061 140511766632256 train.py:97] Step 50, Time 1.89, Loss: 1.18, Accuracy: 58.73, Validation Loss: 1.64, Validation Accuracy: 50.19
+I0208 12:43:19.212843 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:43:22.528677 140511766632256 train.py:97] Step 100, Time 0.20, Loss: 0.63, Accuracy: 79.28, Validation Loss: 1.98, Validation Accuracy: 48.26
+I0208 12:43:22.532075 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:43:25.720635 140511766632256 train.py:97] Step 150, Time 0.20, Loss: 0.46, Accuracy: 85.15, Validation Loss: 1.80, Validation Accuracy: 53.95
+I0208 12:43:25.723257 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:43:28.959263 140511766632256 train.py:97] Step 200, Time 0.20, Loss: 0.44, Accuracy: 86.69, Validation Loss: 1.42, Validation Accuracy: 58.81
+I0208 12:43:28.961790 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:43:32.201871 140511766632256 train.py:97] Step 250, Time 0.20, Loss: 0.36, Accuracy: 88.63, Validation Loss: 0.97, Validation Accuracy: 74.88
+I0208 12:43:32.205577 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:43:35.417813 140511766632256 train.py:97] Step 300, Time 0.20, Loss: 0.54, Accuracy: 83.48, Validation Loss: 2.26, Validation Accuracy: 54.45
+I0208 12:43:35.420214 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:43:38.672747 140511766632256 train.py:97] Step 350, Time 0.20, Loss: 0.36, Accuracy: 88.99, Validation Loss: 2.01, Validation Accuracy: 50.86
+I0208 12:43:38.677391 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:43:41.962262 140511766632256 train.py:97] Step 400, Time 0.26, Loss: 0.31, Accuracy: 90.62, Validation Loss: 1.18, Validation Accuracy: 62.73
+I0208 12:43:41.965793 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:43:45.244831 140511766632256 train.py:97] Step 450, Time 0.20, Loss: 0.28, Accuracy: 91.47, Validation Loss: 0.84, Validation Accuracy: 76.53
+I0208 12:43:45.247925 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:43:48.537023 140511766632256 train.py:97] Step 500, Time 0.21, Loss: 0.34, Accuracy: 89.56, Validation Loss: 1.53, Validation Accuracy: 62.51
+I0208 12:43:48.540811 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:43:51.810591 140511766632256 train.py:97] Step 550, Time 0.21, Loss: 0.30, Accuracy: 90.51, Validation Loss: 0.77, Validation Accuracy: 77.80
+I0208 12:43:51.814964 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:43:55.144641 140511766632256 train.py:97] Step 600, Time 0.21, Loss: 0.26, Accuracy: 91.80, Validation Loss: 1.05, Validation Accuracy: 72.50
+I0208 12:43:55.149479 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:43:58.458622 140511766632256 train.py:97] Step 650, Time 0.21, Loss: 0.26, Accuracy: 92.00, Validation Loss: 0.90, Validation Accuracy: 67.59
+I0208 12:43:58.461207 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:01.796225 140511766632256 train.py:97] Step 700, Time 0.21, Loss: 0.23, Accuracy: 92.86, Validation Loss: 0.61, Validation Accuracy: 82.22
+I0208 12:44:01.799983 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:05.131740 140511766632256 train.py:97] Step 750, Time 0.20, Loss: 0.23, Accuracy: 92.79, Validation Loss: 0.86, Validation Accuracy: 70.51
+I0208 12:44:05.134900 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:08.453418 140511766632256 train.py:97] Step 800, Time 0.21, Loss: 0.20, Accuracy: 93.55, Validation Loss: 1.04, Validation Accuracy: 69.91
+I0208 12:44:08.456276 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:11.968061 140511766632256 train.py:97] Step 850, Time 0.21, Loss: 0.20, Accuracy: 93.38, Validation Loss: 0.73, Validation Accuracy: 74.43
+I0208 12:44:11.972849 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:15.274556 140511766632256 train.py:97] Step 900, Time 0.16, Loss: 0.21, Accuracy: 93.49, Validation Loss: 0.89, Validation Accuracy: 77.08
+I0208 12:44:15.278896 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:18.650437 140511766632256 train.py:97] Step 950, Time 0.21, Loss: 0.21, Accuracy: 93.04, Validation Loss: 0.65, Validation Accuracy: 77.31
+I0208 12:44:18.653928 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:22.035932 140511766632256 train.py:97] Step 1000, Time 0.21, Loss: 0.23, Accuracy: 92.81, Validation Loss: 1.00, Validation Accuracy: 77.58
+I0208 12:44:22.039535 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:25.370953 140511766632256 train.py:97] Step 1050, Time 0.20, Loss: 0.19, Accuracy: 94.21, Validation Loss: 1.02, Validation Accuracy: 79.73
+I0208 12:44:25.373349 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:28.742004 140511766632256 train.py:97] Step 1100, Time 0.21, Loss: 0.19, Accuracy: 94.26, Validation Loss: 1.24, Validation Accuracy: 77.19
+I0208 12:44:28.745354 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:32.102359 140511766632256 train.py:97] Step 1150, Time 0.21, Loss: 0.18, Accuracy: 94.28, Validation Loss: 1.17, Validation Accuracy: 79.29
+I0208 12:44:32.104773 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:35.451458 140511766632256 train.py:97] Step 1200, Time 0.21, Loss: 0.16, Accuracy: 95.06, Validation Loss: 1.18, Validation Accuracy: 78.91
+I0208 12:44:35.454603 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:38.811841 140511766632256 train.py:97] Step 1250, Time 0.21, Loss: 0.15, Accuracy: 95.09, Validation Loss: 1.03, Validation Accuracy: 80.89
+I0208 12:44:38.814997 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:42.142441 140511766632256 train.py:97] Step 1300, Time 0.21, Loss: 0.14, Accuracy: 95.37, Validation Loss: 1.46, Validation Accuracy: 76.26
+I0208 12:44:42.146580 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:45.517435 140511766632256 train.py:97] Step 1350, Time 0.20, Loss: 0.13, Accuracy: 95.52, Validation Loss: 1.10, Validation Accuracy: 75.81
+I0208 12:44:45.521050 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:48.899047 140511766632256 train.py:97] Step 1400, Time 0.21, Loss: 0.13, Accuracy: 95.61, Validation Loss: 1.35, Validation Accuracy: 76.42
+I0208 12:44:48.901331 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:52.220872 140511766632256 train.py:97] Step 1450, Time 0.21, Loss: 0.12, Accuracy: 95.74, Validation Loss: 0.80, Validation Accuracy: 84.21
+I0208 12:44:52.224378 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:55.591666 140511766632256 train.py:97] Step 1500, Time 0.21, Loss: 0.13, Accuracy: 95.64, Validation Loss: 0.87, Validation Accuracy: 82.44
+I0208 12:44:55.595800 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:44:58.915231 140511766632256 train.py:97] Step 1550, Time 0.20, Loss: 0.14, Accuracy: 95.49, Validation Loss: 1.63, Validation Accuracy: 67.26
+I0208 12:44:58.917613 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:45:02.285317 140511766632256 train.py:97] Step 1600, Time 0.21, Loss: 0.13, Accuracy: 95.40, Validation Loss: 1.80, Validation Accuracy: 67.92
+I0208 12:45:02.289515 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:45:05.659369 140511766632256 train.py:97] Step 1650, Time 0.20, Loss: 0.13, Accuracy: 95.43, Validation Loss: 1.28, Validation Accuracy: 78.46
+I0208 12:45:05.661680 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:45:08.985166 140511766632256 train.py:97] Step 1700, Time 0.20, Loss: 0.12, Accuracy: 95.93, Validation Loss: 1.08, Validation Accuracy: 75.15
+I0208 12:45:08.987849 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:45:12.356939 140511766632256 train.py:97] Step 1750, Time 0.20, Loss: 0.12, Accuracy: 95.81, Validation Loss: 1.44, Validation Accuracy: 72.11
+I0208 12:45:12.360875 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:45:15.686126 140511766632256 train.py:97] Step 1800, Time 0.17, Loss: 0.11, Accuracy: 96.15, Validation Loss: 1.24, Validation Accuracy: 79.02
+I0208 12:45:15.690340 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:45:19.066107 140511766632256 train.py:97] Step 1850, Time 0.21, Loss: 0.13, Accuracy: 95.59, Validation Loss: 1.84, Validation Accuracy: 64.38
+I0208 12:45:19.069387 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:45:22.424205 140511766632256 train.py:97] Step 1900, Time 0.21, Loss: 0.11, Accuracy: 96.13, Validation Loss: 1.72, Validation Accuracy: 75.54
+I0208 12:45:22.427788 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:45:25.764949 140511766632256 train.py:97] Step 1950, Time 0.20, Loss: 0.12, Accuracy: 95.86, Validation Loss: 1.09, Validation Accuracy: 73.61
+I0208 12:45:25.769341 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:45:29.141057 140511766632256 train.py:97] Step 2000, Time 0.21, Loss: 0.12, Accuracy: 95.92, Validation Loss: 1.59, Validation Accuracy: 63.67
+I0208 12:45:29.143501 140511766632256 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209/ckpts.
+I0208 12:45:29.160315 140511766632256 train.py:121] Finished training after 2000 steps.
+I0208 12:45:29.187346 140511766632256 main.py:98] Starting model evaluation...
+I0208 12:45:29.532215 140511766632256 eval.py:49] 
+====Results of Test set evaluation on sequential ====
+I0208 12:45:29.533078 140511766632256 eval.py:50] Confusion Matrix:
+[[327  33   0   0   2   2   3   2]
+ [  3 381   0   0   9   2   3   0]
+ [  0   1  75   0   0   2   0   0]
+ [  1   0   0 489   4   8   1   1]
+ [  0   0   0   5 111 401   1   0]
+ [  0   2   0  17 240 253   0   0]
+ [  2   4  10   0  86   7 471   2]
+ [  2 240   0   0   5   0   0 250]]
+I0208 12:45:29.533186 140511766632256 eval.py:51] Accuracy(balanced): 72.45
+I0208 12:45:29.533271 140511766632256 eval.py:52] Accuracy(Unbalanced): 68.16
+I0208 12:45:29.533462 140511766632256 eval.py:53] Accuracy(Sparse Categorical) 68.16
+I0208 12:45:29.533565 140511766632256 eval.py:54] recall: ['88.62%', '95.73%', '96.15%', '97.02%', '21.43%', '49.41%', '80.93%', '50.30%']
+I0208 12:45:29.533645 140511766632256 eval.py:55] precision: ['97.61%', '57.64%', '88.24%', '95.69%', '24.29%', '37.48%', '98.33%', '98.04%']
+I0208 12:45:29.533720 140511766632256 eval.py:56] macro_f1_score: 73.54
+I0208 12:45:29.702712 140511766632256 eval.py:60] ----Evaluation completed----
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+wandb: - 0.006 MB of 0.006 MB uploadedwandb: \ 0.006 MB of 0.006 MB uploadedwandb: | 0.006 MB of 0.006 MB uploadedwandb: / 0.006 MB of 0.006 MB uploadedwandb: - 0.006 MB of 0.006 MB uploadedwandb: \ 0.006 MB of 0.006 MB uploadedwandb: 
+wandb: Run history:
+wandb:         macro_f1_score █▃▁▂▁▂▃
+wandb:                   step ▁▁▁▂▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb: test_balanced_accuracy █▁▁▂▂▃▃
+wandb:        test_sparse_acc █▃▁▂▂▃▄
+wandb:              train_acc ▁▅▆▆▇▆▇▇▇▇▇▇▇▇▇█▇█▇▇████████████████████
+wandb:             train_loss █▄▃▃▃▄▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                val_acc ▁▁▂▃▆▂▂▄▇▄▇▆▅█▅▅▆▇▇▇▇▇▇▇▇▆▆▆██▅▅▇▆▆▇▄▆▆▄
+wandb:               val_loss ▅▇▆▄▃█▇▃▂▅▂▃▂▁▂▃▂▂▁▃▃▄▃▃▃▅▃▄▂▂▅▆▄▃▅▄▆▆▃▅
+wandb: 
+wandb: Run summary:
+wandb:         macro_f1_score 73.54068
+wandb:                   step 2000
+wandb: test_balanced_accuracy 72.44956
+wandb:        test_sparse_acc 68.16078
+wandb:              train_acc 95.92418
+wandb:             train_loss 0.12162
+wandb:                val_acc 63.66648
+wandb:               val_loss 1.58738
+wandb: 
+wandb: 🚀 View run /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-43-00-632209 at: https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/runs/km49k6ld
+wandb: ️⚡ View job at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEyNjk3ODAzMA==/version_details/v34
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240208_124301-km49k6ld/logs
+2024-02-08 12:45:39.622147: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-02-08 12:45:40.340778: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+2024-02-08 12:45:42.009575: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:45:42.079672: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:45:42.080184: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+I0208 12:45:42.087641 139987161806656 tfrecords_realworldhar.py:130] [INFO] Records already exists
+wandb: Currently logged in as: utsavpanchal (dl-lab-uni-stuttgart). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.16.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.0
+wandb: Run data is saved locally in /home/RUS_CIP/st184584/dl-lab-23w-team10/human_activity_recognition/wandb/run-20240208_124542-9adcs3od
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748
+wandb: ⭐️ View project at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy
+wandb: 🚀 View run at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/runs/9adcs3od
+I0208 12:45:43.470232 139987161806656 datasets.py:35] Preparing dataset har...
+2024-02-08 12:45:43.471987: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:45:43.472477: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:45:43.472881: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:45:43.570011: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:45:43.570395: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:45:43.570741: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:45:43.571061: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 9804 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:21:00.0, compute capability: 7.5
+I0208 12:45:46.009778 139987161806656 main.py:65] [DATASET loaded!] har
+(None, 250, 6)
+(None, 8)
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ bidirectional (Bidirection  (None, 250, 64)           9984      
+ al)                                                             
+                                                                 
+ batch_normalization (Batch  (None, 250, 64)           256       
+ Normalization)                                                  
+                                                                 
+ bidirectional_1 (Bidirecti  (None, 250, 64)           24832     
+ onal)                                                           
+                                                                 
+ batch_normalization_1 (Bat  (None, 250, 64)           256       
+ chNormalization)                                                
+                                                                 
+ bidirectional_2 (Bidirecti  (None, 250, 64)           24832     
+ onal)                                                           
+                                                                 
+ batch_normalization_2 (Bat  (None, 250, 64)           256       
+ chNormalization)                                                
+                                                                 
+ bidirectional_3 (Bidirecti  (None, 64)                24832     
+ onal)                                                           
+                                                                 
+ batch_normalization_3 (Bat  (None, 64)                256       
+ chNormalization)                                                
+                                                                 
+ dense (Dense)               (None, 16)                1040      
+                                                                 
+ dropout (Dropout)           (None, 16)                0         
+                                                                 
+ dense_1 (Dense)             (None, 8)                 136       
+                                                                 
+=================================================================
+Total params: 86680 (338.59 KB)
+Trainable params: 86168 (336.59 KB)
+Non-trainable params: 512 (2.00 KB)
+_________________________________________________________________
+I0208 12:45:47.126827 139987161806656 main.py:91] Starting model training...
+I0208 12:45:47.127315 139987161806656 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts
+2024-02-08 12:45:52.667708: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8600
+2024-02-08 12:45:53.059091: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f4fd2f0c6f0 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2024-02-08 12:45:53.059150: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): NVIDIA GeForce RTX 2080 Ti, Compute Capability 7.5
+2024-02-08 12:45:53.062777: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:255] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2024-02-08 12:45:53.159234: I ./tensorflow/compiler/jit/device_compiler.h:186] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+I0208 12:46:05.777306 139987161806656 train.py:97] Step 50, Time 3.43, Loss: 1.55, Accuracy: 45.31, Validation Loss: 1.72, Validation Accuracy: 53.29
+I0208 12:46:05.780594 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:09.965635 139987161806656 train.py:97] Step 100, Time 0.22, Loss: 0.89, Accuracy: 70.34, Validation Loss: 1.23, Validation Accuracy: 56.16
+I0208 12:46:09.970477 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:14.023309 139987161806656 train.py:97] Step 150, Time 0.23, Loss: 0.63, Accuracy: 79.65, Validation Loss: 0.93, Validation Accuracy: 67.64
+I0208 12:46:14.025703 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:18.129016 139987161806656 train.py:97] Step 200, Time 0.23, Loss: 0.49, Accuracy: 84.28, Validation Loss: 0.95, Validation Accuracy: 68.14
+I0208 12:46:18.132885 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:22.209724 139987161806656 train.py:97] Step 250, Time 0.22, Loss: 0.43, Accuracy: 86.08, Validation Loss: 0.64, Validation Accuracy: 73.77
+I0208 12:46:22.214473 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:26.287127 139987161806656 train.py:97] Step 300, Time 0.22, Loss: 0.38, Accuracy: 87.69, Validation Loss: 0.73, Validation Accuracy: 74.88
+I0208 12:46:26.290800 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:30.402445 139987161806656 train.py:97] Step 350, Time 0.22, Loss: 0.35, Accuracy: 89.59, Validation Loss: 0.99, Validation Accuracy: 68.25
+I0208 12:46:30.407212 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:34.465161 139987161806656 train.py:97] Step 400, Time 0.22, Loss: 0.32, Accuracy: 90.50, Validation Loss: 0.89, Validation Accuracy: 73.88
+I0208 12:46:34.468484 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:38.571831 139987161806656 train.py:97] Step 450, Time 0.23, Loss: 0.30, Accuracy: 91.66, Validation Loss: 1.00, Validation Accuracy: 71.23
+I0208 12:46:38.575762 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:42.669678 139987161806656 train.py:97] Step 500, Time 0.22, Loss: 0.26, Accuracy: 92.56, Validation Loss: 0.93, Validation Accuracy: 74.77
+I0208 12:46:42.673458 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:46.741090 139987161806656 train.py:97] Step 550, Time 0.22, Loss: 0.35, Accuracy: 89.52, Validation Loss: 0.85, Validation Accuracy: 74.71
+I0208 12:46:46.745916 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:50.859191 139987161806656 train.py:97] Step 600, Time 0.22, Loss: 0.28, Accuracy: 91.64, Validation Loss: 0.83, Validation Accuracy: 73.94
+I0208 12:46:50.863994 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:54.943313 139987161806656 train.py:97] Step 650, Time 0.22, Loss: 0.24, Accuracy: 93.04, Validation Loss: 0.86, Validation Accuracy: 70.73
+I0208 12:46:54.946758 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:46:59.071638 139987161806656 train.py:97] Step 700, Time 0.22, Loss: 0.23, Accuracy: 93.32, Validation Loss: 1.03, Validation Accuracy: 71.95
+I0208 12:46:59.076132 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:03.167680 139987161806656 train.py:97] Step 750, Time 0.23, Loss: 0.25, Accuracy: 92.97, Validation Loss: 1.06, Validation Accuracy: 71.78
+I0208 12:47:03.171299 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:07.259357 139987161806656 train.py:97] Step 800, Time 0.22, Loss: 0.21, Accuracy: 94.17, Validation Loss: 0.91, Validation Accuracy: 73.99
+I0208 12:47:07.263047 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:11.382830 139987161806656 train.py:97] Step 850, Time 0.23, Loss: 0.20, Accuracy: 94.45, Validation Loss: 1.13, Validation Accuracy: 72.00
+I0208 12:47:11.387566 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:15.454974 139987161806656 train.py:97] Step 900, Time 0.20, Loss: 0.18, Accuracy: 94.70, Validation Loss: 1.14, Validation Accuracy: 73.11
+I0208 12:47:15.458619 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:19.568392 139987161806656 train.py:97] Step 950, Time 0.22, Loss: 0.18, Accuracy: 94.80, Validation Loss: 0.96, Validation Accuracy: 75.26
+I0208 12:47:19.572263 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:23.665093 139987161806656 train.py:97] Step 1000, Time 0.22, Loss: 0.17, Accuracy: 95.01, Validation Loss: 1.13, Validation Accuracy: 71.34
+I0208 12:47:23.669208 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:27.757913 139987161806656 train.py:97] Step 1050, Time 0.22, Loss: 0.18, Accuracy: 95.11, Validation Loss: 1.19, Validation Accuracy: 73.38
+I0208 12:47:27.761390 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:31.873764 139987161806656 train.py:97] Step 1100, Time 0.22, Loss: 0.16, Accuracy: 95.38, Validation Loss: 1.48, Validation Accuracy: 72.34
+I0208 12:47:31.877284 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:35.987503 139987161806656 train.py:97] Step 1150, Time 0.23, Loss: 0.15, Accuracy: 95.84, Validation Loss: 1.10, Validation Accuracy: 77.25
+I0208 12:47:35.990832 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:40.072674 139987161806656 train.py:97] Step 1200, Time 0.23, Loss: 0.15, Accuracy: 95.69, Validation Loss: 1.27, Validation Accuracy: 73.72
+I0208 12:47:40.076021 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:44.169185 139987161806656 train.py:97] Step 1250, Time 0.22, Loss: 0.15, Accuracy: 95.96, Validation Loss: 1.42, Validation Accuracy: 73.05
+I0208 12:47:44.173021 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:48.256052 139987161806656 train.py:97] Step 1300, Time 0.23, Loss: 0.14, Accuracy: 96.18, Validation Loss: 1.47, Validation Accuracy: 76.26
+I0208 12:47:48.260890 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:52.375649 139987161806656 train.py:97] Step 1350, Time 0.22, Loss: 0.14, Accuracy: 95.92, Validation Loss: 1.37, Validation Accuracy: 74.27
+I0208 12:47:52.379474 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:47:56.472780 139987161806656 train.py:97] Step 1400, Time 0.22, Loss: 0.13, Accuracy: 96.25, Validation Loss: 1.11, Validation Accuracy: 77.14
+I0208 12:47:56.476232 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:00.552106 139987161806656 train.py:97] Step 1450, Time 0.22, Loss: 0.13, Accuracy: 96.28, Validation Loss: 1.29, Validation Accuracy: 74.88
+I0208 12:48:00.554389 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:04.666341 139987161806656 train.py:97] Step 1500, Time 0.22, Loss: 0.12, Accuracy: 96.29, Validation Loss: 1.04, Validation Accuracy: 76.37
+I0208 12:48:04.670068 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:08.740669 139987161806656 train.py:97] Step 1550, Time 0.22, Loss: 0.13, Accuracy: 96.31, Validation Loss: 1.58, Validation Accuracy: 66.87
+I0208 12:48:08.744684 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:12.853818 139987161806656 train.py:97] Step 1600, Time 0.22, Loss: 0.12, Accuracy: 96.38, Validation Loss: 1.23, Validation Accuracy: 78.08
+I0208 12:48:12.857287 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:16.968006 139987161806656 train.py:97] Step 1650, Time 0.22, Loss: 0.12, Accuracy: 96.50, Validation Loss: 1.40, Validation Accuracy: 75.15
+I0208 12:48:16.971510 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:21.041266 139987161806656 train.py:97] Step 1700, Time 0.22, Loss: 0.12, Accuracy: 96.62, Validation Loss: 1.49, Validation Accuracy: 73.77
+I0208 12:48:21.046768 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:25.141151 139987161806656 train.py:97] Step 1750, Time 0.22, Loss: 0.11, Accuracy: 96.55, Validation Loss: 1.20, Validation Accuracy: 77.36
+I0208 12:48:25.144716 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:29.199941 139987161806656 train.py:97] Step 1800, Time 0.19, Loss: 0.12, Accuracy: 96.26, Validation Loss: 1.40, Validation Accuracy: 72.72
+I0208 12:48:29.203484 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:33.324230 139987161806656 train.py:97] Step 1850, Time 0.23, Loss: 0.12, Accuracy: 96.86, Validation Loss: 1.55, Validation Accuracy: 76.31
+I0208 12:48:33.327794 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:37.446280 139987161806656 train.py:97] Step 1900, Time 0.22, Loss: 0.19, Accuracy: 94.50, Validation Loss: 1.01, Validation Accuracy: 76.75
+I0208 12:48:37.450388 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:41.529081 139987161806656 train.py:97] Step 1950, Time 0.23, Loss: 0.13, Accuracy: 96.20, Validation Loss: 1.60, Validation Accuracy: 70.40
+I0208 12:48:41.532394 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:45.645327 139987161806656 train.py:97] Step 2000, Time 0.22, Loss: 0.11, Accuracy: 96.75, Validation Loss: 1.92, Validation Accuracy: 70.46
+I0208 12:48:45.648876 139987161806656 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748/ckpts.
+I0208 12:48:45.673157 139987161806656 train.py:121] Finished training after 2000 steps.
+I0208 12:48:45.699786 139987161806656 main.py:98] Starting model evaluation...
+I0208 12:48:46.137259 139987161806656 eval.py:49] 
+====Results of Test set evaluation on sequential ====
+I0208 12:48:46.137738 139987161806656 eval.py:50] Confusion Matrix:
+[[278  76   0   0   2   6   2   5]
+ [  2 382   0   0   7   7   0   0]
+ [  0   0  76   0   0   0   2   0]
+ [  1   0   0 492   2   9   0   0]
+ [  0   3   0   6   2 507   0   0]
+ [  0   0   0  75 172 265   0   0]
+ [  0   7  10   1  87   5 471   1]
+ [  2 237   0   0  37   0   5 216]]
+I0208 12:48:46.137846 139987161806656 eval.py:51] Accuracy(balanced): 67.86
+I0208 12:48:46.137940 139987161806656 eval.py:52] Accuracy(Unbalanced): 63.10
+I0208 12:48:46.138128 139987161806656 eval.py:53] Accuracy(Sparse Categorical) 63.10
+I0208 12:48:46.138228 139987161806656 eval.py:54] recall: ['75.34%', '95.98%', '97.44%', '97.62%', '0.39%', '51.76%', '80.93%', '43.46%']
+I0208 12:48:46.138308 139987161806656 eval.py:55] precision: ['98.23%', '54.18%', '88.37%', '85.71%', '0.65%', '33.17%', '98.12%', '97.30%']
+I0208 12:48:46.138384 139987161806656 eval.py:56] macro_f1_score: 68.66
+I0208 12:48:46.302964 139987161806656 eval.py:60] ----Evaluation completed----
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+wandb: 
+wandb: Run history:
+wandb:         macro_f1_score █▄▁▁▁▂▃
+wandb:                   step ▁▁▁▂▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb: test_balanced_accuracy █▁▁▁▂▃▄
+wandb:        test_sparse_acc █▃▁▁▂▃▃
+wandb:              train_acc ▁▄▆▆▇▇▇▇▇▇▇▇▇█▇█████████████████████████
+wandb:             train_loss █▅▄▃▃▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                val_acc ▁▂▅▅▇▇▅▇▆▇▇▇▆▆▆▇▆▇▇▆▇▆█▇▇▇▇█▇█▅█▇▇█▆██▆▆
+wandb:               val_loss ▇▄▃▃▁▂▃▂▃▃▂▂▂▃▃▂▄▄▃▄▄▆▄▄▅▆▅▄▅▃▆▄▅▆▄▅▆▃▆█
+wandb: 
+wandb: Run summary:
+wandb:         macro_f1_score 68.65601
+wandb:                   step 2000
+wandb: test_balanced_accuracy 67.86326
+wandb:        test_sparse_acc 63.10006
+wandb:              train_acc 96.74992
+wandb:             train_loss 0.1057
+wandb:                val_acc 70.45831
+wandb:               val_loss 1.91888
+wandb: 
+wandb: 🚀 View run /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-45-42-080748 at: https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/runs/9adcs3od
+wandb: ️⚡ View job at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEyNjk3ODAzMA==/version_details/v34
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240208_124542-9adcs3od/logs
+2024-02-08 12:48:54.766208: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-02-08 12:48:55.270603: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+2024-02-08 12:48:56.567514: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:48:56.587954: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:48:56.588351: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+I0208 12:48:56.593576 139821180413760 tfrecords_realworldhar.py:130] [INFO] Records already exists
+wandb: Currently logged in as: utsavpanchal (dl-lab-uni-stuttgart). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.16.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.0
+wandb: Run data is saved locally in /home/RUS_CIP/st184584/dl-lab-23w-team10/human_activity_recognition/wandb/run-20240208_124857-2521odwj
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821
+wandb: ⭐️ View project at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy
+wandb: 🚀 View run at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/runs/2521odwj
+I0208 12:48:57.923710 139821180413760 datasets.py:35] Preparing dataset har...
+2024-02-08 12:48:57.925389: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:48:57.925818: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:48:57.926172: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:48:58.015367: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:48:58.015767: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:48:58.016124: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:48:58.016455: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 9804 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:21:00.0, compute capability: 7.5
+I0208 12:49:00.217964 139821180413760 main.py:65] [DATASET loaded!] har
+(None, 250, 6)
+(None, 8)
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ gru (GRU)                   (None, 250, 32)           3840      
+                                                                 
+ batch_normalization (Batch  (None, 250, 32)           128       
+ Normalization)                                                  
+                                                                 
+ gru_1 (GRU)                 (None, 250, 32)           6336      
+                                                                 
+ batch_normalization_1 (Bat  (None, 250, 32)           128       
+ chNormalization)                                                
+                                                                 
+ gru_2 (GRU)                 (None, 250, 32)           6336      
+                                                                 
+ batch_normalization_2 (Bat  (None, 250, 32)           128       
+ chNormalization)                                                
+                                                                 
+ gru_3 (GRU)                 (None, 32)                6336      
+                                                                 
+ batch_normalization_3 (Bat  (None, 32)                128       
+ chNormalization)                                                
+                                                                 
+ dense (Dense)               (None, 16)                528       
+                                                                 
+ dropout (Dropout)           (None, 16)                0         
+                                                                 
+ dense_1 (Dense)             (None, 8)                 136       
+                                                                 
+=================================================================
+Total params: 24024 (93.84 KB)
+Trainable params: 23768 (92.84 KB)
+Non-trainable params: 256 (1.00 KB)
+_________________________________________________________________
+I0208 12:49:00.681412 139821180413760 main.py:91] Starting model training...
+I0208 12:49:00.681892 139821180413760 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts
+2024-02-08 12:49:03.670290: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8600
+2024-02-08 12:49:03.874484: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f293e507160 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2024-02-08 12:49:03.874532: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): NVIDIA GeForce RTX 2080 Ti, Compute Capability 7.5
+2024-02-08 12:49:03.877944: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:255] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2024-02-08 12:49:03.972941: I ./tensorflow/compiler/jit/device_compiler.h:186] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+I0208 12:49:10.626803 139821180413760 train.py:97] Step 50, Time 1.68, Loss: 1.95, Accuracy: 27.53, Validation Loss: 1.84, Validation Accuracy: 26.67
+I0208 12:49:10.629313 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:12.687610 139821180413760 train.py:97] Step 100, Time 0.12, Loss: 1.57, Accuracy: 39.79, Validation Loss: 1.74, Validation Accuracy: 35.62
+I0208 12:49:12.690235 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:14.663964 139821180413760 train.py:97] Step 150, Time 0.13, Loss: 1.31, Accuracy: 51.98, Validation Loss: 1.34, Validation Accuracy: 50.80
+I0208 12:49:14.667280 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:16.620329 139821180413760 train.py:97] Step 200, Time 0.13, Loss: 1.06, Accuracy: 62.37, Validation Loss: 0.92, Validation Accuracy: 66.70
+I0208 12:49:16.624416 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:18.665546 139821180413760 train.py:97] Step 250, Time 0.20, Loss: 0.85, Accuracy: 70.41, Validation Loss: 0.92, Validation Accuracy: 68.75
+I0208 12:49:18.669269 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:20.607126 139821180413760 train.py:97] Step 300, Time 0.12, Loss: 0.69, Accuracy: 76.81, Validation Loss: 0.71, Validation Accuracy: 73.44
+I0208 12:49:20.610659 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:22.555700 139821180413760 train.py:97] Step 350, Time 0.13, Loss: 0.55, Accuracy: 83.18, Validation Loss: 0.82, Validation Accuracy: 70.68
+I0208 12:49:22.559805 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:24.504507 139821180413760 train.py:97] Step 400, Time 0.13, Loss: 0.46, Accuracy: 86.41, Validation Loss: 0.58, Validation Accuracy: 77.58
+I0208 12:49:24.508031 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:26.465494 139821180413760 train.py:97] Step 450, Time 0.13, Loss: 0.41, Accuracy: 87.67, Validation Loss: 0.56, Validation Accuracy: 78.30
+I0208 12:49:26.469831 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:28.425074 139821180413760 train.py:97] Step 500, Time 0.12, Loss: 0.37, Accuracy: 88.52, Validation Loss: 0.55, Validation Accuracy: 78.19
+I0208 12:49:28.428841 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:30.366956 139821180413760 train.py:97] Step 550, Time 0.12, Loss: 0.34, Accuracy: 89.08, Validation Loss: 0.60, Validation Accuracy: 78.85
+I0208 12:49:30.371174 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:32.318847 139821180413760 train.py:97] Step 600, Time 0.12, Loss: 0.32, Accuracy: 90.08, Validation Loss: 0.99, Validation Accuracy: 74.99
+I0208 12:49:32.322565 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:34.259786 139821180413760 train.py:97] Step 650, Time 0.13, Loss: 0.31, Accuracy: 90.08, Validation Loss: 0.86, Validation Accuracy: 74.82
+I0208 12:49:34.262345 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:36.218624 139821180413760 train.py:97] Step 700, Time 0.13, Loss: 0.30, Accuracy: 90.79, Validation Loss: 0.81, Validation Accuracy: 78.41
+I0208 12:49:36.221006 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:38.156083 139821180413760 train.py:97] Step 750, Time 0.13, Loss: 0.26, Accuracy: 91.78, Validation Loss: 1.19, Validation Accuracy: 74.21
+I0208 12:49:38.160465 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:40.093220 139821180413760 train.py:97] Step 800, Time 0.12, Loss: 0.25, Accuracy: 92.34, Validation Loss: 1.34, Validation Accuracy: 74.05
+I0208 12:49:40.096169 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:42.048547 139821180413760 train.py:97] Step 850, Time 0.13, Loss: 0.24, Accuracy: 93.08, Validation Loss: 1.41, Validation Accuracy: 72.17
+I0208 12:49:42.054091 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:44.008627 139821180413760 train.py:97] Step 900, Time 0.13, Loss: 0.23, Accuracy: 93.39, Validation Loss: 1.43, Validation Accuracy: 77.36
+I0208 12:49:44.011703 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:45.968767 139821180413760 train.py:97] Step 950, Time 0.12, Loss: 0.22, Accuracy: 93.77, Validation Loss: 1.44, Validation Accuracy: 73.11
+I0208 12:49:45.972711 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:47.921571 139821180413760 train.py:97] Step 1000, Time 0.13, Loss: 0.22, Accuracy: 93.44, Validation Loss: 1.58, Validation Accuracy: 74.93
+I0208 12:49:47.924079 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:49.865368 139821180413760 train.py:97] Step 1050, Time 0.12, Loss: 0.21, Accuracy: 93.86, Validation Loss: 1.44, Validation Accuracy: 74.60
+I0208 12:49:49.870250 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:51.819353 139821180413760 train.py:97] Step 1100, Time 0.12, Loss: 0.21, Accuracy: 93.91, Validation Loss: 1.51, Validation Accuracy: 75.37
+I0208 12:49:51.823169 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:53.780184 139821180413760 train.py:97] Step 1150, Time 0.14, Loss: 0.20, Accuracy: 94.06, Validation Loss: 1.59, Validation Accuracy: 75.15
+I0208 12:49:53.783653 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:55.731076 139821180413760 train.py:97] Step 1200, Time 0.13, Loss: 0.19, Accuracy: 94.32, Validation Loss: 1.55, Validation Accuracy: 76.42
+I0208 12:49:55.734564 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:57.669483 139821180413760 train.py:97] Step 1250, Time 0.12, Loss: 0.21, Accuracy: 94.17, Validation Loss: 1.61, Validation Accuracy: 77.19
+I0208 12:49:57.672966 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:49:59.619238 139821180413760 train.py:97] Step 1300, Time 0.13, Loss: 0.20, Accuracy: 94.02, Validation Loss: 1.63, Validation Accuracy: 72.67
+I0208 12:49:59.622838 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:01.575539 139821180413760 train.py:97] Step 1350, Time 0.12, Loss: 0.18, Accuracy: 94.63, Validation Loss: 1.86, Validation Accuracy: 75.32
+I0208 12:50:01.579624 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:03.536998 139821180413760 train.py:97] Step 1400, Time 0.12, Loss: 0.17, Accuracy: 94.66, Validation Loss: 1.76, Validation Accuracy: 77.64
+I0208 12:50:03.540672 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:05.474328 139821180413760 train.py:97] Step 1450, Time 0.13, Loss: 0.17, Accuracy: 94.69, Validation Loss: 2.43, Validation Accuracy: 74.38
+I0208 12:50:05.477822 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:07.424057 139821180413760 train.py:97] Step 1500, Time 0.12, Loss: 0.17, Accuracy: 94.97, Validation Loss: 2.70, Validation Accuracy: 70.68
+I0208 12:50:07.428961 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:09.354761 139821180413760 train.py:97] Step 1550, Time 0.12, Loss: 0.17, Accuracy: 95.02, Validation Loss: 2.23, Validation Accuracy: 79.73
+I0208 12:50:09.358243 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:11.290322 139821180413760 train.py:97] Step 1600, Time 0.12, Loss: 0.16, Accuracy: 95.22, Validation Loss: 2.11, Validation Accuracy: 77.25
+I0208 12:50:11.293815 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:13.249534 139821180413760 train.py:97] Step 1650, Time 0.12, Loss: 0.15, Accuracy: 95.20, Validation Loss: 2.50, Validation Accuracy: 79.57
+I0208 12:50:13.253953 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:15.201684 139821180413760 train.py:97] Step 1700, Time 0.12, Loss: 0.15, Accuracy: 95.41, Validation Loss: 2.13, Validation Accuracy: 77.64
+I0208 12:50:15.206221 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:17.144542 139821180413760 train.py:97] Step 1750, Time 0.12, Loss: 0.15, Accuracy: 95.23, Validation Loss: 2.46, Validation Accuracy: 78.19
+I0208 12:50:17.148749 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:19.092375 139821180413760 train.py:97] Step 1800, Time 0.11, Loss: 0.15, Accuracy: 95.35, Validation Loss: 1.99, Validation Accuracy: 73.83
+I0208 12:50:19.095752 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:21.024945 139821180413760 train.py:97] Step 1850, Time 0.11, Loss: 0.15, Accuracy: 95.45, Validation Loss: 2.56, Validation Accuracy: 77.14
+I0208 12:50:21.028357 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:22.989768 139821180413760 train.py:97] Step 1900, Time 0.13, Loss: 0.14, Accuracy: 95.70, Validation Loss: 3.09, Validation Accuracy: 64.49
+I0208 12:50:22.993578 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:24.949817 139821180413760 train.py:97] Step 1950, Time 0.13, Loss: 0.14, Accuracy: 95.61, Validation Loss: 2.31, Validation Accuracy: 80.62
+I0208 12:50:24.955417 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:26.915458 139821180413760 train.py:97] Step 2000, Time 0.13, Loss: 0.14, Accuracy: 95.81, Validation Loss: 2.02, Validation Accuracy: 77.91
+I0208 12:50:26.920939 139821180413760 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821/ckpts.
+I0208 12:50:26.939821 139821180413760 train.py:121] Finished training after 2000 steps.
+I0208 12:50:26.965008 139821180413760 main.py:98] Starting model evaluation...
+I0208 12:50:27.253784 139821180413760 eval.py:49] 
+====Results of Test set evaluation on sequential ====
+I0208 12:50:27.254305 139821180413760 eval.py:50] Confusion Matrix:
+[[330  27   0   0   1   6   1   4]
+ [ 11 357   9   0  10   3   8   0]
+ [  1   0  76   0   0   0   1   0]
+ [  2   1   0 488   4   9   0   0]
+ [  0   0   1   0   1 516   0   0]
+ [  0   0   0   0 205 306   1   0]
+ [  1   6   1   1  85   7 480   1]
+ [  1 242   0   0   7   0   3 244]]
+I0208 12:50:27.254415 139821180413760 eval.py:51] Accuracy(balanced): 70.61
+I0208 12:50:27.254500 139821180413760 eval.py:52] Accuracy(Unbalanced): 65.99
+I0208 12:50:27.254688 139821180413760 eval.py:53] Accuracy(Sparse Categorical) 65.99
+I0208 12:50:27.254802 139821180413760 eval.py:54] recall: ['89.43%', '89.70%', '97.44%', '96.83%', '0.19%', '59.77%', '82.47%', '49.09%']
+I0208 12:50:27.254911 139821180413760 eval.py:55] precision: ['95.38%', '56.40%', '87.36%', '99.80%', '0.32%', '36.13%', '97.17%', '97.99%']
+I0208 12:50:27.255017 139821180413760 eval.py:56] macro_f1_score: 70.96
+I0208 12:50:27.420892 139821180413760 eval.py:60] ----Evaluation completed----
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+wandb: - 0.006 MB of 0.006 MB uploadedwandb: \ 0.006 MB of 0.025 MB uploadedwandb: | 0.027 MB of 0.027 MB uploadedwandb: 
+wandb: Run history:
+wandb:         macro_f1_score █▂▁▂▃▃▄
+wandb:                   step ▁▁▁▂▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb: test_balanced_accuracy █▂▁▂▂▃▄
+wandb:        test_sparse_acc █▃▁▂▂▃▃
+wandb:              train_acc ▁▂▄▅▅▆▇▇▇▇▇▇▇▇██████████████████████████
+wandb:             train_loss █▇▆▅▄▃▃▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                val_acc ▁▂▄▆▆▇▇████▇▇█▇▇▇█▇▇▇▇▇▇█▇▇█▇▇█████▇█▆██
+wandb:               val_loss ▅▄▃▂▂▁▂▁▁▁▁▂▂▂▃▃▃▃▃▄▃▄▄▄▄▄▅▄▆▇▆▅▆▅▆▅▇█▆▅
+wandb: 
+wandb: Run summary:
+wandb:         macro_f1_score 70.96381
+wandb:                   step 2000
+wandb: test_balanced_accuracy 70.61477
+wandb:        test_sparse_acc 65.99191
+wandb:              train_acc 95.81435
+wandb:             train_loss 0.13985
+wandb:                val_acc 77.91275
+wandb:               val_loss 2.01703
+wandb: 
+wandb: 🚀 View run /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-48-56-588821 at: https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/runs/2521odwj
+wandb: ️⚡ View job at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEyNjk3ODAzMA==/version_details/v34
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240208_124857-2521odwj/logs
+2024-02-08 12:50:34.096143: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-02-08 12:50:34.592555: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+2024-02-08 12:50:35.903655: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:50:35.923276: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:50:35.923702: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+I0208 12:50:35.928898 140105793976128 tfrecords_realworldhar.py:130] [INFO] Records already exists
+wandb: Currently logged in as: utsavpanchal (dl-lab-uni-stuttgart). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.16.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.0
+wandb: Run data is saved locally in /home/RUS_CIP/st184584/dl-lab-23w-team10/human_activity_recognition/wandb/run-20240208_125036-cvon38sl
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178
+wandb: ⭐️ View project at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy
+wandb: 🚀 View run at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/runs/cvon38sl
+I0208 12:50:37.300960 140105793976128 datasets.py:35] Preparing dataset har...
+2024-02-08 12:50:37.302786: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:50:37.303236: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:50:37.303608: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:50:37.378902: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:50:37.379293: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:50:37.379604: I tensorflow/compiler/xla/stream_executor/cuda/cuda_gpu_executor.cc:995] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-02-08 12:50:37.379953: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 9804 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:21:00.0, compute capability: 7.5
+I0208 12:50:39.827685 140105793976128 main.py:65] [DATASET loaded!] har
+(None, 250, 6)
+(None, 8)
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ conv1d (Conv1D)             (None, 248, 64)           1216      
+                                                                 
+ batch_normalization (Batch  (None, 248, 64)           256       
+ Normalization)                                                  
+                                                                 
+ dropout (Dropout)           (None, 248, 64)           0         
+                                                                 
+ conv1d_1 (Conv1D)           (None, 246, 64)           12352     
+                                                                 
+ batch_normalization_1 (Bat  (None, 246, 64)           256       
+ chNormalization)                                                
+                                                                 
+ dropout_1 (Dropout)         (None, 246, 64)           0         
+                                                                 
+ global_max_pooling1d (Glob  (None, 64)                0         
+ alMaxPooling1D)                                                 
+                                                                 
+ dense (Dense)               (None, 16)                1040      
+                                                                 
+ dropout_2 (Dropout)         (None, 16)                0         
+                                                                 
+ dense_1 (Dense)             (None, 8)                 136       
+                                                                 
+=================================================================
+Total params: 15256 (59.59 KB)
+Trainable params: 15000 (58.59 KB)
+Non-trainable params: 256 (1.00 KB)
+_________________________________________________________________
+I0208 12:50:39.895369 140105793976128 main.py:91] Starting model training...
+I0208 12:50:39.895842 140105793976128 train.py:26] Initializing from scratch. Checkpoints stored in /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts
+2024-02-08 12:50:40.689230: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8600
+2024-02-08 12:50:40.964781: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f68617a56d0 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2024-02-08 12:50:40.964826: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): NVIDIA GeForce RTX 2080 Ti, Compute Capability 7.5
+2024-02-08 12:50:40.968018: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:255] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2024-02-08 12:50:41.066986: I ./tensorflow/compiler/jit/device_compiler.h:186] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+I0208 12:50:43.223000 140105793976128 train.py:97] Step 50, Time 0.27, Loss: 2.64, Accuracy: 36.86, Validation Loss: 1.71, Validation Accuracy: 48.92
+I0208 12:50:43.227140 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:43.914407 140105793976128 train.py:97] Step 100, Time 0.07, Loss: 1.17, Accuracy: 53.26, Validation Loss: 1.52, Validation Accuracy: 60.74
+I0208 12:50:43.917881 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:44.610941 140105793976128 train.py:97] Step 150, Time 0.11, Loss: 0.99, Accuracy: 61.52, Validation Loss: 1.35, Validation Accuracy: 64.88
+I0208 12:50:44.613506 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:45.195461 140105793976128 train.py:97] Step 200, Time 0.09, Loss: 0.88, Accuracy: 67.16, Validation Loss: 1.18, Validation Accuracy: 67.81
+I0208 12:50:45.198009 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:45.729936 140105793976128 train.py:97] Step 250, Time 0.06, Loss: 0.80, Accuracy: 71.24, Validation Loss: 1.03, Validation Accuracy: 72.23
+I0208 12:50:45.732455 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:46.324820 140105793976128 train.py:97] Step 300, Time 0.07, Loss: 0.73, Accuracy: 73.99, Validation Loss: 0.91, Validation Accuracy: 73.27
+I0208 12:50:46.331185 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:46.953495 140105793976128 train.py:97] Step 350, Time 0.11, Loss: 0.70, Accuracy: 74.86, Validation Loss: 0.84, Validation Accuracy: 76.86
+I0208 12:50:46.957629 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:47.543725 140105793976128 train.py:97] Step 400, Time 0.11, Loss: 0.66, Accuracy: 76.50, Validation Loss: 0.75, Validation Accuracy: 79.90
+I0208 12:50:47.546510 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:48.121213 140105793976128 train.py:97] Step 450, Time 0.10, Loss: 0.62, Accuracy: 78.00, Validation Loss: 0.71, Validation Accuracy: 79.79
+I0208 12:50:48.124610 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:48.699296 140105793976128 train.py:97] Step 500, Time 0.10, Loss: 0.58, Accuracy: 79.78, Validation Loss: 0.71, Validation Accuracy: 77.97
+I0208 12:50:48.702821 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:49.264443 140105793976128 train.py:97] Step 550, Time 0.10, Loss: 0.55, Accuracy: 81.17, Validation Loss: 0.66, Validation Accuracy: 79.68
+I0208 12:50:49.267369 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:49.840746 140105793976128 train.py:97] Step 600, Time 0.10, Loss: 0.54, Accuracy: 81.28, Validation Loss: 0.62, Validation Accuracy: 81.94
+I0208 12:50:49.843987 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:50.403673 140105793976128 train.py:97] Step 650, Time 0.09, Loss: 0.52, Accuracy: 82.13, Validation Loss: 0.62, Validation Accuracy: 81.61
+I0208 12:50:50.407164 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:50.976135 140105793976128 train.py:97] Step 700, Time 0.10, Loss: 0.49, Accuracy: 83.35, Validation Loss: 0.65, Validation Accuracy: 78.08
+I0208 12:50:50.979509 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:51.560295 140105793976128 train.py:97] Step 750, Time 0.11, Loss: 0.46, Accuracy: 83.75, Validation Loss: 0.66, Validation Accuracy: 76.97
+I0208 12:50:51.563017 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:52.115704 140105793976128 train.py:97] Step 800, Time 0.09, Loss: 0.46, Accuracy: 84.04, Validation Loss: 0.64, Validation Accuracy: 78.69
+I0208 12:50:52.119079 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:52.697958 140105793976128 train.py:97] Step 850, Time 0.11, Loss: 0.44, Accuracy: 84.51, Validation Loss: 0.62, Validation Accuracy: 79.90
+I0208 12:50:52.701705 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:53.255435 140105793976128 train.py:97] Step 900, Time 0.08, Loss: 0.43, Accuracy: 84.82, Validation Loss: 0.60, Validation Accuracy: 80.45
+I0208 12:50:53.259036 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:53.834295 140105793976128 train.py:97] Step 950, Time 0.10, Loss: 0.42, Accuracy: 85.37, Validation Loss: 0.62, Validation Accuracy: 79.35
+I0208 12:50:53.838318 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:54.427466 140105793976128 train.py:97] Step 1000, Time 0.11, Loss: 0.41, Accuracy: 85.89, Validation Loss: 0.65, Validation Accuracy: 77.75
+I0208 12:50:54.431334 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:54.996718 140105793976128 train.py:97] Step 1050, Time 0.10, Loss: 0.40, Accuracy: 86.13, Validation Loss: 0.56, Validation Accuracy: 82.27
+I0208 12:50:55.000882 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:55.582502 140105793976128 train.py:97] Step 1100, Time 0.11, Loss: 0.39, Accuracy: 86.31, Validation Loss: 0.62, Validation Accuracy: 79.51
+I0208 12:50:55.586470 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:56.119344 140105793976128 train.py:97] Step 1150, Time 0.06, Loss: 0.39, Accuracy: 86.91, Validation Loss: 0.59, Validation Accuracy: 80.95
+I0208 12:50:56.121806 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:56.699289 140105793976128 train.py:97] Step 1200, Time 0.11, Loss: 0.38, Accuracy: 86.92, Validation Loss: 0.53, Validation Accuracy: 83.55
+I0208 12:50:56.702064 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:57.282664 140105793976128 train.py:97] Step 1250, Time 0.10, Loss: 0.37, Accuracy: 87.37, Validation Loss: 0.54, Validation Accuracy: 84.37
+I0208 12:50:57.286275 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:57.849132 140105793976128 train.py:97] Step 1300, Time 0.10, Loss: 0.36, Accuracy: 87.47, Validation Loss: 0.51, Validation Accuracy: 86.20
+I0208 12:50:57.852559 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:58.434299 140105793976128 train.py:97] Step 1350, Time 0.11, Loss: 0.35, Accuracy: 87.90, Validation Loss: 0.55, Validation Accuracy: 84.04
+I0208 12:50:58.437782 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:58.995076 140105793976128 train.py:97] Step 1400, Time 0.09, Loss: 0.34, Accuracy: 88.08, Validation Loss: 0.54, Validation Accuracy: 84.70
+I0208 12:50:58.997745 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:50:59.530019 140105793976128 train.py:97] Step 1450, Time 0.06, Loss: 0.34, Accuracy: 88.04, Validation Loss: 0.57, Validation Accuracy: 83.05
+I0208 12:50:59.532455 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:51:00.105319 140105793976128 train.py:97] Step 1500, Time 0.10, Loss: 0.33, Accuracy: 88.50, Validation Loss: 0.49, Validation Accuracy: 86.91
+I0208 12:51:00.109462 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:51:00.663114 140105793976128 train.py:97] Step 1550, Time 0.08, Loss: 0.33, Accuracy: 88.60, Validation Loss: 0.52, Validation Accuracy: 86.31
+I0208 12:51:00.665826 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:51:01.256902 140105793976128 train.py:97] Step 1600, Time 0.11, Loss: 0.33, Accuracy: 88.87, Validation Loss: 0.52, Validation Accuracy: 85.59
+I0208 12:51:01.260015 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:51:01.834222 140105793976128 train.py:97] Step 1650, Time 0.10, Loss: 0.32, Accuracy: 89.05, Validation Loss: 0.53, Validation Accuracy: 84.26
+I0208 12:51:01.840556 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:51:02.417901 140105793976128 train.py:97] Step 1700, Time 0.11, Loss: 0.32, Accuracy: 88.94, Validation Loss: 0.53, Validation Accuracy: 85.48
+I0208 12:51:02.420917 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:51:03.006644 140105793976128 train.py:97] Step 1750, Time 0.11, Loss: 0.32, Accuracy: 89.04, Validation Loss: 0.53, Validation Accuracy: 85.48
+I0208 12:51:03.009630 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:51:03.569541 140105793976128 train.py:97] Step 1800, Time 0.09, Loss: 0.31, Accuracy: 89.28, Validation Loss: 0.51, Validation Accuracy: 86.25
+I0208 12:51:03.572587 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:51:04.157853 140105793976128 train.py:97] Step 1850, Time 0.11, Loss: 0.31, Accuracy: 89.33, Validation Loss: 0.54, Validation Accuracy: 85.04
+I0208 12:51:04.161219 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:51:04.740727 140105793976128 train.py:97] Step 1900, Time 0.10, Loss: 0.30, Accuracy: 89.75, Validation Loss: 0.52, Validation Accuracy: 84.70
+I0208 12:51:04.744459 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:51:05.306508 140105793976128 train.py:97] Step 1950, Time 0.09, Loss: 0.29, Accuracy: 89.78, Validation Loss: 0.50, Validation Accuracy: 85.31
+I0208 12:51:05.309519 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:51:05.871270 140105793976128 train.py:97] Step 2000, Time 0.09, Loss: 0.29, Accuracy: 89.92, Validation Loss: 0.55, Validation Accuracy: 85.42
+I0208 12:51:05.873898 140105793976128 train.py:117] Saving checkpoint to /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178/ckpts.
+I0208 12:51:05.886081 140105793976128 train.py:121] Finished training after 2000 steps.
+I0208 12:51:05.917359 140105793976128 main.py:98] Starting model evaluation...
+I0208 12:51:06.137320 140105793976128 eval.py:49] 
+====Results of Test set evaluation on sequential ====
+I0208 12:51:06.137844 140105793976128 eval.py:50] Confusion Matrix:
+[[337  12   0   0   0   3   0  17]
+ [  3 382   0   0   8   5   0   0]
+ [  0   0  72   0   0   0   6   0]
+ [  0   1   0 487   2  11   0   3]
+ [  0   4   0   0   2 512   0   0]
+ [  0   0   0   0   6 505   0   1]
+ [ 16   6   8   0  61  15 469   7]
+ [ 12 259   0   0   0   4   0 222]]
+I0208 12:51:06.137966 140105793976128 eval.py:51] Accuracy(balanced): 75.06
+I0208 12:51:06.138074 140105793976128 eval.py:52] Accuracy(Unbalanced): 71.60
+I0208 12:51:06.138283 140105793976128 eval.py:53] Accuracy(Sparse Categorical) 71.60
+I0208 12:51:06.138420 140105793976128 eval.py:54] recall: ['91.33%', '95.98%', '92.31%', '96.63%', '0.39%', '98.63%', '80.58%', '44.67%']
+I0208 12:51:06.138520 140105793976128 eval.py:55] precision: ['91.58%', '57.53%', '90.00%', '100.00%', '2.53%', '47.87%', '98.74%', '88.80%']
+I0208 12:51:06.138603 140105793976128 eval.py:56] macro_f1_score: 73.57
+I0208 12:51:06.328661 140105793976128 eval.py:60] ----Evaluation completed----
+/usr/lib/python3/dist-packages/requests/__init__.py:89: RequestsDependencyWarning: urllib3 (2.1.0) or chardet (5.2.0) doesn't match a supported version!
+  warnings.warn("urllib3 ({}) or chardet ({}) doesn't match a supported "
+wandb: - 0.006 MB of 0.006 MB uploadedwandb: \ 0.006 MB of 0.027 MB uploadedwandb: | 0.007 MB of 0.027 MB uploadedwandb: 
+wandb: Run history:
+wandb:         macro_f1_score █▆▂▁▁▂▃
+wandb:                   step ▁▁▁▂▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb: test_balanced_accuracy █▃▂▁▂▃▂
+wandb:        test_sparse_acc █▄▁▁▁▂▂
+wandb:              train_acc ▁▃▄▅▆▆▆▆▆▇▇▇▇▇▇▇▇▇▇▇▇███████████████████
+wandb:             train_loss █▄▃▃▃▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                val_acc ▁▃▄▄▅▅▆▇▇▆▇▇▇▆▆▆▇▇▇▆▇▇▇▇██▇█▇███████████
+wandb:               val_loss █▇▆▅▄▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▁▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb:         macro_f1_score 73.56798
+wandb:                   step 2000
+wandb: test_balanced_accuracy 75.0642
+wandb:        test_sparse_acc 71.60208
+wandb:              train_acc 89.92434
+wandb:             train_loss 0.29251
+wandb:                val_acc 85.42242
+wandb:               val_loss 0.55492
+wandb: 
+wandb: 🚀 View run /home/RUS_CIP/st184584/dl-lab-23w-team10/experiments_har/run_2024-02-08T12-50-35-924178 at: https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/runs/cvon38sl
+wandb: ️⚡ View job at https://wandb.ai/dl-lab-uni-stuttgart/diabetic-retinopathy/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEyNjk3ODAzMA==/version_details/v34
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240208_125036-cvon38sl/logs

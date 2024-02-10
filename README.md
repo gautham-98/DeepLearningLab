@@ -3,7 +3,4 @@
 - Utsav Panchal (st184584)
 
 # How to run the code
-to do
-
-# Results
-to do
+Follow the readme instructions inside the particular project to run the code. 
