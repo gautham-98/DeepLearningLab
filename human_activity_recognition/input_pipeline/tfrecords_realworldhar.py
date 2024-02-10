@@ -114,16 +114,16 @@ def write_as_tfrecord(features, labels, filepath):
 
 def resample_data(features, labels):
     features_resampled = np.empty((0, features.shape[1], features.shape[2]))
-    labels_resampeld = np.empty((0, labels.shape[1]))
+    labels_resampled = np.empty((0, labels.shape[1]))
     activities, activity_counts = np.unique(labels, return_counts=True)
     max_act = np.max(activity_counts)
     for activity in activities:
         activity_indices = np.where(labels == activity)[0]
         indices = np.random.choice(activity_indices, size=max_act, replace=True)
-        labels_resampeld = np.append(labels_resampeld, labels[indices], axis=0)
+        labels_resampled = np.append(labels_resampled, labels[indices], axis=0)
         features_resampled = np.append(features_resampled, features[indices], axis=0)
 
-    return features_resampled, labels_resampeld 
+    return features_resampled, labels_resampled 
 
 
 @gin.configurable
