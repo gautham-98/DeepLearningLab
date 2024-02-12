@@ -8,6 +8,8 @@ from sklearn.utils import shuffle
 import re
 import matplotlib.pyplot as plt
 
+from input_pipeline.visualise_har import visualise_HAR
+
 
 
 # tf.window() does not create exact window_size samples, so we need to define out own custom window maker. 
@@ -71,7 +73,10 @@ def resample_data(features, labels):
 
    
 @gin.configurable
-def make_tfrecords(data_dir, target_dir, window_length, shift):
+def make_tfrecords(data_dir, target_dir, window_length, shift, visualise_expt):
+    if visualise_expt:
+       visualise_HAR(visualise_expt)
+
     if os.path.exists(target_dir):
         logging.info("[INFO] Records already exists")
         return 0
