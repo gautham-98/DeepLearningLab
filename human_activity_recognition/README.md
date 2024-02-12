@@ -38,9 +38,9 @@ The HAPT dataset can be visualised by setting the experiment number to be visual
 make_tfrecords.visualise_expt = 1
 ```
 The visualisation of experiment number 1 is shown below.
-<div style="float:left;margin:0 5px 10px 0" markdown="1">
+
  ![visualise_har](https://media.github.tik.uni-stuttgart.de/user/7666/files/76819a11-8bb9-46c5-b7da-b15c0795887f)
-</div>
+
 
 ## Models  
 
