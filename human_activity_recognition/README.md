@@ -32,6 +32,15 @@ If you are training the model using Real World (HAR) dataset, additionally you n
 this you must change the bodypart parameter in [main.py](/human_activity_recognition/main.py) line no. 54. 
 The data is available for the following body parts: ["chest", "forearm", "head", "shin", "thigh", "upperarm", "waist"]
 
+##Dataset Visualisation
+The HAPT dataset can be visualised by setting the experiment number to be visualised in the **configs/config.gin** file. 
+'''
+make_tfrecords.visualise_expt = 1
+'''
+The visualisation of experiment number 1 is shown below.
+![visualise_har](https://media.github.tik.uni-stuttgart.de/user/7666/files/76819a11-8bb9-46c5-b7da-b15c0795887f)
+
+
 ## Models  
 
 You can change the model name inside the [**batch.sh**](/human_activity_recognition/batch.sh) file under **'--model_name'** flag.  
