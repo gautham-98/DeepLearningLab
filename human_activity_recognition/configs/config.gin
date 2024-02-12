@@ -30,6 +30,7 @@ make_tfrecords.data_dir = "/home/data/HAPT_dataset/RawData/"
 make_tfrecords.target_dir = "./tfrecords_hapt/"
 make_tfrecords.window_length = 100
 make_tfrecords.shift = 50
+make_tfrecords.visualise_expt = 1
 
 # tfrecords RW har 2016
 make_tfrecords_rwhar.data_dir = "/home/data/realworld2016_dataset/"
