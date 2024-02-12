@@ -70,6 +70,13 @@ Inside the **'sweep_configs/'** directory, different sweep configurations are av
 python3 wandb_sweep.py
 ```
 
+## Deep Visualization
+You can a run different deep visualization methods by activating the flag. This will create a single image which consists of 3 different deep visualization methods. An example image is attached at the end.  
+
+```
+python3 main.py --train --eval --model_name "cnn_se" --deep_visu
+```
+
 # Results
 We ran each model 10 times to see the variation in accuracy. The metric shown here is Sparse Categorical Accuracy(%).  
 The logs are stored in **'good_performances/'** directory. 
